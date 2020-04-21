@@ -6,9 +6,12 @@ export const PlayerDiv = styled.div`
 
     p {
         padding: 10px;
+        font-size: 1.4rem;
+        color: #222
     }
     h1 {
         text-transform: capitalize;
+        font-size: 2.5rem;
     }
 }
 

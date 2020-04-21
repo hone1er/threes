@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { GameContext } from "./GameProvider";
+import { Button } from "./styledComponents/Button";
 export default function RollDice() {
   const { game, setGame, sock, player } = useContext(GameContext);
   
@@ -42,10 +43,10 @@ export default function RollDice() {
   }
   return (
     <div>
-      <button disabled={player !== game.names[game.currentPlayer] ? true : game.rollDisabled} onClick={handleRoll}>
+      <Button disabled={player !== game.names[game.currentPlayer] ? true : game.rollDisabled} onClick={handleRoll}>
         {game.gameOver ? "game over " : "roll the dice"}
-      </button>
-      <button onClick={handleReset}>reset</button>
+      </Button>
+      <Button reset={!game.gameOver} onClick={handleReset}>reset</Button>
     </div>
   );
 }
