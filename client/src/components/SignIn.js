@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { GameContext } from "./components/GameProvider";
-
+import { GameContext } from "./GameProvider";
+import { SignInDiv } from "./styledComponents/SignInDiv";
 export default function SignIn() {
   const { sock, player, setPlayer, game } = useContext(GameContext);
 
@@ -23,13 +23,13 @@ export default function SignIn() {
 
   let taken = nameTaken();
   return (
-    <div>
+    <SignInDiv>
       <h1>Please select a username</h1>
       <input value={player} onChange={handleUser} />
 
       <Link disabled="true" to={taken ? "/" : "/game"} onClick={taken ? alertUser : sendUser}>
         Join Game
       </Link>
-    </div>
+    </SignInDiv>
   );
 }

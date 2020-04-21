@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { GameContext } from "./GameProvider";
 import { Die } from "./styledComponents/Die";
+import { DiceDiv } from "./styledComponents/DiceDiv";
 
 export default function Dice() {
   const { game, handleScore, player } = useContext(GameContext);
   return (
-    <div>
+    <DiceDiv>
       {game.diceValues.map((value, index) => {
         if (game.dieVisable[index]){
         return (
@@ -25,6 +26,6 @@ export default function Dice() {
         )};
       return null})
       }
-    </div>
+    </DiceDiv>
   );
 }

@@ -42,11 +42,11 @@ export default function RollDice() {
     sock.emit("setGame", newGame);
   }
   return (
-    <div>
+    <>
       <Button disabled={player !== game.names[game.currentPlayer] ? true : game.rollDisabled} onClick={handleRoll}>
         {game.gameOver ? "game over " : "roll the dice"}
       </Button>
       <Button reset={!game.gameOver} onClick={handleReset}>reset</Button>
-    </div>
+    </>
   );
 }
