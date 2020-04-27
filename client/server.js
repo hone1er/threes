@@ -1,6 +1,7 @@
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
+
 const app = express();
 const clientPath = `${__dirname}/build`;
 let count = 0;
@@ -23,14 +24,9 @@ app.use(express.static(clientPath));
 
 app.get("*", (req, res) => {
   express.static(path.resolve(__dirname, "build"));
-});
+}); 
 
-const PORT = process.env.PORT || 5000;
-const INDEX = "build/index.html";
-
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`\n\n\nListening on ${PORT}.............................................................\n\n\n`));
+const server = http.createServer(app);
 
 const io = socketio(server);
 
@@ -52,7 +48,6 @@ io.on("connection", (sock) => {
   });
 
   sock.on("addUser", (user) => {
-    console.log("ADDING")
     game.names.push(user);
     game.scores.push(0);
     io.emit("setGame", game);
@@ -65,3 +60,10 @@ io.on("connection", (sock) => {
   });
 });
 
+server.on("error", (error) => {
+  console.error("server error: ", error);
+});
+
+server.listen(5000, () => {
+  console.log("Threes server started");
+});

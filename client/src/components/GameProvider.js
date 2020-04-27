@@ -2,7 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 
 export const GameContext = createContext();
-const sock = socketIOClient("https://localhost:5000");
+const sock = socketIOClient("http://localhost:5000");
 
 export function GameProvider(props) {
   const [player, setPlayer] = useState(
