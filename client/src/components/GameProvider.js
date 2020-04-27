@@ -2,7 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 
 export const GameContext = createContext();
-const sock = socketIOClient("localhost:5000");
+const sock = socketIOClient("https://localhost:5000");
 
 export function GameProvider(props) {
   const [player, setPlayer] = useState(
@@ -28,7 +28,13 @@ export function GameProvider(props) {
     tempGame.dieVisable[die] = false;
     tempGame.playerTurns -= 1;
 
-
+    setGame({
+      ...game,
+      scores: tempGame.scores,
+      dieVisable: tempGame.dieVisable,
+      playerTurns: tempGame.playerTurns,
+      rollDisabled: false,
+    })
     sock.emit("setGame", {
       ...game,
       scores: tempGame.scores,
@@ -42,11 +48,6 @@ export function GameProvider(props) {
 
   // handles the switching of players when playerTurns run out and checks for winner
   useEffect(() => {
-    sock.on("receiveMessage", (message) => {
-      const el = document.createElement("li");
-      el.innerHTML = message;
-      document.getElementById("chat").appendChild(el);
-  })
     const tempGame = game;
     if (game.playerTurns <= 0 && game.currentPlayer < game.names.length) {
       tempGame.currentPlayer = (tempGame.currentPlayer + 1);
@@ -62,6 +63,14 @@ export function GameProvider(props) {
         gameOver: game.currentPlayer === game.names.length,
         rollDisabled: game.currentPlayer === game.names.length,
       });
+      sock.emit("setGame", {
+        ...game,
+        currentPlayer: tempGame.currentPlayer,
+        diceDisabled: tempGame.diceDisabled,
+        dieVisable: tempGame.dieVisable,
+        gameOver: game.currentPlayer === game.names.length,
+        rollDisabled: game.currentPlayer === game.names.length,
+      })
     }
   }, [game]);
 
