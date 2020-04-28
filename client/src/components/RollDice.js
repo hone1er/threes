@@ -15,7 +15,12 @@ export default function RollDice() {
         diceDisabled: false,
       });
     }
-
+    setGame({
+      ...game,
+      diceValues: value,
+      rollDisabled: true,
+      diceDisabled: false,
+    })
     sock.emit("rollDice", {
       ...game,
       diceValues: value,
@@ -39,6 +44,8 @@ export default function RollDice() {
       diceDisabled: true,
       gameOver: false,
     };
+
+    setGame(newGame);
     sock.emit("setGame", newGame);
   }
   return (

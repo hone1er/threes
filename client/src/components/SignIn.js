@@ -9,11 +9,11 @@ export default function SignIn() {
     setPlayer(e.target.value);
   }
   function nameTaken() {
-    return (
-      game.names.filter((name) => name.toLowerCase() === player.toLowerCase())
+      return (
+      game.names.filter((name) => name === player)
         .length > 0
     );
-  }
+}
 
   function sendUser() {
     let tempGame = game;
@@ -45,6 +45,7 @@ export default function SignIn() {
       >
         Join Game
       </Link>
+      <Link to="/game">Specate</Link>
     </SignInDiv>
   );
 }

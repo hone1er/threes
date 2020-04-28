@@ -10,7 +10,6 @@ export const PlayerDiv = styled.div`
         color: #222
     }
     h1 {
-        text-transform: capitalize;
         font-size: 2.5rem;
     }
 }

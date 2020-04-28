@@ -24,13 +24,14 @@ app.use(express.static(clientPath));
 
 app.get("*", (req, res) => {
   express.static(path.resolve(__dirname, "build"));
-}); 
+});
 
 const server = http.createServer(app);
 
 const io = socketio(server);
 
 io.on("connection", (sock) => {
+  let sockUser;
   count += 1;
   console.log("total users connected: " + count);
 
@@ -50,6 +51,7 @@ io.on("connection", (sock) => {
   sock.on("addUser", (user) => {
     game.names.push(user);
     game.scores.push(0);
+    sockUser = user;
     io.emit("setGame", game);
   });
 
@@ -58,12 +60,20 @@ io.on("connection", (sock) => {
     console.log(chat);
     sock.broadcast.emit("receiveMessage", chat);
   });
+
+  sock.on("disconnect", (user) => {
+    let tempGame = game;
+    tempGame.scores.splice(tempGame.names.indexOf(sockUser));
+    tempGame.names.splice(tempGame.names.indexOf(sockUser));
+    io.emit("setGame", tempGame);
+    console.log(`${sockUser} disconnected`);
+  });
 });
 
 server.on("error", (error) => {
   console.error("server error: ", error);
 });
 
-server.listen(5000, () => {
+server.listen(process.env.PORT, () => {
   console.log("Threes server started");
 });

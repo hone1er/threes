@@ -6,11 +6,11 @@ export default function Player(props) {
   const { game } = useContext(GameContext);
   return (
     <PlayerDiv>
-      <div className="player">
+      <div className="player" player={props.player}>
       {props.player ? <p>You: </p> : null}
       <h1> {game.names[props.playerNumber]}</h1>
       </div>
-      <h2>{game.scores[props.playerNumber]}</h2>
+      <h1>{game.scores[props.playerNumber]}</h1>
     </PlayerDiv>
   );
 }
