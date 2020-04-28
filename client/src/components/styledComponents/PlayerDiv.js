@@ -2,7 +2,7 @@ import styled from 'styled-components'
 export const PlayerDiv = styled.div`
 .player {
     display: flex;
-    align-items: center;
+    align-items: end;
 
     p {
         padding: 10px;
