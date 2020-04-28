@@ -10,9 +10,9 @@ export function GameProvider(props) {
   );
   const [game, setGame] = useState({
     currentPlayer: 0,
-    playerTurns: 6,
-    diceValues: Array(6).fill(5),
-    dieVisable: Array(6).fill(true),
+    playerTurns: 5,
+    diceValues: Array(5).fill(5),
+    dieVisable: Array(5).fill(true),
     names: [],
     scores: [],
     rollDisabled: false,
@@ -51,8 +51,8 @@ export function GameProvider(props) {
     const tempGame = game;
     if (game.playerTurns <= 0 && game.currentPlayer < game.names.length) {
       tempGame.currentPlayer = (tempGame.currentPlayer + 1);
-      tempGame.playerTurns = 6;
-      tempGame.dieVisable = Array(6).fill(true);
+      tempGame.playerTurns = 5;
+      tempGame.dieVisable = Array(5).fill(true);
       tempGame.diceDisabled = true
 
       setGame({

@@ -23,7 +23,6 @@ export default function SignIn() {
     sock.emit("addUser", player);
     localStorage.setItem("player", JSON.stringify(player));
   }
-
   function alertUser() {
     alert(`${player} is taken`);
   }
@@ -45,7 +44,6 @@ export default function SignIn() {
       >
         Join Game
       </Link>
-      <Link to="/game">Specate</Link>
     </SignInDiv>
   );
 }

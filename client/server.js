@@ -8,9 +8,9 @@ let count = 0;
 let chat = [];
 let game = {
   currentPlayer: 0,
-  playerTurns: 6,
-  diceValues: Array(6).fill(5),
-  dieVisable: Array(6).fill(true),
+  playerTurns: 5,
+  diceValues: Array(5).fill(5),
+  dieVisable: Array(5).fill(true),
   names: [],
   scores: [],
   rollDisabled: false,
