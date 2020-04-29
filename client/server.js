@@ -34,9 +34,8 @@ io.on("connection", (sock) => {
   let sockUser;
   count += 1;
   console.log("total users connected: " + count);
-
   sock.emit("setGame", game);
-
+  
   sock.on("setGame", (data) => {
     console.log(data);
     game = data;
@@ -52,6 +51,7 @@ io.on("connection", (sock) => {
     game.names.push(user);
     game.scores.push(0);
     sockUser = user;
+    console.log(`${sockUser} has joined the game`);
     io.emit("setGame", game);
   });
 
