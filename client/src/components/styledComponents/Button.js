@@ -20,9 +20,17 @@ export const Button = styled.button`
       : "#339900"};
   max-width: 130px;
   align-self: center;
-  scale: 1;
+  zoom: 1; /* IE */
+-moz-transform: scale(1); /* Firefox */
+-o-transform: scale(1); /* Opera */
+-webkit-transform: scale(1); /* Safari And Chrome */
+transform: scale(1); /* Standard Property */
 
-  :hover {
-    scale: 1.1;
-  }
+    &:hover {
+        zoom: 1.1; /* IE */
+        -moz-transform: scale(1.1); /* Firefox */
+        -o-transform: scale(1.1); /* Opera */
+        -webkit-transform: scale(1.1); /* Safari And Chrome */
+        transform: scale(1.1); /* Standard Property */
+    }
 `;
