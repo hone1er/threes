@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Die = styled.button`
-
+    cursor: pointer;
     background: ${props => props.disabled ? "#444" : "#f8f8f8"};
     color: ${props => props.disabled ? "#f8f8f8" : "#444"};
     margin: 10px;

@@ -58,7 +58,7 @@ export default function RollDice() {
   return (
     <>
       <Button disabled={player !== game.names[game.currentPlayer] ? true : game.rollDisabled} onClick={handleRoll}>
-        {game.gameOver ? "game over " : "roll the dice"}
+        {game.gameOver ? "game over " : game.rollDisabled ? "pickup dice" : "roll the dice"}
       </Button>
       <Button reset={!game.gameOver} onClick={handleReset}>reset</Button>
     </>
