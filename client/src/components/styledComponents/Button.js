@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  padding: 1rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  min-width: 200px;
   margin: 10px;
-  box-shadow: ${(props) =>
+  color: #f8f8f8;
+  background: ${(props) =>
     props.disabled
-      ? "0 0 5px 3px red"
+      ? "red"
       : props.reset
-      ? "none"
-      : "0 0 5px 3px green"};
+      ? "#333"
+      : "green"};
   max-width: 130px;
   align-self: center;
 `;

@@ -32,7 +32,6 @@ export default function RollDice() {
       rollDisabled: true,
       diceDisabled: false,
       rolling: !game.rolling
-
     });
   }
   function handleReset() {
