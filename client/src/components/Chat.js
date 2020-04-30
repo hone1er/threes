@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GameContext } from "./GameProvider";
+import { ChatDiv } from "./styledComponents/ChatDiv";
 
 export default function Chat() {
-  const { sock } = useContext(GameContext);
+  const { sock, player } = useContext(GameContext);
 
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
@@ -12,16 +13,21 @@ export default function Chat() {
   }
 
   function sendMessage() {
-    sock.emit("sendMessage", message);
+    sock.emit("sendMessage", player + ": " + message);
     const el = document.createElement("li");
-    el.innerHTML = message;
+    el.innerHTML = player + ": " + message;
     document.querySelector("#chat").appendChild(el);
+    setMessage("");
+    const elem = document.getElementById("chat");
+    elem.scrollTop = elem.scrollHeight;
   }
 
   useEffect(() => {
     const el = document.createElement("li");
-    el.innerHTML = chat[chat.length - 1];
+    el.innerHTML = chat[chat.length - 1] || "";
     document.getElementById("chat").appendChild(el);
+    const elem = document.getElementById("chat");
+    elem.scrollTop = elem.scrollHeight;
   }, [chat]);
 
   sock.on("receiveMessage", (chat) => {
@@ -29,9 +35,11 @@ export default function Chat() {
   });
 
   return (
-    <div>
+    <ChatDiv>
+      <h1>chat</h1>
       <ul id="chat"></ul>
       <input
+        id="chat-input"
         value={message}
         onChange={handleChange}
         placeholder="Enter message"
@@ -39,6 +47,6 @@ export default function Chat() {
       <button disabled={message.length === 0} onClick={sendMessage}>
         send
       </button>
-    </div>
+    </ChatDiv>
   );
 }
