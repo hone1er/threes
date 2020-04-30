@@ -89,7 +89,7 @@ export function GameProvider(props) {
         for (let i = 0; i < el.length; i++) {
           el[i].classList.remove("rolling");
         }
-      }, 250);
+      }, 500);
     }
   }, [game.rolling])
 

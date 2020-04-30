@@ -33,8 +33,11 @@ transform-origin: 0 0;  /* Standard Property */
         transform-origin: 0 0;  /* Standard Property */
     }
 
-    &.rolling {
-        animation: rolling 0.25s 1;
+    &.rolling:nth-child(odd) {
+        animation: rolling 0.25s 2;
+    }
+    &.rolling:nth-child(even) {
+        animation: reverse-rolling 0.25s 2;
     }
 
     @keyframes rolling {
@@ -45,6 +48,16 @@ transform-origin: 0 0;  /* Standard Property */
           to {
             transform-origin: 55% 40%;
             transform: rotate(360deg);
+    }
+}
+    @keyframes reverse-rolling {
+        from {
+            transform-origin: 40% 55%;
+            transform: rotate(0deg);
+          }
+          to {
+            transform-origin: 55% 40%;
+            transform: rotate(-360deg);
     }
 }
 
