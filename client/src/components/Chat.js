@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GameContext } from "./GameProvider";
 import { ChatDiv } from "./styledComponents/ChatDiv";
-
+import chatAudio from "../intuition.mp3"
 export default function Chat() {
   const { sock, player } = useContext(GameContext);
 
@@ -37,9 +37,14 @@ export default function Chat() {
     document.getElementById("chat").appendChild(el);
     const elem = document.getElementById("chat");
     elem.scrollTop = elem.scrollHeight;
+    return () => {
+    var audio = new Audio(chatAudio);
+    audio.play();
+    }
   }, [chat]);
 
   sock.on("receiveMessage", (chat) => {
+  
     setChat(chat);
   });
 

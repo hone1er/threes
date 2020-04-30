@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
-
+import diceAudio from "../diceSound.mp3"
 export const GameContext = createContext();
 const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
 
@@ -78,8 +78,11 @@ export function GameProvider(props) {
   useEffect(() => {
     setTimeout(() => {
       let el = document.getElementsByClassName("dice");
+      var audio = new Audio(diceAudio);
+      audio.play();
       for (let i = 0; i < el.length; i++) {
         el[i].classList.add("rolling");
+
       }
     }, 0);
 
