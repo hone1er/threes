@@ -14,7 +14,7 @@ export const Button = styled.button`
       : "#f8f8f8"};
   background: ${(props) =>
     props.disabled
-      ? " 	#cc330090"
+      ? " 	#cc3300"
       : props.reset
       ? "#333"
       : "#339900"};
