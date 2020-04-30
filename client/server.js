@@ -13,6 +13,7 @@ let game = {
   dieVisable: Array(5).fill(true),
   names: [],
   scores: [],
+  rolling: false,
   rollDisabled: false,
   diceDisabled: true,
   gameOver: false,

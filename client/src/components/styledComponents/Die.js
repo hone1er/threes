@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Die = styled.button`
+
     background: ${props => props.disabled ? "#444" : "#f8f8f8"};
     color: ${props => props.disabled ? "#f8f8f8" : "#444"};
     margin: 10px;
@@ -25,6 +26,20 @@ transform-origin: 0 0;  /* Standard Property */
         -webkit-transform-origin: 0 0;
         transform: scale(1.1); /* Standard Property */
         transform-origin: 0 0;  /* Standard Property */
+    }
+
+    &.rolling {
+        animation: rolling 0.5s infinite;
+    }
+
+    @keyframes rolling {
+        from {
+            transform-origin: 40% 55%;
+            transform: rotate(0deg);
+          }
+          to {
+            transform-origin: 55% 40%;
+            transform: rotate(360deg);
     }
 
 `

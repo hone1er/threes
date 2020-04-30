@@ -16,6 +16,7 @@ export function GameProvider(props) {
     names: [],
     scores: [],
     rollDisabled: false,
+    rolling: false,
     diceDisabled: true,
     gameOver: false,
   });
@@ -73,6 +74,24 @@ export function GameProvider(props) {
       })
     }
   }, [game]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      let el = document.getElementsByClassName("dice");
+      for (let i = 0; i < el.length; i++) {
+        el[i].classList.add("rolling");
+      }
+    }, 0);
+
+    return () => {
+      setTimeout(() => {
+        let el = document.getElementsByClassName("dice");
+        for (let i = 0; i < el.length; i++) {
+          el[i].classList.remove("rolling");
+        }
+      }, 500);
+    }
+  }, [game.rolling])
 
   sock.on("setGame", (data) => {
     setGame(data);

@@ -6,6 +6,8 @@ export default function RollDice() {
   
   function handleRoll() {
     let value = [Array(5).fill(null)];
+
+
     for (let i = 0; i < game.diceValues.length; i++) {
       value[i] = Math.ceil(Math.random() * 6);
       setGame({
@@ -13,6 +15,7 @@ export default function RollDice() {
         diceValues: value,
         rollDisabled: true,
         diceDisabled: false,
+        rolling: !game.rolling
       });
     }
     setGame({
@@ -20,12 +23,16 @@ export default function RollDice() {
       diceValues: value,
       rollDisabled: true,
       diceDisabled: false,
+      rolling: !game.rolling
+
     })
     sock.emit("rollDice", {
       ...game,
       diceValues: value,
       rollDisabled: true,
       diceDisabled: false,
+      rolling: !game.rolling
+
     });
   }
   function handleReset() {
