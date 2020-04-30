@@ -5,6 +5,15 @@ export const ChatDiv = styled.div`
     margin: auto;
     margin-top: 25px;
 
+    .chat-item{
+        display: flex;
+    }
+
+    .chat-user-item {
+        color: #333;
+        margin-right: 2.5%;
+    }
+
     #chat-input-div {
         width: 100%
         margin: auto;
@@ -29,19 +38,19 @@ export const ChatDiv = styled.div`
 }
 
 li {
-    padding-left: 20px;
     font-size: 1.15rem;
     font-weight: 500;
     border: 1px solid #e4e4e4;
-    line-height: 2.5rem;
+    line-height: 1.5rem;
+    padding: 2px 0 2px 10px;
   }
   input {
-      width: 628px;
+      width: 632px;
       margin: auto;
       height: 2rem;
       font-size: 1rem;
       font-weight: 400;
-      padding-left: 10px;
+      padding-left: 5px;
   }
   button {
       position: relative;
@@ -67,7 +76,7 @@ li {
       width: 450px;
       
       input {
-          width: 335px;
+          width: 340px;
         }
     }
 
@@ -75,7 +84,7 @@ li {
     width: 350px;
     
     input {
-        width: 246px;
+        width: 251px;
     }
     
     li {
