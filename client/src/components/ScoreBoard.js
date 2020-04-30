@@ -9,7 +9,6 @@ export function ScoreBoard() {
 
   return (
     <ScoreBoardDiv>
-      <img src={threes} alt="threes"/>
       {game.names.map((name, index) => {
           return (
             <>
