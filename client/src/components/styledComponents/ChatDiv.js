@@ -33,7 +33,21 @@ li {
       height: 2rem;
   }
   button {
+      cursor: pointer;
+      margin: 10px;
+      background: #337ab7;
+      color: #f8f8f8;
+      border: none;
+      border-radius: 4px;
+      text-align: center;
+      padding: 0 20px;
+      justify-content: center;
+      align-items: center;
       height: 2rem;
       margin-bottom: 100px;
+
+      :hover {
+          background: #286090;
+      }
   }
 `;

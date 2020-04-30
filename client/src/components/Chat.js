@@ -12,6 +12,15 @@ export default function Chat() {
     setMessage(e.target.value);
   }
 
+  function handleEnterKey(event) {
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      document.getElementById("chat-btn").click();
+  }
+}
+
   function sendMessage() {
     sock.emit("sendMessage", player + ": " + message);
     const el = document.createElement("li");
@@ -43,8 +52,9 @@ export default function Chat() {
         value={message}
         onChange={handleChange}
         placeholder="Enter message"
+        onKeyUp={handleEnterKey}
       ></input>
-      <button disabled={message.length === 0} onClick={sendMessage}>
+      <button id="chat-btn" disabled={message.length === 0} onClick={sendMessage}>
         send
       </button>
     </ChatDiv>
