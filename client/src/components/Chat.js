@@ -52,6 +52,7 @@ export default function Chat() {
     <ChatDiv>
       <h1>chat</h1>
       <ul id="chat"></ul>
+      <div id="chat-input-div">
       <input
         id="chat-input"
         value={message}
@@ -62,6 +63,7 @@ export default function Chat() {
       <button id="chat-btn" disabled={message.length === 0} onClick={sendMessage}>
         send
       </button>
+      </div>
     </ChatDiv>
   );
 }

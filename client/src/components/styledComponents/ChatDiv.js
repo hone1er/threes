@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
 export const ChatDiv = styled.div`
-  width: 100%;
+    width: 775px;
+    margin: auto;
     margin-top: 25px;
+
+    #chat-input-div {
+        width: 100%
+        margin: auto;
+    }
     h1 {
         text-transform: uppercase;
     }
@@ -24,30 +30,56 @@ export const ChatDiv = styled.div`
 
 li {
     padding-left: 20px;
-    font-size: 1.5rem;
+    font-size: 1.15rem;
     font-weight: 500;
     border: 1px solid #e4e4e4;
+    line-height: 2.5rem;
   }
   input {
-      margin: 10px 0;
+      width: 628px;
+      margin: auto;
       height: 2rem;
+      font-size: 1rem;
+      font-weight: 400;
+      padding-left: 10px;
   }
   button {
+      position: relative;
+      bottom: 0.5px;
+      width: 60px;
       cursor: pointer;
-      margin: 10px;
+      margin: 0;
       background: #337ab7;
       color: #f8f8f8;
       border: none;
-      border-radius: 4px;
       text-align: center;
-      padding: 0 20px;
       justify-content: center;
       align-items: center;
-      height: 2rem;
+      height: 2.2rem;
       margin-bottom: 100px;
 
       :hover {
           background: #286090;
       }
   }
-`;
+
+  @media (max-width: 800px) {
+      width: 450px;
+      
+      input {
+          width: 335px;
+        }
+    }
+
+  @media (max-width: 460px) {
+    width: 350px;
+    
+    input {
+        width: 246px;
+    }
+    
+    li {
+        font-size: 1.1rem;
+    }
+}
+    `;
