@@ -64,8 +64,8 @@ io.on("connection", (sock) => {
 
   sock.on("disconnect", (user) => {
     let tempGame = game;
-    tempGame.scores.splice(tempGame.names.indexOf(sockUser));
-    tempGame.names.splice(tempGame.names.indexOf(sockUser));
+    tempGame.scores = [...tempGame.scores.slice(0, tempGame.names.indexOf(sockUser)), ...tempGame.scores.slice(tempGame.names.indexOf(sockUser) + 1)];
+    tempGame.names = [...tempGame.name.slice(0, tempGame.names.indexOf(sockUser)), ...tempGame.name.slice(tempGame.names.indexOf(sockUser) + 1)];
     io.emit("setGame", tempGame);
     console.log(`${sockUser} disconnected`);
   });
