@@ -6,11 +6,11 @@ export const PlayerDiv = styled.div`
 
     p {
         padding: 10px;
-        font-size: 1.4rem;
+        font-size: 1.25rem;
         color: #222
     }
     h1 {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
     }
 }
 

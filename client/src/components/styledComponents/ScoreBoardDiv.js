@@ -6,6 +6,6 @@ export const ScoreBoardDiv = styled.div`
     justify-content: space-around;
 
     @media (max-width: 800px){
-        margin-bottom: 2vh;
+        margin-bottom: 5vh;
     }
 `
