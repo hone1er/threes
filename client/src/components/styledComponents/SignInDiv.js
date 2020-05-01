@@ -8,11 +8,10 @@ export const SignInDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-image: url(${threesimg});
   background-size: contain;
-  background-position: left;
-  background-repeat: no-repeat;
+  background-position: center;
 
   a {
     border: 2px solid black;
@@ -24,6 +23,7 @@ export const SignInDiv = styled.div`
     background: #337ab7;
     color: #f8f8f8;
     border: none;
+    margin-bottom: 8vh;
 
     :hover {
       background: #286090;
@@ -36,7 +36,7 @@ export const SignInDiv = styled.div`
     height: 40px;
     margin: 1.5rem;
     font-size: 1.5rem;
-    margin-top: 45vh;
+    margin-top: 75vh;
   }
 
   a,
