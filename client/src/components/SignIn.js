@@ -9,17 +9,14 @@ export default function SignIn() {
     setPlayer(e.target.value);
   }
   function nameTaken() {
-      return (
-      game.names.filter((name) => name === player)
-        .length > 0
-    );
-}
+    return game.names.filter((name) => name === player).length > 0;
+  }
 
   function sendUser() {
     let tempGame = game;
     tempGame.names.push(player);
     tempGame.scores.push(0);
-    setGame(tempGame)
+    setGame(tempGame);
     sock.emit("addUser", player);
     localStorage.setItem("player", JSON.stringify(player));
   }
@@ -30,18 +27,13 @@ export default function SignIn() {
   let taken = nameTaken();
   return (
     <SignInDiv>
-      <h1>Let's play 3's!</h1>
       <input
         value={player}
         onChange={handleUser}
         placeholder="Enter your username"
       />
 
-      <Link
-        disabled="true"
-        to={"/game"}
-        onClick={taken ? alertUser : sendUser}
-      >
+      <Link disabled="true" to={"/game"} onClick={taken ? alertUser : sendUser}>
         Join Game
       </Link>
     </SignInDiv>

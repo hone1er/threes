@@ -23,7 +23,7 @@ export const ChatDiv = styled.div`
 
   #chat-mute {
     width: 145px;
-    margin: 0 37px 150px;
+    margin: 5px 37px 150px;
   }
   h1 {
     text-transform: uppercase;
@@ -55,7 +55,7 @@ export const ChatDiv = styled.div`
   input {
     width: 635px;
     margin: auto;
-    height: 2rem;
+    height: 2.3rem;
     font-size: 1rem;
     font-weight: 400;
     padding-left: 5px;
@@ -74,7 +74,7 @@ export const ChatDiv = styled.div`
     text-align: center;
     justify-content: center;
     align-items: center;
-    height: 2.2rem;
+    height: 2.5rem;
 
     :hover {
       background: #286090;

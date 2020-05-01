@@ -1,17 +1,19 @@
 import styled from "styled-components";
+import threesimg from "./threesimg.jpg";
 
 export const SignInDiv = styled.div`
-position: relative;
-top: 20vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-image: url(${threesimg});
+  background-size: contain;
+  background-position: left;
+  background-repeat: no-repeat;
 
-h1 {
-  font-size: 3rem;
-}
   a {
     border: 2px solid black;
     text-align: center;
@@ -19,23 +21,26 @@ h1 {
     heigth: 60px;
     border-radius: 8px;
     text-decoration: none;
-    color: #444;
-    background: #f8f8f8;
+    background: #337ab7;
+    color: #f8f8f8;
+    border: none;
 
-    :hover{
-      background: #e4e4e4;
-  
+    :hover {
+      background: #286090;
     }
-}
+  }
 
-input {
-  width: 250px;
-  height: 40px;
-  margin: 1.5rem;
-  font-size: 1.5rem;
-}
+  input {
+    background: #e4e4e4;
+    width: 250px;
+    height: 40px;
+    margin: 1.5rem;
+    font-size: 1.5rem;
+    margin-top: 45vh;
+  }
 
-a, input{
-padding: 10px;
-}
+  a,
+  input {
+    padding: 10px;
+  }
 `;
