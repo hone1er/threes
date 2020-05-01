@@ -45,7 +45,7 @@ export default function SignIn() {
         placeholder="Enter your username"
         onKeyUp={handleEnterKey}
       />
-      <Link to={"/game"} id="join" onClick={taken ? alertUser : sendUser}>
+      <Link to={taken ? "/" : "/game"} id="join" onClick={taken ? alertUser : sendUser}>
       <PrimaryBtn>
         Join Game
       </PrimaryBtn>
