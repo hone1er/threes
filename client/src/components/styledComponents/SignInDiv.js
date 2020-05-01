@@ -43,4 +43,13 @@ export const SignInDiv = styled.div`
   input {
     padding: 10px;
   }
+
+  @media (max-width: 500px){
+    input {
+      margin-top: 20vh;
+    }
+    a {
+      margin-bottom: 66vh;
+    }
+  }
 `;

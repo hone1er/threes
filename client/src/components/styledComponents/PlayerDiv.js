@@ -14,4 +14,26 @@ export const PlayerDiv = styled.div`
     }
 }
 
+@media (max-width: 800px) {
+    .player {
+        p {
+            font-size: 1rem;
+        }
+        h1{
+            font-size: 2rem;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .player{
+    p {
+        font-size: .7rem;
+    }
+    h1 {
+        font-size: 1.4rem;
+    }
+}
+}
+
 `

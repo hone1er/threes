@@ -47,7 +47,7 @@ export const ChatDiv = styled.div`
 
   li {
     font-size: 1.15rem;
-    border: 1px solid #e4e4e4;
+    border: 1px solid #e4e4e480;
     line-height: 1.5rem;
     padding: 2px 0 2px 10px;
     letter-spacing: 0.05rem;
