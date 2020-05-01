@@ -1,5 +1,9 @@
 import styled from "styled-components";
 export const ModalDiv = styled.div`
+
+#myModal {
+  display: ${props => props.modal === false ? "block" : "none"};
+}
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -27,10 +31,12 @@ export const ModalDiv = styled.div`
 
     ul {
         padding: 5%;
+        padding-top: 2%;
     }
     li {
         padding: .5rem;
         font-size: 1.5rem;
+        text-align: left;
 
         @media (max-width: 800px){
             font-size: 1rem;

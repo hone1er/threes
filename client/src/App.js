@@ -4,19 +4,20 @@ import { ScoreBoard } from "./components/ScoreBoard";
 import CurrentPlayer from "./components/CurrentPlayer";
 import Dice from "./components/Dice";
 import RollDice from "./components/RollDice";
-import 'react-dice-complete/dist/react-dice-complete.css'
+import "react-dice-complete/dist/react-dice-complete.css";
 import Chat from "./components/Chat";
+import Modal from "./components/Modal";
 // import TestApp from "./TestApp";
 function App() {
-  
   return (
     <div className="App">
       <ScoreBoard />
       <CurrentPlayer />
       <Dice />
-        {/* <TestApp/> */}
+      {/* <TestApp/> */}
       <RollDice />
-      <Chat/>
+      <Chat />
+      <Modal />
     </div>
   );
 }

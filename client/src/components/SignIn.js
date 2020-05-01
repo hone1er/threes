@@ -15,6 +15,15 @@ export default function SignIn() {
     return game.names.filter((name) => name === player).length > 0;
   }
 
+  function handleEnterKey(event) {
+    if (event.keyCode === 13 && player !== "") {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      document.getElementById("join").click();
+    }
+  }
+
   function sendUser() {
     let tempGame = game;
     tempGame.names.push(player);
@@ -29,13 +38,14 @@ export default function SignIn() {
 
   let taken = nameTaken();
   return (
-    <SignInDiv>
+    <SignInDiv player={player}>
       <input
         value={player}
         onChange={handleUser}
         placeholder="Enter your username"
+        onKeyUp={handleEnterKey}
       />
-      <Link disabled="true" to={"/game"} onClick={taken ? alertUser : sendUser}>
+      <Link to={"/game"} id="join" onClick={taken ? alertUser : sendUser}>
       <PrimaryBtn>
         Join Game
       </PrimaryBtn>

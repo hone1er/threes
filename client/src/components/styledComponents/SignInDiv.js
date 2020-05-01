@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import threesimg from "./threes(1).jpg";
+import threesimg from "./threesCropped.jpg";
 
 export const SignInDiv = styled.div`
   position: relative;
@@ -8,11 +8,14 @@ export const SignInDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: url(${threesimg});
   background-size: contain;
-  background-position: center;
+  background-position: top;
+  background-repeat: no-repeat;
+
   a {
+    pointer-events: ${props => props.player === "" ? "none" : "unset"};
     text-decoration: none;
   }
   input {
@@ -25,12 +28,4 @@ export const SignInDiv = styled.div`
     padding: 10px;
   }
 
-  @media (max-width: 500px){
-    input {
-      margin-top: 20vh;
-    }
-    .rules {
-      margin-bottom: 61vh;
-    }
-  }
 `;

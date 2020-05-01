@@ -11,7 +11,7 @@ export function ScoreBoard() {
       {game.names.map((name, index) => {
           return (
             <>
-              <Player playerNumber={index} player={name===player}/>
+              <Player playerNumber={index} key={index} player={name===player}/>
             </>
           );
         }
