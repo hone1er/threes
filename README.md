@@ -1,13 +1,13 @@
 # Threes
 
 ## rules
-..* This is a turn based game
-..* Lowest score at the end of the game wins
-..* Each player will start their turn with 5 dice
-..* Player will roll the dice up to 5 times
-..* After each roll, the player must pick up at least 1 die but may pick up more if they choose
-..* Player will continue to roll and pick up dice until all dice have been taken
-..* Each die adds its face value to the current players score, except 3, 3 adds 0 to the score
+⋅⋅* This is a turn based game
+⋅⋅* Lowest score at the end of the game wins
+⋅⋅* Each player will start their turn with 5 dice
+⋅⋅* Player will roll the dice up to 5 times
+⋅⋅* After each roll, the player must pick up at least 1 die but may pick up more if they choose
+⋅⋅* Player will continue to roll and pick up dice until all dice have been taken
+⋅⋅* Each die adds its face value to the current players score, except 3, 3 adds 0 to the score
 
 
 
