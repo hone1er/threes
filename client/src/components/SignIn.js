@@ -8,6 +8,7 @@ export default function SignIn() {
   function handleUser(e) {
     setPlayer(e.target.value);
   }
+
   function nameTaken() {
     return game.names.filter((name) => name === player).length > 0;
   }

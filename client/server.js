@@ -4,8 +4,11 @@ const socketio = require("socket.io");
 
 const app = express();
 const clientPath = `${__dirname}/build`;
+// keep track of the number of clients connected
 let count = 0;
+// chat log
 let chat = [];
+// server side game state
 let game = {
   currentPlayer: 0,
   playerTurns: 5,
@@ -31,16 +34,17 @@ const server = http.createServer(app);
 
 const io = socketio(server);
 
+
 io.on("connection", (sock) => {
+  // name of the socket user
   let sockUser;
   count += 1;
   console.log("total users connected: " + count);
+  // emit game state of connection
   sock.emit("setGame", game);
   
   sock.on("setGame", (data) => {
-    console.log(data);
     game = data;
-
     io.emit("setGame", data);
   });
 
@@ -48,6 +52,7 @@ io.on("connection", (sock) => {
     io.emit("setGame", data);
   });
 
+  // upon sign-in, add user and set game 
   sock.on("addUser", (user) => {
     game.names.push(user);
     game.scores.push(0);
@@ -64,10 +69,13 @@ io.on("connection", (sock) => {
 
   sock.on("disconnect", (user) => {
     let tempGame = game;
+    if (tempGame.names.indexOf(sockUser) !== -1){
     tempGame.scores.splice(tempGame.names.indexOf(sockUser), 1);
     tempGame.names.splice(tempGame.names.indexOf(sockUser), 1);
     io.emit("setGame", tempGame);
+    count -= 1;
     console.log(`${sockUser} disconnected`);
+    }
   });
 });
 
