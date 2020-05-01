@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  padding: 1.25rem;
   font-size: 1.5rem;
   text-transform: capitalize;
   cursor: pointer;
   border-radius: 8px;
   min-width: 200px;
+  min-height: 2.5rem;
   margin: 10px;
   color: ${(props) =>
     props.disabled
@@ -32,5 +32,9 @@ transform: scale(1); /* Standard Property */
         -o-transform: scale(1.1); /* Opera */
         -webkit-transform: scale(1.1); /* Safari And Chrome */
         transform: scale(1.1); /* Standard Property */
+    }
+
+    @media (max-width: 500px) {
+      font-size: 1.25rem;
     }
 `;
