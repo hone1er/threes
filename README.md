@@ -7,7 +7,7 @@
   * Player will roll the dice up to 5 times
   * After each roll, the player must pick up at least 1 die but may pick up more if they choose
   * Player will continue to roll and pick up dice until all dice have been taken
-  * Each die adds its face value to the current players score, except 3, 3 adds 0 to the score
+  * When chosen, each die adds its face value to the current players score, except 3, 3 adds 0 to the score
 
 
 
