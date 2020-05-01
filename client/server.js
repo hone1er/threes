@@ -68,6 +68,8 @@ io.on("connection", (sock) => {
   });
 
   sock.on("disconnect", (user) => {
+    chat.push(`${sockUser} disconnected`);
+    io.emit("receiveMessage", chat);
     let tempGame = game;
     if (tempGame.names.indexOf(sockUser) !== -1){
     tempGame.scores.splice(tempGame.names.indexOf(sockUser), 1);
