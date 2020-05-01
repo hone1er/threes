@@ -5,9 +5,7 @@ export const GameContext = createContext();
 const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
 
 export function GameProvider(props) {
-  const [player, setPlayer] = useState(
-    JSON.parse(localStorage.getItem("player")) || ""
-  );
+  const [player, setPlayer] = useState("");
   const [game, setGame] = useState({
     currentPlayer: 0,
     playerTurns: 5,
