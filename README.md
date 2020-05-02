@@ -12,6 +12,10 @@
 
 
 # What I learned making this game
-  The main goal of this project was to learn more about using web sockets.  
+  The main goal of this project was to learn more about using web sockets and building a web apps with React, using hooks.  
 
-  I learned how to connect the client and server through a web socket and how to use this connection to communicate between clients. I implemented this project using Socket.io and Express for the backend as well as ReactJS for the front-end.
+  I learned how to connect the client and server through a web socket and how to use this connection to communicate between clients. I also learned about the use of namespaces as they relate to sockets, and how to create, join, and communicate with rooms within each namespace. 
+  
+  This game has also allowed me to improve my working knowledge of hooks and the context API from React. All state management was done with hooks and the context API.
+  
+  This project was implemented using Socket.io and Express, as well as ReactJS for the front-end.

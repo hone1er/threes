@@ -84,7 +84,7 @@ let rooms = {
 };
 // server side game state
 
-const game = {
+const newGame = {
   currentPlayer: 0,
   playerTurns: 5,
   diceValues: Array(5).fill(5),
@@ -113,9 +113,9 @@ io.on("connection", (sock) => {
   // name of the socket user
   let sockUser;
   let userRoom;
-  let userGame = game;
+  let userGame = newGame;
   count += 1;
-  console.log("total users connected: " + count);
+  console.log("total users connected: " + count + "...........................................");
   sock.emit("setRooms", Object.keys(rooms));
   sock.on("joinRoom", ({room, player}) => {
    
@@ -128,22 +128,13 @@ io.on("connection", (sock) => {
       userRoom = room;
       userGame = rooms[room]
       rooms[room] = currentGame;
-      console.log(`you have succefully joined room: ${room}`);
+      console.log(`${sockUser} has succefully joined room: ${room}`);
       return io.to(room).emit("setGame", currentGame)
     } else {
       console.log(`no room found named: ${room}`);
       return sock.emit("err", `no room found named: ${room}`);
     }
   });
-  sock.on("newRoom", (game) => {
-      let tempGame = game;
-      tempGame.names.push(player);
-      tempGame.scores.push(0);
-      rooms[room] = tempGame;
-      console.log(rooms)
-      return io.to(room).emit("setGame", tempGame)
-  })
-
 
   sock.on("setGame", (data) => {
     rooms[userRoom] = data;
@@ -154,26 +145,23 @@ io.on("connection", (sock) => {
     sock.broadcast.to(userRoom).emit("setGame", data);
   });
 
-
-
   sock.on("sendMessage", (message) => {
     chat.push(message);
-    console.log(chat);
     sock.broadcast.to(userRoom).emit("receiveMessage", chat);
   });
 
   sock.on("disconnect", (user) => {
     chat.push(`${sockUser} disconnected`);
-    sock.emit("setGame", game);
     sock.broadcast.to(userRoom).emit("receiveMessage", chat);
     let tempGame = userGame;
-    console.log(sockUser)
+    count -= 1;
     if (tempGame.names.indexOf(sockUser) !== -1) {
       tempGame.scores.splice(tempGame.names.indexOf(sockUser), 1);
       tempGame.names.splice(tempGame.names.indexOf(sockUser), 1);
-      sock.broadcast.to(userRoom).emit("setGame", tempGame);
-      count -= 1;
-      console.log(`${sockUser} disconnected`);
+      io.to(userRoom).emit("setGame", tempGame);
+      rooms[userRoom] = tempGame;
+      userGame = rooms[userRoom];
+      console.log(`${sockUser} disconnected.....................................................`);
     }
 
   });
@@ -184,5 +172,5 @@ server.on("error", (error) => {
 });
 
 server.listen(process.env.PORT, () => {
-  console.log("Threes server started");
+  console.log("Threes server started on port: " +  process.env.PORT + "............................");
 });

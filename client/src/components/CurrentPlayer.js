@@ -6,7 +6,7 @@ export default function CurrentPlayer() {
   const { game } = useContext(GameContext);
 
   // show current player or winner
-  const current = !game.names ? null : game.names[game.currentPlayer]
+  const current = game.names.length < 1 ? null : game.names[game.currentPlayer]
     ? game.names[game.currentPlayer] + "'s Turn"
     : "Winner: " + game.names[game.scores.indexOf(Math.min(...game.scores))];
 
