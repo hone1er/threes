@@ -2,7 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import diceAudio from "../diceSound.mp3"
 export const GameContext = createContext();
-const sock = socketIOClient("localhost:5000");
+const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
 
 export function GameProvider(props) {
   const [player, setPlayer] = useState("");
