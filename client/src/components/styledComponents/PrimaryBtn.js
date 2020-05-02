@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const PrimaryBtn = styled.div`
 a{
     text-decoration: none;
-
+    color: #f8f8f8;
 }
     cursor: pointer;
     border: 2px solid black;

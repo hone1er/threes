@@ -27,5 +27,8 @@ export const SignInDiv = styled.div`
     margin-top: 50vh;
     padding: 10px;
   }
+  #enter-room{ 
+    margin: 0 0 10px;
+  }
 
 `;

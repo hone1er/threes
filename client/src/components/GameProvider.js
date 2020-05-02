@@ -2,7 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import diceAudio from "../diceSound.mp3"
 export const GameContext = createContext();
-const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
+const sock = socketIOClient("localhost:5000");
 
 export function GameProvider(props) {
   const [player, setPlayer] = useState("");
@@ -13,6 +13,7 @@ export function GameProvider(props) {
     dieVisable: Array(5).fill(true),
     names: [],
     scores: [],
+    rooms: [],
     rollDisabled: false,
     rolling: false,
     diceDisabled: true,
