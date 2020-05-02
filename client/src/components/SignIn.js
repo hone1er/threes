@@ -42,14 +42,13 @@ export default function SignIn() {
     alert(`${player} is taken`);
   }
   function roomDoesNotExist() {
-    alert(`${room} does not exist.`);
+    alert(`Please select a room from the drop down`);
   }
 
   let taken = checkNameTaken();
   let roomTaken = checkRoomTaken();
 
   sock.on("setRooms", (rooms) => {
-    console.log(rooms);
     setRoomList(rooms);
   });
 
@@ -61,7 +60,16 @@ export default function SignIn() {
         onChange={handleUser}
         placeholder="Enter your username"
       />
-      <input id="enter-room" value={room} onChange={handleRoom} placeholder="Enter room" />
+      {/* <input id="enter-room" value={room} onChange={handleRoom} placeholder="Enter room" /> */}
+      <select onChange={handleRoom}>
+        <option select>select a room</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="benal">benal</option>
+      </select>
       <Link
         to={taken || !roomTaken ? "/" : "/game"}
         id="join"

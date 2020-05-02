@@ -18,6 +18,11 @@ export const SignInDiv = styled.div`
     pointer-events: ${props => props.player === "" ? "none" : "unset"};
     text-decoration: none;
   }
+  select {
+    margin-bottom: 15px;
+    width: 175px;
+    padding: 10px;
+  }
   input {
     background: #e4e4e4;
     width: 250px;

@@ -164,6 +164,7 @@ io.on("connection", (sock) => {
 
   sock.on("disconnect", (user) => {
     chat.push(`${sockUser} disconnected`);
+    sock.emit("setGame", game);
     sock.broadcast.to(userRoom).emit("receiveMessage", chat);
     let tempGame = userGame;
     console.log(sockUser)
