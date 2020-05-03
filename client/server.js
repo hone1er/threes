@@ -48,10 +48,11 @@ io.on("connection", (sock) => {
   );
   sock.emit("setRooms", rooms);
   sock.on("newRoom", ({ room, player }) => {
+    sock.leaveAll();
     sock.join(room);
     sockUser = player;
     userRoom = room;
-    let tempGame = userGame;
+    let tempGame = JSON.parse(JSON.stringify(newGame));
     tempGame.names.push(player);
     tempGame.scores.push(0);
     rooms[room] = tempGame;

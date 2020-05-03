@@ -69,6 +69,10 @@ export function GameProvider(props) {
         rollDisabled: game.currentPlayer === game.names.length,
       });
     }
+    else {
+      return
+    }
+    
   }, [game]);
 
   useEffect(() => {

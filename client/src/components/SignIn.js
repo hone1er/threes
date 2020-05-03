@@ -4,10 +4,12 @@ import { SignInDiv } from "./styledComponents/SignInDiv";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
 import { PrimaryBtn } from "./styledComponents/PrimaryBtn";
+
 export default function SignIn() {
   const { sock, player, setPlayer, game } = useContext(GameContext);
   const [room, setRoom] = useState("");
   const [roomList, setRoomList] = useState({});
+
   function handleUser(e) {
     setPlayer(e.target.value);
   }
@@ -37,11 +39,12 @@ export default function SignIn() {
     let tempGame = game;
     tempGame.names.push(player);
     tempGame.scores.push(0);
-
     localStorage.setItem("player", JSON.stringify(player));
   }
   function roomExist() {
-    alert(`The room '${room}' has already been created. Join the room or start a new one with a different name`);
+    alert(
+      `The room '${room}' has already been created. Join the room or start a new one with a different name`
+    );
   }
   function alertUser() {
     alert(`A player in ${room} has already used the name: ${player}`);
@@ -72,16 +75,6 @@ export default function SignIn() {
         onChange={handleRoom}
         placeholder="Enter room"
       />
-      {/* <select onChange={handleRoom}>
-        <option select>select a room</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="benal">benal</option>
-        <option value="osos">osos</option>
-      </select> */}
       <Link
         to={taken ? "/" : !roomTaken ? "/" : "/game"}
         id="join"
