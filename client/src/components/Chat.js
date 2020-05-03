@@ -39,18 +39,21 @@ export default function Chat() {
     elem.scrollTop = elem.scrollHeight;
   }
   useEffect(() => {
-      const el = document.createElement("li");
-      el.innerHTML = chat[chat.length - 1] || "";
-      document.getElementById("chat").appendChild(el);
-      const elem = document.getElementById("chat");
-      elem.scrollTop = elem.scrollHeight;
+    const el = document.createElement("li");
+    el.innerHTML = chat[chat.length - 1] || "";
+    document.getElementById("chat").appendChild(el);
+    const elem = document.getElementById("chat");
+    elem.scrollTop = elem.scrollHeight;
     // eslint-disable-next-line
   }, [chat]);
 
-  sock.on("receiveMessage", (chat) => {
+  useEffect(() => {
     if (chatSound === true) {
       audio.play();
     }
+  }, [chat, chatSound]);
+
+  sock.on("receiveMessage", (chat) => {
     setChat(chat);
   });
 
@@ -60,20 +63,20 @@ export default function Chat() {
       <ul id="chat"></ul>
       <div id="chat-input-div">
         <div>
-        <input
-          id="chat-input"
-          value={message}
-          onChange={handleChange}
-          placeholder="Enter message"
-          onKeyUp={handleEnterKey}
-        ></input>
-        <button
-          id="chat-btn"
-          disabled={message.length === 0}
-          onClick={sendMessage}
-        >
-          send
-        </button>
+          <input
+            id="chat-input"
+            value={message}
+            onChange={handleChange}
+            placeholder="Enter message"
+            onKeyUp={handleEnterKey}
+          ></input>
+          <button
+            id="chat-btn"
+            disabled={message.length === 0}
+            onClick={sendMessage}
+          >
+            send
+          </button>
         </div>
         <button id="chat-mute" onClick={handleSound}>
           {chatSound ? "mute" : "unmute"} chat
