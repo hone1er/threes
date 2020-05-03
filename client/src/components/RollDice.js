@@ -6,9 +6,8 @@ import diceAudio from "../diceSound.mp3";
 export default function RollDice() {
   const { game, setGame, sock, player } = useContext(GameContext);
   
+  var audio = new Audio(diceAudio);
   function handleRoll() {
-    
-    var audio = new Audio(diceAudio);
     audio.play();
     let value = [Array(5).fill(null)];
 

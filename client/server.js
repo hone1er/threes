@@ -104,10 +104,12 @@ io.on("connection", (sock) => {
         console.log(`${userRoom} deleted...........................`);
         console.log(rooms);
       }
-      io.emit("setRooms", Object.keys(rooms));
-      io.to(userRoom).emit("setGame", tempGame);
+      else {
       rooms[userRoom] = tempGame;
       userGame = rooms[userRoom];
+      }
+      io.emit("setRooms", Object.keys(rooms));
+      io.to(userRoom).emit("setGame", tempGame);
       console.log(
         `${sockUser} disconnected from room: ${userRoom}.....................................................`
       );
@@ -119,8 +121,8 @@ server.on("error", (error) => {
   console.error("server error: ", error);
 });
 
-server.listen(5000, () => {
+server.listen(process.env.PORT, () => {
   console.log(
-    "Threes server started on port: " + 5000 + "............................"
+    "Threes server started on port: " + process.env.PORT + "............................"
   );
 });
