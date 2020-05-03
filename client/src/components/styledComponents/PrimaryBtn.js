@@ -25,4 +25,8 @@ a{
         position: relative;
         top: 2vh;
     }
+
+    &#logout {
+       border-radius: 0 0 8px;
+    }
 `

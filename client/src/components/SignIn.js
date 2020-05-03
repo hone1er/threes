@@ -28,21 +28,22 @@ export default function SignIn() {
     localStorage.setItem("player", JSON.stringify(player));
   }
 
-  // function handleNewRoom() {
-  //   sock.emit("newRoom", ({room: room, player: player}));
-  //   let tempGame = game;
-  //   tempGame.names.push(player);
-  //   tempGame.scores.push(0);
-  //   localStorage.setItem("player", JSON.stringify(player));
-  // }
-  // function roomExist() {
-  //   alert(`${room} is already taken.`);
-  // }
+  function handleNewRoom() {
+    sock.emit("newRoom", ({room: room, player: player}));
+    let tempGame = game;
+    tempGame.names.push(player);
+    tempGame.scores.push(0);
+
+    localStorage.setItem("player", JSON.stringify(player));
+  }
+  function roomExist() {
+    alert(`${room} is already taken.`);
+  }
   function alertUser() {
     alert(`${player} is taken`);
   }
   function roomDoesNotExist() {
-    alert(`Please select a room from the drop down`);
+    alert(`There is no room: '${room}'. Check the name and try again, or create a new room`);
   }
 
   let taken = checkNameTaken();
@@ -60,8 +61,8 @@ export default function SignIn() {
         onChange={handleUser}
         placeholder="Enter your username"
       />
-      {/* <input id="enter-room" value={room} onChange={handleRoom} placeholder="Enter room" /> */}
-      <select onChange={handleRoom}>
+      <input id="enter-room" value={room} onChange={handleRoom} placeholder="Enter room" />
+      {/* <select onChange={handleRoom}>
         <option select>select a room</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -69,9 +70,10 @@ export default function SignIn() {
         <option value="4">4</option>
         <option value="5">5</option>
         <option value="benal">benal</option>
-      </select>
+        <option value="osos">osos</option>
+      </select> */}
       <Link
-        to={taken || !roomTaken ? "/" : "/game"}
+        to={taken ?  "/" : !roomTaken ? "/" : "/game"}
         id="join"
         onClick={
           taken ? alertUser : !roomTaken ? roomDoesNotExist : handleJoinRoom
@@ -79,13 +81,13 @@ export default function SignIn() {
       >
         <PrimaryBtn>Join Game</PrimaryBtn>
       </Link>
-      {/* <Link
+      <Link
         to={roomTaken || taken ? "/" : "/game"}
-        id="join"
+        id="new"
         onClick={taken ? alertUser : roomTaken ? roomExist : handleNewRoom}
       >
         <PrimaryBtn>New Game</PrimaryBtn>
-      </Link> */}
+      </Link>
       <Modal />
     </SignInDiv>
   );

@@ -36,15 +36,18 @@ export default function Chat() {
     elem.scrollTop = elem.scrollHeight;
   }
   useEffect(() => {
-    const el = document.createElement("li");
-    el.innerHTML = chat[chat.length - 1] || "";
-    document.getElementById("chat").appendChild(el);
-    const elem = document.getElementById("chat");
-    elem.scrollTop = elem.scrollHeight;
+      const el = document.createElement("li");
+      el.innerHTML = chat[chat.length - 1] || "";
+      document.getElementById("chat").appendChild(el);
+      const elem = document.getElementById("chat");
+      elem.scrollTop = elem.scrollHeight;
+    
     const audio = new Audio(chatAudio);
+    return () => {
     if (chatSound === true) {
       audio.play();
     }
+  }
     // eslint-disable-next-line
   }, [chat]);
 

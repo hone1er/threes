@@ -10,9 +10,7 @@ export function ScoreBoard() {
     <ScoreBoardDiv>
       {game.names.map((name, index) => {
           return (
-            <>
-              <Player playerNumber={index} key={index} player={name===player}/>
-            </>
+              <Player key={index + name} playerNumber={index}  player={name===player ? "true" : null}/>
           );
         }
         )}

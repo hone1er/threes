@@ -35,5 +35,17 @@ export const SignInDiv = styled.div`
   #enter-room{ 
     margin: 0 0 10px;
   }
+  #join {
+    position: relative;
+    top: 10px;
+  }
+  #new {
+    position: relative;
+    top: 20px;
+  }
+  .rules {
+    position: relative;
+    top: 30px;
+  }
 
 `;

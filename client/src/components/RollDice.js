@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
 import { GameContext } from "./GameProvider";
 import { Button } from "./styledComponents/Button";
+import diceAudio from "../diceSound.mp3";
+
 export default function RollDice() {
   const { game, setGame, sock, player } = useContext(GameContext);
   
   function handleRoll() {
+    
+    var audio = new Audio(diceAudio);
+    audio.play();
     let value = [Array(5).fill(null)];
 
 

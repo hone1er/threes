@@ -1,8 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
-import diceAudio from "../diceSound.mp3"
 export const GameContext = createContext();
-const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
+const sock = socketIOClient("localhost:5000");
 
 export function GameProvider(props) {
   const [player, setPlayer] = useState("");
@@ -34,7 +33,7 @@ export function GameProvider(props) {
       dieVisable: tempGame.dieVisable,
       playerTurns: tempGame.playerTurns,
       rollDisabled: false,
-    })
+    });
     sock.emit("setGame", {
       ...game,
       scores: tempGame.scores,
@@ -44,16 +43,14 @@ export function GameProvider(props) {
     });
   }
 
-  
-
   // handles the switching of players when playerTurns run out and checks for winner
   useEffect(() => {
     const tempGame = game;
     if (game.playerTurns <= 0 && game.currentPlayer < game.names.length) {
-      tempGame.currentPlayer = (tempGame.currentPlayer + 1);
+      tempGame.currentPlayer = tempGame.currentPlayer + 1;
       tempGame.playerTurns = 5;
       tempGame.dieVisable = Array(5).fill(true);
-      tempGame.diceDisabled = true
+      tempGame.diceDisabled = true;
 
       setGame({
         ...game,
@@ -70,30 +67,28 @@ export function GameProvider(props) {
         dieVisable: tempGame.dieVisable,
         gameOver: game.currentPlayer === game.names.length,
         rollDisabled: game.currentPlayer === game.names.length,
-      })
+      });
     }
   }, [game]);
 
   useEffect(() => {
     setTimeout(() => {
       let el = document.getElementsByClassName("dice");
-      var audio = new Audio(diceAudio);
-      audio.play();
       for (let i = 0; i < el.length; i++) {
         el[i].classList.add("rolling");
-
       }
     }, 0);
 
     return () => {
       setTimeout(() => {
+
         let el = document.getElementsByClassName("dice");
         for (let i = 0; i < el.length; i++) {
           el[i].classList.remove("rolling");
         }
       }, 500);
-    }
-  }, [game.rolling])
+    };
+  }, [game.rolling]);
 
   sock.on("setGame", (data) => {
     setGame(data);

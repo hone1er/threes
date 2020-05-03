@@ -11,7 +11,7 @@ export default function Logout() {
   return (
     <LogoutDiv>
         <a href="/">
-      <PrimaryBtn onClick={handleLogout}>
+      <PrimaryBtn id="logout" onClick={handleLogout}>
         Logout
       </PrimaryBtn>
       </a>
