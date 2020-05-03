@@ -46,7 +46,7 @@ io.on("connection", (sock) => {
       count +
       "..........................................."
   );
-  sock.emit("setRooms", Object.keys(rooms));
+  sock.emit("setRooms", rooms);
   sock.on("newRoom", ({ room, player }) => {
     sock.join(room);
     sockUser = player;
@@ -55,7 +55,7 @@ io.on("connection", (sock) => {
     tempGame.names.push(player);
     tempGame.scores.push(0);
     rooms[room] = tempGame;
-    io.emit("setRooms", Object.keys(rooms));
+    io.emit("setRooms", rooms);
     io.to(room).emit("setGame", tempGame);
     console.log(`${player} has succefully CREATED room: ${room}`);
   });
@@ -102,13 +102,13 @@ io.on("connection", (sock) => {
       if (tempGame.names.length === 0) {
         delete rooms[userRoom];
         console.log(`${userRoom} deleted...........................`);
-        console.log(rooms);
+        console.log("Active Rooms Remaining: " + Object.keys(rooms) + " ..................................................");
       }
       else {
       rooms[userRoom] = tempGame;
       userGame = rooms[userRoom];
       }
-      io.emit("setRooms", Object.keys(rooms));
+      io.emit("setRooms", rooms);
       io.to(userRoom).emit("setGame", tempGame);
       console.log(
         `${sockUser} disconnected from room: ${userRoom}.....................................................`

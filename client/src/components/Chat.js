@@ -2,6 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { GameContext } from "./GameProvider";
 import { ChatDiv } from "./styledComponents/ChatDiv";
 import chatAudio from "../intuition.mp3";
+
+const audio = new Audio(chatAudio);
+
 export default function Chat() {
   const { sock, player } = useContext(GameContext);
 
@@ -41,17 +44,13 @@ export default function Chat() {
       document.getElementById("chat").appendChild(el);
       const elem = document.getElementById("chat");
       elem.scrollTop = elem.scrollHeight;
-    
-    const audio = new Audio(chatAudio);
-    return () => {
-    if (chatSound === true) {
-      audio.play();
-    }
-  }
     // eslint-disable-next-line
   }, [chat]);
 
   sock.on("receiveMessage", (chat) => {
+    if (chatSound === true) {
+      audio.play();
+    }
     setChat(chat);
   });
 
