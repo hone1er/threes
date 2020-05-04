@@ -42,12 +42,28 @@ io.on("connection", (sock) => {
   let userGame = JSON.parse(JSON.stringify(newGame));
   count += 1;
   console.log(
-    "total users connected: " +
+    "\ntotal users connected: " +
       count +
-      "..........................................."
+      "...........................................\n"
   );
   sock.emit("setRooms", rooms);
   sock.on("newRoom", ({ room, player }) => {
+    if (userGame) {
+      let currentGame = userGame;
+      if (currentGame.names.indexOf(sockUser) !== -1) {
+        currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
+        currentGame.names.splice(currentGame.names.indexOf(sockUser), 1);
+        chat.push(`${sockUser} disconnected`);
+        sock.broadcast.to(userRoom).emit("receiveMessage", chat);
+        sock.leave(userRoom);
+        console.log(`\n${player} disconnected from room: ${userRoom}\n`);
+        sock.broadcast.to(userRoom).emit("setGame", currentGame);
+        if (currentGame.names.length === 0) {
+          delete rooms[userRoom];
+          console.log(`\n${userRoom} deleted...........................\n`);
+        }
+      }
+    }
     sock.leaveAll();
     sock.join(room);
     sockUser = player;
@@ -56,11 +72,28 @@ io.on("connection", (sock) => {
     tempGame.names.push(player);
     tempGame.scores.push(0);
     rooms[room] = tempGame;
+    userGame = rooms[room];
+
     io.emit("setRooms", rooms);
     io.to(room).emit("setGame", tempGame);
-    console.log(`${player} has succefully CREATED room: ${room}`);
+    console.log(`\n${player} has succefully CREATED room: ${room}\n`);
   });
   sock.on("joinRoom", ({ room, player }) => {
+    let currentGame = userGame;
+    if (currentGame.names.indexOf(sockUser) !== -1) {
+      currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
+      currentGame.names.splice(currentGame.names.indexOf(sockUser), 1);
+      chat.push(`${sockUser} disconnected`);
+      sock.broadcast.to(userRoom).emit("receiveMessage", chat);
+      sock.leave(userRoom);
+      console.log(`\n${player} disconnected from room: ${userRoom}\n`);
+
+      if (currentGame.names.length === 0) {
+        delete rooms[userRoom];
+        console.log(`\n${userRoom} deleted...........................\n`);
+        console.log(rooms);
+      }
+    }
     if (rooms[room]) {
       sock.join(room);
       currentGame = rooms[room];
@@ -68,13 +101,13 @@ io.on("connection", (sock) => {
       currentGame.scores.push(0);
       sockUser = player;
       userRoom = room;
-      userGame = rooms[room];
       rooms[room] = currentGame;
-      console.log(`${sockUser} has succefully JOINED room: ${room}`);
+      userGame = rooms[room];
+      console.log(`\n${sockUser} has succefully JOINED room: ${room}\n`);
       return io.to(room).emit("setGame", currentGame);
     } else {
-      console.log(`no room found named: ${room}`);
-      return sock.emit("err", `no room found named: ${room}`);
+      console.log(`\nno room found named: ${room}\n`);
+      return sock.emit("err", `\nno room found named: ${room}\n`);
     }
   });
 
@@ -97,24 +130,26 @@ io.on("connection", (sock) => {
     sock.broadcast.to(userRoom).emit("receiveMessage", chat);
     let tempGame = userGame;
     count -= 1;
+
     if (tempGame.names.indexOf(sockUser) !== -1) {
       tempGame.scores.splice(tempGame.names.indexOf(sockUser), 1);
       tempGame.names.splice(tempGame.names.indexOf(sockUser), 1);
       if (tempGame.names.length === 0) {
         delete rooms[userRoom];
-        console.log(`${userRoom} deleted...........................`);
-        console.log("Active Rooms Remaining: " + Object.keys(rooms) + " ..................................................");
+        console.log(`\n${userRoom} deleted...........................\n`);
+        console.log("Rooms Remaining:  \n")
+        console.log(Object.keys(rooms).length ? Object.keys(rooms) + "\n" : "none \n");
+      } else {
+        rooms[userRoom] = tempGame;
+        userGame = rooms[userRoom];
       }
-      else {
-      rooms[userRoom] = tempGame;
-      userGame = rooms[userRoom];
-      }
-      io.emit("setRooms", rooms);
-      io.to(userRoom).emit("setGame", tempGame);
-      console.log(
-        `${sockUser} disconnected from room: ${userRoom}.....................................................`
-      );
     }
+    sock.leave(userRoom);
+    io.emit("setRooms", rooms);
+    io.to(userRoom).emit("setGame", tempGame);
+    console.log(
+      `\n${sockUser} disconnected from room: ${userRoom}.....................................................\n`
+    );
   });
 });
 

@@ -28,5 +28,9 @@ a{
 
     &#logout {
        border-radius: 0 0 8px;
+
+       @media (max-width: 500px){
+           font-size:.8rem;
+       }
     }
 `

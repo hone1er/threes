@@ -72,7 +72,7 @@ export function GameProvider(props) {
     else {
       return
     }
-    
+
   }, [game]);
 
   useEffect(() => {
