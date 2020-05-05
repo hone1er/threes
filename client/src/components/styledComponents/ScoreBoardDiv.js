@@ -14,10 +14,9 @@ export const ScoreBoardDiv = styled.div`
 
     @media (max-width: 800px){
         align-items: center;
-        margin-bottom: 5vh;
 
         .score-header-container{
-            font-size: .9rem;
+            font-size: .7rem;
             padding: 0 10px;
             border-bottom: none;
             width: max-content;

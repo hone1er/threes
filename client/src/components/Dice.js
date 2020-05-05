@@ -12,7 +12,7 @@ import die6 from "../diceSVG/U+2685.svg"
 export default function Dice() {
   const { game, handleScore, player } = useContext(GameContext);
   return (
-    <DiceDiv>
+    <DiceDiv className="dice-area">
       {game.diceValues.map((value, index) => {
         if (game.dieVisable[index]){
           let die;
@@ -48,7 +48,7 @@ export default function Dice() {
                 ? true
                 : game.diceDisabled
             }
-            className="dice dice-area"
+            className="dice"
             onClick={() => handleScore(game.currentPlayer, value, index)}
           >
             <img src={die} alt="dice" />

@@ -23,7 +23,7 @@ export const ChatDiv = styled.div`
 
   #chat-mute {
     width: 145px;
-    margin: 5px 37px 150px;
+
   }
   h1 {
     text-transform: uppercase;
@@ -51,7 +51,7 @@ export const ChatDiv = styled.div`
     letter-spacing: 0.05rem;
   }
   input {
-    width: calc(100% - 69px);
+    width: calc(100% - 72px);
     margin: auto;
     height: 2.3rem;
     font-size: 1rem;
@@ -62,7 +62,7 @@ export const ChatDiv = styled.div`
   button {
       letter-spacing: 0.05rem;
     position: relative;
-    bottom: 2.5px;
+    bottom: 1.5px;
     width: 60px;
     cursor: pointer;
     margin: 0;
@@ -85,15 +85,22 @@ export const ChatDiv = styled.div`
     }
     #chat-mute {
       width: 145px;
-      margin: 0 20px 150px;
+
     }
   }
-
+  @media (max-width: 650px) {
+    height: 100%;
+    ul {
+      height: 300px;
+    }
+  }
   @media (max-width: 460px) {
 
-
+    input {
+      font-size: .9rem;
+    }
     li {
-      font-size: .8rem;
+      font-size: .9rem;
     }
   }
 `;

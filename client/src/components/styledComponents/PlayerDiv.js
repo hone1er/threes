@@ -33,7 +33,7 @@ export const PlayerDiv = styled.div`
         font-size: .7rem;
     }
     h1 {
-        font-size: 1.4rem;
+        font-size: 1.1rem;
     }
 }
 }
