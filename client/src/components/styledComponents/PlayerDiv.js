@@ -3,6 +3,7 @@ export const PlayerDiv = styled.div`
 .player {
     display: flex;
     align-items: end;
+    padding: 0 20px;
 
     p {
         padding: 10px;
@@ -10,13 +11,12 @@ export const PlayerDiv = styled.div`
         color: #222
     }
     h1 {
-        font-size: 2.25rem;
+        font-size: 2rem;
     }
 }
 
 @media (max-width: 800px) {
     .player {
-        padding: 0 20px;
         align-items: center;
         p {
             font-size: 1rem;

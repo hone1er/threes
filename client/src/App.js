@@ -8,7 +8,6 @@ import "react-dice-complete/dist/react-dice-complete.css";
 import Chat from "./components/Chat";
 import Modal from "./components/Modal";
 import Logout from "./components/Logout";
-// import TestApp from "./TestApp";
 function App() {
   return (
     <div className="App">
@@ -16,7 +15,6 @@ function App() {
       <ScoreBoard />
       <CurrentPlayer />
       <Dice />
-      {/* <TestApp/> */}
       <RollDice />
       <Chat />
       <Modal />

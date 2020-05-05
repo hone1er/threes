@@ -7,6 +7,7 @@ export const ScoreBoardDiv = styled.div`
     background-color: rgba(115, 189, 130, 0.30);
 .score-header-container {
     width: 100%;
+    font-size: .8rem;
     border-right: 2px solid rgba(88, 185, 108, 0.30);;
     border-bottom: 2px solid rgba(88, 185, 108, 0.30);;
 }
@@ -23,4 +24,10 @@ export const ScoreBoardDiv = styled.div`
         }
         border: 2px solid rgba(88, 185, 108, 0.30);;
     }
+    @media (max-width: 650px){
+        .score-header-container{
+            font-size: .4rem;
+        }
+    }
+
 `

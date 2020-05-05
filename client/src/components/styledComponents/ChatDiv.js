@@ -5,6 +5,10 @@ export const ChatDiv = styled.div`
   margin: auto;
   margin-top: 25px;
   height: 100vh;
+
+  h1 {
+    font-size: 1.4rem;
+  }
   .chat-item {
     display: flex;
   }
@@ -23,6 +27,9 @@ export const ChatDiv = styled.div`
 
   #chat-mute {
     width: 145px;
+    position: relative;
+    top: 5px;
+    left: 3px;
 
   }
   h1 {
@@ -51,7 +58,7 @@ export const ChatDiv = styled.div`
     letter-spacing: 0.05rem;
   }
   input {
-    width: calc(100% - 72px);
+    width: calc(100% - 71px);
     margin: auto;
     height: 2.3rem;
     font-size: 1rem;
@@ -86,6 +93,10 @@ export const ChatDiv = styled.div`
     #chat-mute {
       width: 145px;
 
+    }
+    input {
+    width: calc(100% - 75px);
+    border-radius: 0 !important;
     }
   }
   @media (max-width: 650px) {
