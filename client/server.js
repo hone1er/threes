@@ -158,8 +158,8 @@ server.on("error", (error) => {
   console.error("server error: ", error);
 });
 
-server.listen(5000, () => {
+server.listen(process.env.PORT, () => {
   console.log(
-    "Threes server started on port: " + 5000 + "............................"
+    "Threes server started on port: " + process.env.PORT + "............................"
   );
 });
