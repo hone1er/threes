@@ -41,12 +41,12 @@ export default function SignIn() {
     tempGame.scores.push(0);
     localStorage.setItem("player", JSON.stringify(player));
   }
-  function roomExist() {
+  function roomNameTaken() {
     alert(
       `The room '${room}' has already been created. Join the room or start a new one with a different name`
     );
   }
-  function alertUser() {
+  function userNameTaken() {
     alert(`A player in ${room} has already used the name: ${player}`);
   }
   function roomDoesNotExist() {
@@ -79,7 +79,7 @@ export default function SignIn() {
         to={taken ? "/" : !roomTaken ? "/" : "/game"}
         id="join"
         onClick={
-          taken ? alertUser : !roomTaken ? roomDoesNotExist : handleJoinRoom
+          taken ? userNameTaken : !roomTaken ? roomDoesNotExist : handleJoinRoom
         }
       >
         <PrimaryBtn>Join Game</PrimaryBtn>
@@ -87,7 +87,7 @@ export default function SignIn() {
       <Link
         to={roomTaken || taken ? "/" : "/game"}
         id="new"
-        onClick={taken ? alertUser : roomTaken ? roomExist : handleNewRoom}
+        onClick={taken ? userNameTaken : roomTaken ? roomNameTaken : handleNewRoom}
       >
         <PrimaryBtn>New Game</PrimaryBtn>
       </Link>

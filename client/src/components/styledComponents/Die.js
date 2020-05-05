@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Die = styled.button`
-width: 6.5rem;
-    height: 6.5rem;
+width: 6rem;
+    height: 6rem;
     img {
-        width: 6.5rem;
+        width: 6rem;
     }
 cursor: pointer;
 background: ${(props) => (props.disabled ? "#444" : "#f8f8f8")};
@@ -62,10 +62,10 @@ transform-origin: 0 0;  /* Standard Property */
 }
 
 @media (max-width: 768px){
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 4rem;
+    height: 4rem;
     img {
-        width: 4.5rem;
+        width: 4rem;
     }
 }
 `;

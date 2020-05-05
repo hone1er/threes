@@ -5,7 +5,7 @@ import diceAudio from "../diceSound.mp3";
 
 var audio = new Audio(diceAudio);
 export default function RollDice() {
-  const { game, setGame, sock, player } = useContext(GameContext);
+  const { game, setGame, handleReset, sock, player } = useContext(GameContext);
   function handleRoll() {
     audio.play();
     let value = [Array(5).fill(null)];
@@ -35,29 +35,8 @@ export default function RollDice() {
       rolling: !game.rolling,
     });
   }
-  function handleReset() {
-    const elements = document.getElementsByClassName("dice");
-    for (let i = 0; i < elements.length; i++) {
-      document.getElementsByClassName("dice")[i].style.display = "unset";
-    }
-    const newGame = {
-      ...game,
-      currentPlayer: 0,
-      playerTurns: 5,
-      diceValues: Array(5).fill(5),
-      dieVisable: Array(5).fill(true),
-      scores: Array(game.names.length).fill(0),
-      rollDisabled: false,
-      diceDisabled: true,
-      gameOver: false,
-    };
-
-    setGame(newGame);
-    sock.emit("setGame", newGame);
-  }
-
   return (
-    <>
+    <div className="roll-area">
       <Button
         disabled={
           player !== game.names[game.currentPlayer] ? true : game.rollDisabled
@@ -75,6 +54,6 @@ export default function RollDice() {
       <Button reset={!game.gameOver} onClick={handleReset}>
         reset
       </Button>
-    </>
+    </div>
   );
 }

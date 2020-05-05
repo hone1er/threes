@@ -16,11 +16,13 @@ export const PlayerDiv = styled.div`
 
 @media (max-width: 800px) {
     .player {
+        padding: 0 20px;
+        align-items: center;
         p {
             font-size: 1rem;
         }
         h1{
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
     }
 }

@@ -58,7 +58,7 @@ export default function Chat() {
   });
 
   return (
-    <ChatDiv>
+    <ChatDiv className="chat-area">
       <h1>chat</h1>
       <ul id="chat"></ul>
       <div id="chat-input-div">

@@ -1,7 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 export const GameContext = createContext();
-const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
+const sock = socketIOClient("localhost:5000");
 
 export function GameProvider(props) {
   const [player, setPlayer] = useState("");
@@ -17,6 +17,7 @@ export function GameProvider(props) {
     rolling: false,
     diceDisabled: true,
     gameOver: false,
+    public: true,
   });
 
   function handleScore(playerid, value, die) {
@@ -43,6 +44,27 @@ export function GameProvider(props) {
     });
   }
 
+  function handleReset() {
+    const elements = document.getElementsByClassName("dice");
+    for (let i = 0; i < elements.length; i++) {
+      document.getElementsByClassName("dice")[i].style.display = "unset";
+    }
+    const newGame = {
+      ...game,
+      currentPlayer: 0,
+      playerTurns: 5,
+      diceValues: Array(5).fill(5),
+      dieVisable: Array(5).fill(true),
+      scores: Array(game.names.length).fill(0),
+      rollDisabled: false,
+      diceDisabled: true,
+      gameOver: false,
+      public: true,
+    };
+
+    setGame(newGame);
+    sock.emit("setGame", newGame);
+  }
   // handles the switching of players when playerTurns run out and checks for winner
   useEffect(() => {
     const tempGame = game;
@@ -68,11 +90,9 @@ export function GameProvider(props) {
         gameOver: game.currentPlayer === game.names.length,
         rollDisabled: game.currentPlayer === game.names.length,
       });
+    } else {
+      return;
     }
-    else {
-      return
-    }
-
   }, [game]);
 
   useEffect(() => {
@@ -85,12 +105,12 @@ export function GameProvider(props) {
 
     return () => {
       setTimeout(() => {
-
         let el = document.getElementsByClassName("dice");
         for (let i = 0; i < el.length; i++) {
           el[i].classList.remove("rolling");
         }
       }, 500);
+      return;
     };
   }, [game.rolling]);
 
@@ -100,7 +120,15 @@ export function GameProvider(props) {
 
   return (
     <GameContext.Provider
-      value={{ game, setGame, handleScore, sock, setPlayer, player }}
+      value={{
+        game,
+        setGame,
+        handleScore,
+        sock,
+        setPlayer,
+        player,
+        handleReset,
+      }}
     >
       {props.children}
     </GameContext.Provider>

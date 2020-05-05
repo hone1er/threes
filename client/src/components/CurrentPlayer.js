@@ -4,17 +4,25 @@ import { CurrentPlayerDiv } from "./styledComponents/CurrentPlayerDiv";
 
 export default function CurrentPlayer() {
   const { game } = useContext(GameContext);
-
+  // keep track of low scor
+  const lowScores = game.scores.filter((item) => {
+    return item === Math.min(...game.scores);
+  });
   // show current player or winner
-  const current = game.names.length < 1 ? null : game.names[game.currentPlayer]
-    ? game.names[game.currentPlayer] + "'s Turn"
-    : "Winner: " + game.names[game.scores.indexOf(Math.min(...game.scores))];
+  const current =
+    game.names.length < 1
+      ? ""
+      : !game.gameOver
+      ? game.names[game.currentPlayer] + "'s Turn"
+      : lowScores.length > 1
+      ? "TIE GAME!"
+      : "Winner: " + game.names[game.scores.indexOf(lowScores[0])];
 
   // assign classname based on current player or winner to styling
   const classname = game.names[game.currentPlayer] ? "turn" : "winner";
 
   return (
-    <CurrentPlayerDiv>
+    <CurrentPlayerDiv className="player-area">
       <h1 className={classname}>{current}</h1>
     </CurrentPlayerDiv>
   );

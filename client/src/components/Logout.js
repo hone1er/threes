@@ -3,7 +3,7 @@ import { PrimaryBtn } from "./styledComponents/PrimaryBtn";
 import { LogoutDiv } from "./styledComponents/LogoutDiv";
 export default function Logout() {
   return (
-    <LogoutDiv>
+    <LogoutDiv className="logout-area">
         <a href="/">
       <PrimaryBtn id="logout">
         Leave Room

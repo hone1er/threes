@@ -1,6 +1,7 @@
 import styled from "styled-components";
 export const ModalDiv = styled.div`
-
+display: flex;
+justify-self: end;
 #myModal {
   display: ${props => props.modal === false ? "block" : "none"};
 }

@@ -7,7 +7,10 @@ export function ScoreBoard() {
   const { game, player } = useContext(GameContext);
 
   return (
-    <ScoreBoardDiv>
+    <ScoreBoardDiv className="scoreboard-area">
+      <div className="score-header-container">
+      <h1 className="scoreboard-header">Players</h1>
+      </div>
       {game.names.map((name, index) => {
           return (
               <Player key={index + name} playerNumber={index}  player={name===player ? "true" : null}/>

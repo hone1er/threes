@@ -48,7 +48,7 @@ export default function Dice() {
                 ? true
                 : game.diceDisabled
             }
-            className="dice"
+            className="dice dice-area"
             onClick={() => handleScore(game.currentPlayer, value, index)}
           >
             <img src={die} alt="dice" />

@@ -7,7 +7,6 @@ export default function Player(props) {
   return (
     <PlayerDiv>
       <div className="player" player={props.player}>
-      {props.player ? <p>You: </p> : null}
       <h1> {game.names[props.playerNumber]}: {game.scores[props.playerNumber]}</h1>
       </div>
     </PlayerDiv>

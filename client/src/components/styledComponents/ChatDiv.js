@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const ChatDiv = styled.div`
-  width: 775px;
+  width: 100%;
   margin: auto;
   margin-top: 25px;
-
+  height: 100vh;
   .chat-item {
     display: flex;
   }
@@ -35,10 +35,8 @@ export const ChatDiv = styled.div`
     padding: 0 1px;
     overflow-x: hidden;
     margin: auto;
-    width: 90%;
     background: #f8f8f8;
-    height: 150px;
-    max-height: 150px;
+    height: 60vh;
     overflow-y: scroll;
     border: 2px solid black;
     list-style: none;
@@ -53,7 +51,7 @@ export const ChatDiv = styled.div`
     letter-spacing: 0.05rem;
   }
   input {
-    width: 635px;
+    width: calc(100% - 69px);
     margin: auto;
     height: 2.3rem;
     font-size: 1rem;
@@ -64,7 +62,7 @@ export const ChatDiv = styled.div`
   button {
       letter-spacing: 0.05rem;
     position: relative;
-    bottom: 0.5px;
+    bottom: 2.5px;
     width: 60px;
     cursor: pointer;
     margin: 0;
@@ -82,12 +80,9 @@ export const ChatDiv = styled.div`
   }
 
   @media (max-width: 800px) {
-    width: 450px;
-
-    input {
-      width: 342px;
+    li {
+      font-size: 1rem;
     }
-
     #chat-mute {
       width: 145px;
       margin: 0 20px 150px;
@@ -95,14 +90,10 @@ export const ChatDiv = styled.div`
   }
 
   @media (max-width: 460px) {
-    width: 350px;
 
-    input {
-      width: 251px;
-    }
 
     li {
-      font-size: 1.1rem;
+      font-size: .8rem;
     }
   }
 `;

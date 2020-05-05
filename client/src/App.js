@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import { ScoreBoard } from "./components/ScoreBoard";
 import CurrentPlayer from "./components/CurrentPlayer";
 import Dice from "./components/Dice";

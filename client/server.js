@@ -21,6 +21,7 @@ const newGame = {
   rollDisabled: false,
   diceDisabled: true,
   gameOver: false,
+  public: true,
 };
 
 console.log(`serving static files from : ${clientPath}`);
@@ -157,8 +158,8 @@ server.on("error", (error) => {
   console.error("server error: ", error);
 });
 
-server.listen(process.env.PORT, () => {
+server.listen(5000, () => {
   console.log(
-    "Threes server started on port: " + process.env.PORT + "............................"
+    "Threes server started on port: " + 5000 + "............................"
   );
 });
