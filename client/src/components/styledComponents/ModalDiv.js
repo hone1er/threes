@@ -1,5 +1,8 @@
 import styled from "styled-components";
 export const ModalDiv = styled.div`
+&.game-room-rules {
+  width: unset;
+}
 display: flex;
 justify-self: end;
 #myModal {

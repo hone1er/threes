@@ -78,6 +78,7 @@ export const SignInDiv = styled.div`
       align-items: center;
       justify-content: space-between;
       height: 175px;
+      min-height: 175px;
     }
     
   }

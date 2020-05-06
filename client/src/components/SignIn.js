@@ -96,7 +96,7 @@ export default function SignIn() {
       >
         <PrimaryBtn  className="sign-in-button">New Game</PrimaryBtn>
       </Link>
-      <Modal className="sign-in-button" />
+      <Modal class="sign-in-rules modal-area" />
       </div>
     </SignInDiv>
   );

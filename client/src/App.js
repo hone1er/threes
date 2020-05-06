@@ -18,7 +18,7 @@ function App() {
       <Dice />
       <RollDice />
       <Chat />
-      <Modal />
+      <Modal class="game-room-rules modal-area" />
     </div>
   );
 }

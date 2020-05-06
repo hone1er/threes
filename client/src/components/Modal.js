@@ -3,7 +3,7 @@ import { ModalDiv } from "./styledComponents/ModalDiv";
 import { PrimaryBtn } from "./styledComponents/PrimaryBtn";
 import rules from "./styledComponents/rules(1).jpg";
 
-export default function Modal() {
+export default function Modal(props) {
   const [modalState, setModalState] = useState(true);
   // Get the modal
   var modal = document.getElementById("myModal");
@@ -19,7 +19,7 @@ export default function Modal() {
     }
   };
   return (
-    <ModalDiv className="modal-area" modal={modalState} >
+    <ModalDiv className={props.class} modal={modalState} >
       <PrimaryBtn className="rules sign-in-button" onClick={handleButtonClick} id="myBtn">
         Rules
       </PrimaryBtn>
