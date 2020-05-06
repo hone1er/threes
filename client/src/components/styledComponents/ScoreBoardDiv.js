@@ -1,34 +1,32 @@
 import styled from "styled-components";
 
 export const ScoreBoardDiv = styled.div`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color:#fcffea;
+  .score-header-container {
     width: 100%;
+    font-size: 0.8rem;
+    border-right: 2px solid #e4fa6650;
+    border-bottom: 2px solid #e4fa6640;
+  }
+
+  @media (max-width: 800px) {
+    align-items: center;
     flex-flow: wrap;
-    background-color: rgba(115, 189, 130, 0.30);
-.score-header-container {
-    width: 100%;
-    font-size: .8rem;
-    border-right: 2px solid rgba(88, 185, 108, 0.30);;
-    border-bottom: 2px solid rgba(88, 185, 108, 0.30);;
-}
 
-
-    @media (max-width: 800px){
-        align-items: center;
-
-        .score-header-container{
-            font-size: .7rem;
-            padding: 0 10px;
-            border-bottom: none;
-            width: max-content;
-        }
-        border: 2px solid rgba(88, 185, 108, 0.30);;
+    .score-header-container {
+      font-size: 0.7rem;
+      padding: 0 10px;
+      border-bottom: none;
+      width: max-content;
     }
-    @media (max-width: 650px){
-        .score-header-container{
-            font-size: .4rem;
-        }
+    border: 2px solid #e4fa6650;
+  }
+  @media (max-width: 650px) {
+    .score-header-container {
+      font-size: 0.4rem;
     }
-
-`
+  }
+`;

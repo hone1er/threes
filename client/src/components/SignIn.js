@@ -65,33 +65,39 @@ export default function SignIn() {
   return (
     <SignInDiv player={player}>
       <input
+      className="sign-in-input"
         value={player}
         onChange={handleUser}
         placeholder="Enter your username"
       />
       <input
+      className="sign-in-input"
         id="enter-room"
         value={room}
         onChange={handleRoom}
         placeholder="Enter room"
       />
+      <div className="sign-in-buttons">
       <Link
         to={taken ? "/" : !roomTaken ? "/" : "/game"}
         id="join"
         onClick={
           taken ? userNameTaken : !roomTaken ? roomDoesNotExist : handleJoinRoom
         }
+        className="sign-in-button"
       >
-        <PrimaryBtn>Join Game</PrimaryBtn>
+        <PrimaryBtn  className="sign-in-button">Join Game</PrimaryBtn>
       </Link>
       <Link
         to={roomTaken || taken ? "/" : "/game"}
         id="new"
         onClick={taken ? userNameTaken : roomTaken ? roomNameTaken : handleNewRoom}
+        className="sign-in-button"
       >
-        <PrimaryBtn>New Game</PrimaryBtn>
+        <PrimaryBtn  className="sign-in-button">New Game</PrimaryBtn>
       </Link>
-      <Modal />
+      <Modal className="sign-in-button" />
+      </div>
     </SignInDiv>
   );
 }

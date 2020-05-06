@@ -7,8 +7,8 @@ width: 6rem;
         width: 6rem;
     }
 cursor: pointer;
-background: ${(props) => (props.disabled ? "#444" : "#f8f8f8")};
-color: ${(props) => (props.disabled ? "#f8f8f8" : "#444")};
+background: #f8f8f8;
+color: #444;
 margin: 10px;
 padding: 0 !important;
 zoom: 1; /* IE */

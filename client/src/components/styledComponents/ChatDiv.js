@@ -56,6 +56,7 @@ export const ChatDiv = styled.div`
     line-height: 1.5rem;
     padding: 2px 0 2px 10px;
     letter-spacing: 0.05rem;
+    color: #444;
   }
   input {
     width: calc(100% - 71px);
@@ -65,6 +66,7 @@ export const ChatDiv = styled.div`
     font-weight: 400;
     padding-left: 5px;
     letter-spacing: 0.05rem;
+    color: #444;
   }
   button {
       letter-spacing: 0.05rem;
@@ -73,7 +75,7 @@ export const ChatDiv = styled.div`
     width: 60px;
     cursor: pointer;
     margin: 0;
-    background: #337ab7;
+    background: #333;
     color: #f8f8f8;
     border: none;
     text-align: center;
@@ -82,7 +84,7 @@ export const ChatDiv = styled.div`
     height: 2.5rem;
 
     :hover {
-      background: #286090;
+      background: #000;
     }
   }
 

@@ -67,6 +67,10 @@
   grid-area: modal;
 }
 
+.sign-in-input::placeholder {
+color: #ff7070;
+}
+
 .App {
   height: 100%;
   display: grid;

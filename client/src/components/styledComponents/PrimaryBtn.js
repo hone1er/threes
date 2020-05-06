@@ -12,20 +12,16 @@ a{
     heigth: 60px;
     border-radius: 8px;
     text-decoration: none;
-    background: #337ab7;
+    background: #333;
     color: #f8f8f8;
     border: none;
     padding: 10px;
     :hover {
-      background: #286090;
+      background: #000;
     }
 
 
-    &.rules {
-        position: relative;
-        top: 2vh;
-    }
-
+    
     &#logout {
        border-radius: 0 0 0 8px;
        @media (max-width: 500px){

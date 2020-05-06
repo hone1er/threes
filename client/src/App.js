@@ -8,6 +8,7 @@ import "react-dice-complete/dist/react-dice-complete.css";
 import Chat from "./components/Chat";
 import Modal from "./components/Modal";
 import Logout from "./components/Logout";
+
 function App() {
   return (
     <div className="App">
