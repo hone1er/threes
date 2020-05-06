@@ -19,7 +19,7 @@ export default function Modal() {
     }
   };
   return (
-    <ModalDiv className="modal-area sign-in-button" modal={modalState} >
+    <ModalDiv className="modal-area" modal={modalState} >
       <PrimaryBtn className="rules sign-in-button" onClick={handleButtonClick} id="myBtn">
         Rules
       </PrimaryBtn>

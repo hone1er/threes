@@ -35,7 +35,7 @@ export const SignInDiv = styled.div`
     font-size: 1.5rem;
     margin-top: 45vh;
     padding: 10px;
-    min-width: 315px;
+    min-width: 290px;
     max-width: 600px;
     @media (max-width: 500px) {
       margin-top: 25vh;
@@ -52,13 +52,12 @@ export const SignInDiv = styled.div`
     }
     @media (max-width: 800px) {
       width: 90%;
-      margin: auto;
+      margin: 0 auto;
     }
   }
 .rules {
   background: #333;
   @media (max-width: 800px) {
-
     width: 100%;
   }
 }

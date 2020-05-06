@@ -65,6 +65,10 @@
 
 .modal-area {
   grid-area: modal;
+
+  @media (max-width: 800px){
+  width: 90%;
+  }
 }
 
 .sign-in-input::placeholder {
