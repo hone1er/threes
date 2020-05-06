@@ -5,16 +5,11 @@ export const PlayerDiv = styled.div`
     display: flex;
     align-items: end;
     padding: 0 20px;
-    background-color: #ff6666;
+    background-color:  ${(props) => ( props.current === "current" ? "#333" :  "#111")};
     margin: 1px;
-
-    p {
-      padding: 10px;
-      font-size: 1.25rem;
-      color: #222;
-    }
     h1 {
-      font-size: 2rem;
+      font-size: 1.25rem;
+      font-weight: 400;
     }
   }
 

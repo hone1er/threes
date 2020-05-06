@@ -2,7 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { GameContext } from "./GameProvider";
 import { ChatDiv } from "./styledComponents/ChatDiv";
 import chatAudio from "../intuition.mp3";
-
+import {GoMute} from "react-icons/go"
+import {GoUnmute} from "react-icons/go"
+import {MdSend} from "react-icons/md"
 const audio = new Audio(chatAudio);
 
 export default function Chat() {
@@ -75,11 +77,11 @@ export default function Chat() {
             disabled={message.length === 0}
             onClick={sendMessage}
           >
-            send
+            <MdSend/>
           </button>
         </div>
         <button id="chat-mute" onClick={handleSound}>
-          {chatSound ? "mute" : "unmute"} chat
+          {chatSound ?  <GoUnmute/> : <GoMute/>}
         </button>
       </div>
     </ChatDiv>

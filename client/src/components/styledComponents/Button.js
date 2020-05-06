@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   text-transform: capitalize;
   cursor: pointer;
   border-radius: 8px;
   min-width: 200px;
   min-height: 2.5rem;
   margin: 10px;
-  color: ${(props) => (props.disabled ? "#333" : "#f8f8f8")};
+  color: ${(props) => (props.reset ? "#ff7070;" : props.disabled ? "#e4fa6660" : "#e4fa66")};
   background: ${(props) =>
-    props.disabled ? " 	#cc3300" : props.reset ? "#333" : "#339900"};
+    props.disabled ? " 	#444" : props.reset ? "#222" : "#222"};
+    border:none;
   max-width: 130px;
   align-self: center;
   zoom: 1; /* IE */

@@ -13,7 +13,7 @@ export function ScoreBoard() {
       </div>
       {game.names.map((name, index) => {
           return (
-              <Player key={index + name} playerNumber={index}  player={name===player ? "true" : null}/>
+              <Player key={index + name} playerNumber={index}  player={name===player ? "true" : null}  current={game.names.indexOf(name) === game.currentPlayer ? "current" : "not-current"}/>
           );
         }
         )}

@@ -24,13 +24,38 @@ export const ChatDiv = styled.div`
     display: flex;
     flex-direction: column;
   }
-
+  #chat-btn {
+    background: white;
+    width: fit-content;
+    height: auto;
+    postion: relative;
+    top: 10px;
+    svg {
+      width: 30px;
+      height: 30px;
+      fill: #333;
+      &:hover {
+        fill: #111
+      }
+    }
+  }
   #chat-mute {
-    width: 145px;
+    width: fit-content;
+    height: auto;
+    color: black;
+    background: white;
+    width: max-content
     position: relative;
     top: 5px;
     left: 3px;
-
+    svg {
+      width: 30px;
+      height: 30px;
+      fill: #333;
+      &:hover {
+        fill: #111
+      }
+    }
   }
   h1 {
     text-transform: uppercase;
@@ -92,10 +117,7 @@ export const ChatDiv = styled.div`
     li {
       font-size: 1rem;
     }
-    #chat-mute {
-      width: 145px;
 
-    }
     input {
     width: calc(100% - 75px);
     border-radius: 0 !important;

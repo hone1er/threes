@@ -61,6 +61,8 @@
 
 .roll-area {
   grid-area: roll;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-area {
@@ -78,7 +80,7 @@ color: #ff7070;
 .App {
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 3fr 2fr;
+  grid-template-columns: 1fr 5fr 2fr;
   grid-template-areas:
     "scoreboard logout logout"
     "scoreboard player chat"

@@ -4,7 +4,7 @@ export const ScoreBoardDiv = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color:#ff7070;
+  background-color:#111;
   color: #f8f8f8;
   .score-header-container {
     width: 100%;

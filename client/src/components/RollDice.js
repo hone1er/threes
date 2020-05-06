@@ -43,12 +43,10 @@ export default function RollDice() {
         }
         onClick={handleRoll}
       >
-        {game.gameOver
+        {game.gameOver || ! game.names[game.currentPlayer]
           ? "game over "
-          : game.names[game.currentPlayer] !== player
+          :game.names[game.currentPlayer] !== player
           ? `${game.names[game.currentPlayer]}'s turn`
-          : game.rollDisabled
-          ? "pickup dice"
           : "roll the dice"}
       </Button>
       <Button reset={!game.gameOver} onClick={handleReset}>
