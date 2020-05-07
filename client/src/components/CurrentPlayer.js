@@ -16,7 +16,7 @@ export default function CurrentPlayer() {
   // show current player or winner
   const current =
     lowScores.length > 1 ? (
-      <h1 className={classname}>TIE GAME!</h1>
+      <h1 className={classname}>Winner: tie game</h1>
     ) : (
       <h1 className={classname}>
         Winner: {game.names[game.scores.indexOf(lowScores[0])]}
