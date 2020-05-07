@@ -1,11 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GameContext } from "./GameProvider";
 import { ChatDiv } from "./styledComponents/ChatDiv";
-import chatAudio from "../intuition.mp3";
-import {GoMute} from "react-icons/go"
-import {GoUnmute} from "react-icons/go"
-import {MdSend} from "react-icons/md"
-const audio = new Audio(chatAudio);
+import { GoMute } from "react-icons/go";
+import { GoUnmute } from "react-icons/go";
+import { MdSend } from "react-icons/md";
+import Sound from "./Sound";
 
 export default function Chat() {
   const { sock, player } = useContext(GameContext);
@@ -39,6 +38,9 @@ export default function Chat() {
     setMessage("");
     const elem = document.getElementById("chat");
     elem.scrollTop = elem.scrollHeight;
+    let tempChat = chat;
+    tempChat.push(message);
+    setChat(tempChat);
   }
   useEffect(() => {
     const el = document.createElement("li");
@@ -48,12 +50,6 @@ export default function Chat() {
     elem.scrollTop = elem.scrollHeight;
     // eslint-disable-next-line
   }, [chat]);
-
-  useEffect(() => {
-    if (chatSound === true) {
-      audio.play();
-    }
-  }, [chat, chatSound]);
 
   sock.on("receiveMessage", (chat) => {
     setChat(chat);
@@ -77,13 +73,14 @@ export default function Chat() {
             disabled={message.length === 0}
             onClick={sendMessage}
           >
-            <MdSend/>
+            <MdSend />
           </button>
         </div>
         <button id="chat-mute" onClick={handleSound}>
-          {chatSound ?  <GoUnmute/> : <GoMute/>}
+          {chatSound ? <GoUnmute /> : <GoMute />}
         </button>
       </div>
+      <Sound chat={chat} chatSound={chatSound} />
     </ChatDiv>
   );
 }

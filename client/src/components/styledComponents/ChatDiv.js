@@ -113,6 +113,10 @@ export const ChatDiv = styled.div`
     }
   }
 
+#sound {
+  display: none;
+}
+
   @media (max-width: 800px) {
     li {
       font-size: 1rem;

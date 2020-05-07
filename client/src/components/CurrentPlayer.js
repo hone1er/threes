@@ -9,12 +9,13 @@ export default function CurrentPlayer() {
     return item === Math.min(...game.scores);
   });
   // assign classname based on current player or winner to styling
-  const classname = game.names[game.currentPlayer] ? "turn" : "winner";
+  const classname = "winner";
+  const position = game.gameOver ? "0" : "-150vw";
+  const imagePosition = game.gameOver ? "0" : "-100px";
+
   // show current player or winner
   const current =
-    game.names.length < 1 || !game.gameOver ? (
-      <img src={threes} alt="threesLogo" />
-    ) : lowScores.length > 1 ? (
+    lowScores.length > 1 ? (
       <h1 className={classname}>TIE GAME!</h1>
     ) : (
       <h1 className={classname}>
@@ -22,5 +23,10 @@ export default function CurrentPlayer() {
       </h1>
     );
 
-  return <CurrentPlayerDiv className="player-area">{current}</CurrentPlayerDiv>;
+  return (
+    <CurrentPlayerDiv position={position} imagePosition={imagePosition} className="player-area">
+      <img className="dice-area-logo" src={threes} alt="threesLogo" />
+      {current}
+    </CurrentPlayerDiv>
+  );
 }
