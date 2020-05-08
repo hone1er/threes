@@ -7,4 +7,8 @@ justify-self: end;
     a {
         text-decoration: none;
     }
+
+@media (max-width: 800px){
+    margin-bottom: 25px
+}
 `

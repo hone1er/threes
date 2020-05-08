@@ -8,6 +8,9 @@ img {
     bottom: ${(props) => ( props.imagePosition ? props.imagePosition : 0)};
     transition: bottom .5s;
     
+    @media (max-width: 800px) {
+        width: 80%;
+    }
 }
 .turn {
     font-size: 2.5rem;

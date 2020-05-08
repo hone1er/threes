@@ -14,7 +14,7 @@ export const ChatDiv = styled.div`
   }
 
   .chat-user-item {
-    color: #333;
+    color: #222;
     margin-right: 2.5%;
   }
 
@@ -33,7 +33,7 @@ export const ChatDiv = styled.div`
     svg {
       width: 30px;
       height: 30px;
-      fill: #333;
+      fill: #222;
       &:hover {
         fill: #111
       }
@@ -51,7 +51,7 @@ export const ChatDiv = styled.div`
     svg {
       width: 30px;
       height: 30px;
-      fill: #333;
+      fill: #222;
       &:hover {
         fill: #111
       }
@@ -100,7 +100,7 @@ export const ChatDiv = styled.div`
     width: 60px;
     cursor: pointer;
     margin: 0;
-    background: #333;
+    background: #222;
     color: #f8f8f8;
     border: none;
     text-align: center;
@@ -109,7 +109,7 @@ export const ChatDiv = styled.div`
     height: 2.5rem;
 
     :hover {
-      background: #000;
+      background: #111;
     }
   }
 

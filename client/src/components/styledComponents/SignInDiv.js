@@ -44,11 +44,11 @@ export const SignInDiv = styled.div`
     
   .sign-in-button {
     border-radius: 8px;
-    background: ${(props) => (props.player === "" ? "#555" : "#333")};
+    background: ${(props) => (props.player === "" ? "#555" : "#222")};
 
     color: #f8f8f8;
     :hover {
-      background: #000;
+      background: #111;
     }
     @media (max-width: 800px) {
       width: 90%;
@@ -56,9 +56,11 @@ export const SignInDiv = styled.div`
     }
   }
 .rules {
-  background: #333;
+  background: #222;
   @media (max-width: 800px) {
     width: 100%;
+  background: #111;
+
   }
 }
   #enter-room {

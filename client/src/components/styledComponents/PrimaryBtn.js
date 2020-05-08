@@ -12,12 +12,12 @@ a{
     heigth: 60px;
     border-radius: 8px;
     text-decoration: none;
-    background: #333;
+    background: #222;
     color: #f8f8f8;
     border: none;
     padding: 10px;
     :hover {
-      background: #000;
+      background: #111;
     }
 
 
