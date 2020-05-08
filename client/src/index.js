@@ -5,7 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { GameProvider } from "./components/GameProvider";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import SignIn from "./components/SignIn";
+import SignIn from "./components/sign-in/SignIn";
 ReactDOM.render(
   <React.StrictMode>
     <Router>

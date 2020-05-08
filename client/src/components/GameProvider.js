@@ -1,7 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 export const GameContext = createContext();
-const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
+const sock = socketIOClient("localhost:5000");
 
 export function GameProvider(props) {
   const [player, setPlayer] = useState("");
@@ -13,6 +13,8 @@ export function GameProvider(props) {
     names: [],
     scores: [],
     rooms: [],
+    currentRoom: "",
+    password: "",
     rollDisabled: false,
     rolling: false,
     diceDisabled: true,

@@ -8,6 +8,30 @@ justify-self: end;
 #myModal {
   display: ${props => props.modal === false ? "block" : "none"};
 }
+#myModal, #publicModal {
+  display: ${props => props.modal === false ? "block" : "none"};
+}
+
+#publicModal {
+  .modal-content {
+    width: max-content;
+    input{ 
+      max-height: auto !important;
+      width: min-content !important;
+      height: min-content !important;
+      margin: 0;
+      padding: 0;
+      max-width: 10px !important;
+    }
+  }
+}
+
+.radio-btns-outer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
