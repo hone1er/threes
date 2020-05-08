@@ -66,6 +66,24 @@ export const SignInDiv = styled.div`
   #enter-room {
     margin: 0 0 10px;
   }
+  #room-password {
+    margin: 15px 0 10px;
+  }
+
+  .radio-btn-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    input {
+      width: 15px !important;
+      min-width: auto;
+      height: auto;
+      margin-top: 4vh;
+    }
+  }
 
   .sign-in-buttons {
     display: flex;

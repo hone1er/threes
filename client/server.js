@@ -11,17 +11,19 @@ let chat = [];
 let rooms = {};
 // server side game state
 const newGame = {
-  currentPlayer: 0,
-  playerTurns: 5,
-  diceValues: Array(5).fill(5),
-  dieVisable: Array(5).fill(true),
-  names: [],
-  scores: [],
-  rolling: false,
-  rollDisabled: false,
-  diceDisabled: true,
-  gameOver: false,
-  public: true,
+    currentPlayer: 0,
+    playerTurns: 5,
+    diceValues: Array(5).fill(5),
+    dieVisable: Array(5).fill(true),
+    names: [],
+    scores: [],
+    currentRoom: "",
+    password: "",
+    rollDisabled: false,
+    rolling: false,
+    diceDisabled: true,
+    gameOver: false,
+    public: true,
 };
 
 console.log(`serving static files from : ${clientPath}`);
@@ -48,7 +50,10 @@ io.on("connection", (sock) => {
       "...........................................\n"
   );
   sock.emit("setRooms", rooms);
-  sock.on("newRoom", ({ room, player }) => {
+  sock.on("newRoom", ({ room, player, publicStatus, password }) => {
+
+    console.log(publicStatus, password)
+
     if (userGame) {
       let currentGame = userGame;
       if (currentGame.names.indexOf(sockUser) !== -1) {
@@ -72,6 +77,8 @@ io.on("connection", (sock) => {
     let tempGame = JSON.parse(JSON.stringify(newGame));
     tempGame.names.push(player);
     tempGame.scores.push(0);
+    tempGame.public = publicStatus;
+    tempGame.password = password;
     rooms[room] = tempGame;
     userGame = rooms[room];
 
@@ -79,7 +86,10 @@ io.on("connection", (sock) => {
     io.to(room).emit("setGame", tempGame);
     console.log(`\n${player} has succefully CREATED room: ${room}\n`);
   });
-  sock.on("joinRoom", ({ room, player }) => {
+  sock.on("joinRoom", ({ room, player, publicStatus, password }) => {
+
+    if ((publicStatus === false && password === rooms[room].password) || publicStatus === true) {
+
     let currentGame = userGame;
     if (currentGame.names.indexOf(sockUser) !== -1) {
       currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
@@ -110,7 +120,12 @@ io.on("connection", (sock) => {
       console.log(`\nno room found named: ${room}\n`);
       return sock.emit("err", `\nno room found named: ${room}\n`);
     }
-  });
+  }
+  else if (publicStatus === false && password !== rooms[room].password) {
+    console.log(`\nWRONG PASSWORD: ${room}\n`);
+  }
+}
+);
 
   sock.on("setGame", (data) => {
     rooms[userRoom] = data;
@@ -158,8 +173,8 @@ server.on("error", (error) => {
   console.error("server error: ", error);
 });
 
-server.listen(process.env.PORT, () => {
+server.listen(5000, () => {
   console.log(
-    "Threes server started on port: " + process.env.PORT + "............................"
+    "Threes server started on port: " + 5000 + "............................"
   );
 });
