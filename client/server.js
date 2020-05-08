@@ -51,9 +51,6 @@ io.on("connection", (sock) => {
   );
   sock.emit("setRooms", rooms);
   sock.on("newRoom", ({ room, player, publicStatus, password }) => {
-
-    console.log(publicStatus, password)
-
     if (userGame) {
       let currentGame = userGame;
       if (currentGame.names.indexOf(sockUser) !== -1) {
@@ -173,8 +170,8 @@ server.on("error", (error) => {
   console.error("server error: ", error);
 });
 
-server.listen(5000, () => {
+server.listen(process.env.PORT, () => {
   console.log(
-    "Threes server started on port: " + 5000 + "............................"
+    "Threes server started on port: " + process.env.PORT + "............................"
   );
 });
