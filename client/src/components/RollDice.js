@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { GameContext } from "./GameProvider";
 import { Button } from "./styledComponents/Button";
 import diceAudio from "../diceSound.mp3";
@@ -35,6 +35,25 @@ export default function RollDice() {
       rolling: !game.rolling,
     });
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      let el = document.getElementsByClassName("dice");
+      for (let i = 0; i < el.length; i++) {
+        el[i].classList.remove("rolling");
+      }
+    }, 500);
+    return () => {
+      setTimeout(() => {
+        let el = document.getElementsByClassName("dice");
+        for (let i = 0; i < el.length; i++) {
+          el[i].classList.add("rolling");
+        }
+      }, 0);
+      return;
+    };
+  }, [game.rolling]);
+
   return (
     <div className="roll-area">
       <Button
@@ -43,9 +62,9 @@ export default function RollDice() {
         }
         onClick={handleRoll}
       >
-        {game.gameOver || ! game.names[game.currentPlayer]
+        {game.gameOver || !game.names[game.currentPlayer]
           ? "game over "
-          :game.names[game.currentPlayer] !== player
+          : game.names[game.currentPlayer] !== player
           ? `${game.names[game.currentPlayer]}'s turn`
           : "roll the dice"}
       </Button>

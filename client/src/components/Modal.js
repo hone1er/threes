@@ -15,12 +15,16 @@ export default function Modal(props) {
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target === modal) {
-      setModalState(!modalState)
+      setModalState(!modalState);
     }
   };
   return (
-    <ModalDiv className={props.class} modal={modalState} >
-      <PrimaryBtn className="rules sign-in-button" onClick={handleButtonClick} id="myBtn">
+    <ModalDiv className={props.class} modal={modalState}>
+      <PrimaryBtn
+        className="rules sign-in-button"
+        onClick={handleButtonClick}
+        id="myBtn"
+      >
         Rules
       </PrimaryBtn>
 

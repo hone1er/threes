@@ -97,25 +97,6 @@ export function GameProvider(props) {
     }
   }, [game]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      let el = document.getElementsByClassName("dice");
-      for (let i = 0; i < el.length; i++) {
-        el[i].classList.add("rolling");
-      }
-    }, 0);
-
-    return () => {
-      setTimeout(() => {
-        let el = document.getElementsByClassName("dice");
-        for (let i = 0; i < el.length; i++) {
-          el[i].classList.remove("rolling");
-        }
-      }, 500);
-      return;
-    };
-  }, [game.rolling]);
-
   sock.on("setGame", (data) => {
     setGame(data);
   });

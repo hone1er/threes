@@ -7,7 +7,10 @@ export default function Player(props) {
   return (
     <PlayerDiv current={props.current}>
       <div className="player" player={props.player}>
-      <h1> {game.names[props.playerNumber]}: {game.scores[props.playerNumber]}</h1>
+        <h1>
+          {" "}
+          {game.names[props.playerNumber]}: {game.scores[props.playerNumber]}
+        </h1>
       </div>
     </PlayerDiv>
   );

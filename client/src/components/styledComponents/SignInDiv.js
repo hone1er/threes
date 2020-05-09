@@ -41,7 +41,7 @@ export const SignInDiv = styled.div`
       margin-top: 25vh;
     }
   }
-    
+
   .sign-in-button {
     border-radius: 8px;
     background: ${(props) => (props.player === "" ? "#555" : "#222")};
@@ -55,14 +55,13 @@ export const SignInDiv = styled.div`
       margin: 0 auto;
     }
   }
-.rules {
-  background: #222;
-  @media (max-width: 800px) {
-    width: 100%;
-  background: #111;
-
+  .rules {
+    background: #222;
+    @media (max-width: 800px) {
+      width: 100%;
+      background: #111;
+    }
   }
-}
   #enter-room {
     margin: 0 0 10px;
   }
@@ -93,15 +92,12 @@ export const SignInDiv = styled.div`
     position: relative;
     top: 25px;
 
-    @media (max-width: 800px){
+    @media (max-width: 800px) {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
       height: 175px;
       min-height: 175px;
     }
-    
   }
-
-  
 `;

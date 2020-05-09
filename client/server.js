@@ -11,19 +11,19 @@ let chat = [];
 let rooms = {};
 // server side game state
 const newGame = {
-    currentPlayer: 0,
-    playerTurns: 5,
-    diceValues: Array(5).fill(5),
-    dieVisable: Array(5).fill(true),
-    names: [],
-    scores: [],
-    currentRoom: "",
-    password: "",
-    rollDisabled: false,
-    rolling: false,
-    diceDisabled: true,
-    gameOver: false,
-    public: true,
+  currentPlayer: 0,
+  playerTurns: 5,
+  diceValues: Array(5).fill(5),
+  dieVisable: Array(5).fill(true),
+  names: [],
+  scores: [],
+  currentRoom: "",
+  password: "",
+  rollDisabled: false,
+  rolling: false,
+  diceDisabled: true,
+  gameOver: false,
+  public: true,
 };
 
 console.log(`serving static files from : ${clientPath}`);
@@ -84,45 +84,44 @@ io.on("connection", (sock) => {
     console.log(`\n${player} has succefully CREATED room: ${room}\n`);
   });
   sock.on("joinRoom", ({ room, player, publicStatus, password }) => {
+    if (
+      (publicStatus === false && password === rooms[room].password) ||
+      publicStatus === true
+    ) {
+      let currentGame = userGame;
+      if (currentGame.names.indexOf(sockUser) !== -1) {
+        currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
+        currentGame.names.splice(currentGame.names.indexOf(sockUser), 1);
+        chat.push(`${sockUser} disconnected`);
+        sock.broadcast.to(userRoom).emit("receiveMessage", chat);
+        sock.leave(userRoom);
+        console.log(`\n${player} disconnected from room: ${userRoom}\n`);
 
-    if ((publicStatus === false && password === rooms[room].password) || publicStatus === true) {
-
-    let currentGame = userGame;
-    if (currentGame.names.indexOf(sockUser) !== -1) {
-      currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
-      currentGame.names.splice(currentGame.names.indexOf(sockUser), 1);
-      chat.push(`${sockUser} disconnected`);
-      sock.broadcast.to(userRoom).emit("receiveMessage", chat);
-      sock.leave(userRoom);
-      console.log(`\n${player} disconnected from room: ${userRoom}\n`);
-
-      if (currentGame.names.length === 0) {
-        delete rooms[userRoom];
-        console.log(`\n${userRoom} deleted...........................\n`);
-        console.log(rooms);
+        if (currentGame.names.length === 0) {
+          delete rooms[userRoom];
+          console.log(`\n${userRoom} deleted...........................\n`);
+          console.log(rooms);
+        }
       }
+      if (rooms[room]) {
+        sock.join(room);
+        currentGame = rooms[room];
+        currentGame.names.push(player);
+        currentGame.scores.push(0);
+        sockUser = player;
+        userRoom = room;
+        rooms[room] = currentGame;
+        userGame = rooms[room];
+        console.log(`\n${sockUser} has succefully JOINED room: ${room}\n`);
+        return io.to(room).emit("setGame", currentGame);
+      } else {
+        console.log(`\nno room found named: ${room}\n`);
+        return sock.emit("err", `\nno room found named: ${room}\n`);
+      }
+    } else if (publicStatus === false && password !== rooms[room].password) {
+      console.log(`\nWRONG PASSWORD: ${room}\n`);
     }
-    if (rooms[room]) {
-      sock.join(room);
-      currentGame = rooms[room];
-      currentGame.names.push(player);
-      currentGame.scores.push(0);
-      sockUser = player;
-      userRoom = room;
-      rooms[room] = currentGame;
-      userGame = rooms[room];
-      console.log(`\n${sockUser} has succefully JOINED room: ${room}\n`);
-      return io.to(room).emit("setGame", currentGame);
-    } else {
-      console.log(`\nno room found named: ${room}\n`);
-      return sock.emit("err", `\nno room found named: ${room}\n`);
-    }
-  }
-  else if (publicStatus === false && password !== rooms[room].password) {
-    console.log(`\nWRONG PASSWORD: ${room}\n`);
-  }
-}
-);
+  });
 
   sock.on("setGame", (data) => {
     rooms[userRoom] = data;
@@ -150,8 +149,10 @@ io.on("connection", (sock) => {
       if (tempGame.names.length === 0) {
         delete rooms[userRoom];
         console.log(`\n${userRoom} deleted...........................\n`);
-        console.log("Rooms Remaining:  \n")
-        console.log(Object.keys(rooms).length ? Object.keys(rooms) + "\n" : "none \n");
+        console.log("Rooms Remaining:  \n");
+        console.log(
+          Object.keys(rooms).length ? Object.keys(rooms) + "\n" : "none \n"
+        );
       } else {
         rooms[userRoom] = tempGame;
         userGame = rooms[userRoom];

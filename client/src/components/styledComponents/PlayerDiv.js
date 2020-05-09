@@ -5,7 +5,8 @@ export const PlayerDiv = styled.div`
     display: flex;
     align-items: end;
     padding: 0 20px;
-    background-color:  ${(props) => ( props.current === "current" ? "#333" :  "#111")};
+    background-color: ${(props) =>
+      props.current === "current" ? "#333" : "#111"};
     margin: 1px;
     h1 {
       font-size: 1.25rem;
@@ -14,7 +15,7 @@ export const PlayerDiv = styled.div`
   }
 
   @media (max-width: 800px) {
-      width: unset;
+    width: unset;
     .player {
       align-items: center;
       p {

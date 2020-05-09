@@ -9,14 +9,22 @@ export function ScoreBoard() {
   return (
     <ScoreBoardDiv className="scoreboard-area">
       <div className="score-header-container">
-      <h1 className="scoreboard-header">Players</h1>
+        <h1 className="scoreboard-header">Players</h1>
       </div>
       {game.names.map((name, index) => {
-          return (
-              <Player key={index + name} playerNumber={index}  player={name===player ? "true" : null}  current={game.names.indexOf(name) === game.currentPlayer ? "current" : "not-current"}/>
-          );
-        }
-        )}
+        return (
+          <Player
+            key={index + name}
+            playerNumber={index}
+            player={name === player ? "true" : null}
+            current={
+              game.names.indexOf(name) === game.currentPlayer
+                ? "current"
+                : "not-current"
+            }
+          />
+        );
+      })}
     </ScoreBoardDiv>
   );
 }

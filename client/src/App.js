@@ -12,7 +12,7 @@ import Logout from "./components/Logout";
 function App() {
   return (
     <div className="App">
-      <Logout/>
+      <Logout />
       <ScoreBoard />
       <CurrentPlayer />
       <Dice />
