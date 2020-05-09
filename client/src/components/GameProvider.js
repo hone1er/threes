@@ -3,6 +3,74 @@ import socketIOClient from "socket.io-client";
 export const GameContext = createContext();
 const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
 
+sock.on("joinFailed", (reason) => {
+  switch (reason) {
+    case "userNameTaken":
+      userNameTaken()
+      break;
+    case "roomTaken":
+      roomNameTaken()
+      break;
+      case "roomDoesNotExist":
+      roomDoesNotExist()
+      break;
+      case "wrongPassword":
+      wrongPassword()
+      break;
+      case "publicStatusError":
+        publicStatusError()
+        break;
+        case "privateStatusError":
+        privateStatusError()
+        break;
+    default:
+      break;
+  }
+})
+
+function publicStatusError() {
+  alert(
+    `The room you are trying to join is set to public. Please select the public option and try again`
+  )
+}
+
+function privateStatusError() {
+  alert(
+    `The room you are trying to join is set to private. Please select the private option, enter the correct password, and try again`
+  )
+}
+
+function roomNameTaken() {
+  alert(
+    `That room name has already been created. Join the room or start a new one with a different name`
+  );
+}
+function userNameTaken() {
+  alert(`A player in the room you are joining has already used that username. Please select another usename and try again`);
+}
+function wrongPassword() {
+  alert(`The room you are trying to join is set to private. Please choose the 'private' option and enter the correct password to join`)
+}
+function roomDoesNotExist() {
+  alert(
+    `There is no room by that name. Check the name and try again, or create a new room`
+  );
+}
+
+sock.on("joinSuccess", (reason) => {
+  switch (reason) {
+    case "join":
+      document.getElementById("join").click();      
+      break;
+      case "new":
+      document.getElementById("new").click();      
+      break;
+    default:
+      break;
+  }
+  return
+}) 
+
 export function GameProvider(props) {
   const [player, setPlayer] = useState("");
   const [game, setGame] = useState({
@@ -12,7 +80,6 @@ export function GameProvider(props) {
     dieVisable: Array(5).fill(true),
     names: [],
     scores: [],
-    rooms: [],
     currentRoom: "",
     password: "",
     rollDisabled: false,

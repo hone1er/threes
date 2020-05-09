@@ -20,6 +20,8 @@ function SignInInputs() {
   }
 
   const passwordInput = game.public ? null : (
+    <>
+    <label id="password-label">*required</label>
     <input
       className="sign-in-input"
       id="room-password"
@@ -28,15 +30,19 @@ function SignInInputs() {
       type="password"
       placeholder="Enter password"
     />
+    </>
   );
   return (
     <>
+        <label id="top-label">*required</label>
       <input
         className="sign-in-input"
         value={player}
         onChange={handleUser}
         placeholder="Enter your username"
-      />
+        />
+        <label id="bottom-label">*required</label>
+
       <input
         className="sign-in-input"
         id="enter-room"

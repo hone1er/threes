@@ -15,13 +15,28 @@ export const SignInDiv = styled.div`
   background-repeat: no-repeat;
 
   a {
-    pointer-events: ${(props) => (props.player === "" ? "none" : "unset")};
+    pointer-events: ${(props) => ((props.player === "" || props.room === "") ? "none" : "unset")};
     text-decoration: none;
   }
   select {
     margin-bottom: 15px;
     width: 175px;
     padding: 10px;
+  }
+  #top-label {
+    margin-top: 45vh;
+    @media (max-width: 500px) {
+      margin-top: 25vh;
+    }
+  }
+  #top-label, #bottom-label, #password-label{
+    width: 90%;
+    min-width: 290px;
+    max-width: 600px;
+  }
+  label {
+    color: #ff7070;
+    margin-bottom: 5px;
   }
   input {
     color: #444;
@@ -31,20 +46,17 @@ export const SignInDiv = styled.div`
     width: 90%;
     height: 40px;
     margin: 1.5rem;
-    margin-top: 1.5rem;
+    margin-top: 0;
     font-size: 1.5rem;
-    margin-top: 45vh;
     padding: 10px;
     min-width: 290px;
     max-width: 600px;
-    @media (max-width: 500px) {
-      margin-top: 25vh;
-    }
+    
   }
 
   .sign-in-button {
     border-radius: 8px;
-    background: ${(props) => (props.player === "" ? "#555" : "#222")};
+    background: ${(props) => ((props.player === "" || props.room === "") ? "#555" : "#222")};
 
     color: #f8f8f8;
     :hover {
@@ -65,7 +77,7 @@ export const SignInDiv = styled.div`
   #enter-room {
     margin: 0 0 10px;
   }
-  #room-password {
+  #password-label {
     margin: 15px 0 10px;
   }
 
