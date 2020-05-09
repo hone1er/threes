@@ -25,17 +25,31 @@ export default function SignIn() {
   }
 
   function handleJoinRoom() {
-    if ((game.password === roomList[game.currentRoom].password) && (game.public === roomList[game.currentRoom].public)){
-      sock.emit("joinRoom", { room: room, player: player, publicStatus: game.public, password: game.password });
+    if (
+      game.password === roomList[game.currentRoom].password &&
+      game.public === roomList[game.currentRoom].public
+    ) {
+      sock.emit("joinRoom", {
+        room: room,
+        player: player,
+        publicStatus: game.public,
+        password: game.password,
+      });
       localStorage.setItem("player", JSON.stringify(player));
-    }
-    else {
-      alert(`${game.currentRoom} is set to private. Please select the private option and input the correct password`)
+    } else {
+      alert(
+        `${game.currentRoom} is set to private. Please select the private option and input the correct password`
+      );
     }
   }
 
   function handleNewRoom() {
-    sock.emit("newRoom", { room: room, player: player, publicStatus: game.public, password: game.password });
+    sock.emit("newRoom", {
+      room: room,
+      player: player,
+      publicStatus: game.public,
+      password: game.password,
+    });
     let tempGame = game;
     tempGame.names.push(player);
     tempGame.scores.push(0);
@@ -58,8 +72,12 @@ export default function SignIn() {
 
   const taken = checkNameTaken();
   const roomTaken = checkRoomTaken();
-  const passwordCorrect = roomList[game.currentRoom] ? game.password === roomList[game.currentRoom].password : false;
-  const publicRoomRadio = roomList[game.currentRoom] ? game.public === roomList[game.currentRoom].public : false;
+  const passwordCorrect = roomList[game.currentRoom]
+    ? game.password === roomList[game.currentRoom].password
+    : false;
+  const publicRoomRadio = roomList[game.currentRoom]
+    ? game.public === roomList[game.currentRoom].public
+    : false;
 
   sock.on("setRooms", (rooms) => {
     setRoomList(rooms);
@@ -67,11 +85,17 @@ export default function SignIn() {
 
   return (
     <SignInDiv player={player}>
-      <SignInInputs/>
-      <Radios/>
+      <SignInInputs />
+      <Radios />
       <div className="sign-in-buttons">
         <Link
-          to={taken ? "/" : !roomTaken || !passwordCorrect || !publicRoomRadio ? "/" : "/game"}
+          to={
+            taken
+              ? "/"
+              : !roomTaken || !passwordCorrect || !publicRoomRadio
+              ? "/"
+              : "/game"
+          }
           id="join"
           onClick={
             taken

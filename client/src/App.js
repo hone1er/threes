@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
 import { ScoreBoard } from "./components/ScoreBoard";
-import CurrentPlayer from "./components/CurrentPlayer";
+import Winner from "./components/Winner";
 import Dice from "./components/Dice";
 import RollDice from "./components/RollDice";
 import "react-dice-complete/dist/react-dice-complete.css";
@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Logout />
       <ScoreBoard />
-      <CurrentPlayer />
+      <Winner />
       <Dice />
       <RollDice />
       <Chat />

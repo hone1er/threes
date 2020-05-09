@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { GameContext } from "../GameProvider";
 
 function SignInInputs() {
-  const {player, setPlayer, game, setGame } = useContext(GameContext);
+  const { player, setPlayer, game, setGame } = useContext(GameContext);
 
   const [room, setRoom] = useState("");
   const [password, setPassword] = useState("");
@@ -12,11 +12,11 @@ function SignInInputs() {
   }
   function handleRoom(e) {
     setRoom(e.target.value);
-    setGame({...game, currentRoom: e.target.value})
+    setGame({ ...game, currentRoom: e.target.value });
   }
   function handlePassword(e) {
     setPassword(e.target.value);
-    setGame({...game, password: e.target.value})
+    setGame({ ...game, password: e.target.value });
   }
 
   const passwordInput = game.public ? null : (

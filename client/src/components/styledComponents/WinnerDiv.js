@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CurrentPlayerDiv = styled.div`
+export const WinnerDiv = styled.div`
   overflow-x: hidden;
   img {
     width: 70%;

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { GameContext } from "./GameProvider";
-import { CurrentPlayerDiv } from "./styledComponents/CurrentPlayerDiv";
+import { WinnerDiv } from "./styledComponents/WinnerDiv";
 import threes from "./styledComponents/threesMain.jpg";
 
-export default function CurrentPlayer() {
+export default function Winner() {
   const { game } = useContext(GameContext);
 
   // keep track of low score
@@ -27,13 +27,13 @@ export default function CurrentPlayer() {
     );
 
   return (
-    <CurrentPlayerDiv
+    <WinnerDiv
       position={position}
       imagePosition={imagePosition}
       className="player-area"
     >
       <img className="dice-area-logo" src={threes} alt="threesLogo" />
       {winner}
-    </CurrentPlayerDiv>
+    </WinnerDiv>
   );
 }
