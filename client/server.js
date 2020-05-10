@@ -49,7 +49,6 @@ io.on("connection", (sock) => {
       count +
       "...........................................\n"
   );
-  sock.emit("setRooms", Object.keys(rooms));
   sock.on("newRoom", ({ room, player, publicStatus, password }) => {
     if (rooms[room]) {
       sock.emit("joinFailed", "roomTaken");
@@ -188,7 +187,6 @@ io.on("connection", (sock) => {
       }
     }
     sock.leave(userRoom);
-    io.emit("setRooms", rooms);
     io.to(userRoom).emit("setGame", tempGame);
     console.log(
       `\n${sockUser} disconnected from room: ${userRoom}.....................................................\n`
