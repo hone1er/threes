@@ -10,6 +10,13 @@
   * When chosen, each die adds its face value to the current players score, except 3, 3 adds 0 to the score
 
 
+## features
+
+  * Real time multiplayer dice game
+  * Real time chat
+  * Public or private rooms
+  
+
 
 # What I learned making this game
   The main goal of this project was to learn more about using web sockets and building a web apps with React, using hooks.  
