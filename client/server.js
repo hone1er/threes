@@ -83,7 +83,6 @@ io.on("connection", (sock) => {
 
       sock.emit("joinSuccess", "new");
       io.to(room).emit("setGame", tempGame);
-      console.log(rooms);
       console.log(`\n${player} has succefully CREATED room: ${room}\n`);
     }
   });
@@ -119,10 +118,9 @@ io.on("connection", (sock) => {
 
         if (rooms[room].public !== publicStatus) {
           if (rooms[room].public === true) {
-            return sock.emit("joinFailed", "publicStatusError")
-          }
-          else{
-            return sock.emit("joinFailed", "privateStatusError")
+            return sock.emit("joinFailed", "publicStatusError");
+          } else {
+            return sock.emit("joinFailed", "privateStatusError");
           }
         }
         // join the game if everything is correct
@@ -171,6 +169,10 @@ io.on("connection", (sock) => {
     let tempGame = userGame;
     count -= 1;
 
+    console.log(
+      `\n${sockUser} disconnected from room: ${userRoom}.....................................................\n`
+    );
+
     if (tempGame.names.indexOf(sockUser) !== -1) {
       tempGame.scores.splice(tempGame.names.indexOf(sockUser), 1);
       tempGame.names.splice(tempGame.names.indexOf(sockUser), 1);
@@ -188,9 +190,6 @@ io.on("connection", (sock) => {
     }
     sock.leave(userRoom);
     io.to(userRoom).emit("setGame", tempGame);
-    console.log(
-      `\n${sockUser} disconnected from room: ${userRoom}.....................................................\n`
-    );
   });
 });
 
@@ -200,6 +199,8 @@ server.on("error", (error) => {
 
 server.listen(process.env.PORT, () => {
   console.log(
-    "Threes server started on port: " + process.env.PORT + "............................"
+    "Threes server started on port: " +
+      process.env.PORT +
+      "............................"
   );
 });

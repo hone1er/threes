@@ -13,6 +13,10 @@ export default function SignIn() {
 
 
   function handleJoinRoom() {
+    if (game.password === room) {
+      alert(`Password cannot be the same as the room name`);
+      return
+    }
       sock.emit("joinRoom", {
         room: room,
         player: player,
@@ -27,6 +31,10 @@ export default function SignIn() {
   
 
   function handleNewRoom() {
+    if (game.password === room) {
+      alert(`Password cannot be the same as the room name`);
+      return
+    }
     sock.emit("newRoom", {
       room: room,
       player: player,

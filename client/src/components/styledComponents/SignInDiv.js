@@ -57,6 +57,7 @@ export const SignInDiv = styled.div`
   .sign-in-button {
     border-radius: 8px;
     background: ${(props) => ((props.player === "" || props.room === "") ? "#555" : "#222")};
+    pointer-events: ${(props) => ((props.player === "" || props.room === "") ? "none" : "unset")};
 
     color: #f8f8f8;
     :hover {

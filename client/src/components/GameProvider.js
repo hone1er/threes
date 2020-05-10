@@ -49,7 +49,7 @@ function userNameTaken() {
   alert(`A player in the room you are joining has already used that username. Please select another usename and try again`);
 }
 function wrongPassword() {
-  alert(`The room you are trying to join is set to private. Please choose the 'private' option and enter the correct password to join`)
+  alert(`The room you are trying to join is set to private. Please select the private option, enter the correct password, and try again`)
 }
 function roomDoesNotExist() {
   alert(

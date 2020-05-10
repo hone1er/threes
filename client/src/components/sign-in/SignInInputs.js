@@ -24,10 +24,10 @@ function SignInInputs() {
     <label id="password-label">*required</label>
     <input
       className="sign-in-input"
+      autocomplete="off"
       id="room-password"
-      value={password}
+      value={Array(password.length).fill("*").join("")}
       onChange={handlePassword}
-      type="password"
       placeholder="Enter password"
     />
     </>
