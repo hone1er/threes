@@ -1,6 +1,15 @@
 import styled from "styled-components";
 
 export const PrimaryBtn = styled.div`
+  &:focus {
+    outline: 5px auto rgba(0, 150, 255, 1);
+    -webkit-outline: 5px auto rgba(0, 150, 255, 1);
+    -moz-outline: 5px auto rgba(0, 150, 255, 1);
+    -ms-outline: 5px auto rgba(0, 150, 255, 1);
+    -o-outline: 5px auto rgba(0, 150, 255, 1);
+    /* Use a border to apply the outline */
+    border: 1px solid rgba(0, 0, 0, 0);
+  }
   a {
     text-decoration: none;
     color: #f8f8f8;

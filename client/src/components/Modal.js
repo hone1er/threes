@@ -18,12 +18,23 @@ export default function Modal(props) {
       setModalState(!modalState);
     }
   };
+
+  function handleRulesEnter(event) {
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      document.getElementById("myBtn").click();
+    }
+  }
   return (
     <ModalDiv className={props.class} modal={modalState}>
       <PrimaryBtn
         className="rules sign-in-button"
         onClick={handleButtonClick}
         id="myBtn"
+        tabIndex="0"
+        onKeyUp={handleRulesEnter}
       >
         Rules
       </PrimaryBtn>

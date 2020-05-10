@@ -12,29 +12,33 @@ import die6 from "../diceSVG/U+2685.svg";
 export default function Dice() {
   const { game, handleScore, player } = useContext(GameContext);
   const diceImages = [die1, die2, die3, die4, die5, die6];
-  
+
   return (
     <DiceDiv className="dice-area">
       {game.diceValues.map((value, index) => {
+        const die = diceImages[value - 1];
+        let diePosition;
         if (game.dieVisable[index]) {
-          const die = diceImages[value - 1];
-          return (
-            <Die
-              key={index}
-              id={index}
-              disabled={
-                player !== game.names[game.currentPlayer]
-                  ? true
-                  : game.diceDisabled
-              }
-              className="dice"
-              onClick={() => handleScore(game.currentPlayer, value, index)}
-            >
-              <img src={die} alt="dice" />
-            </Die>
-          );
+          diePosition = "0";
+        } else {
+          diePosition = index % 2 ? "120vw" : "-120vw";
         }
-        return null;
+        return (
+          <Die
+            key={index}
+            id={index}
+            disabled={
+              player !== game.names[game.currentPlayer]
+                ? true
+                : game.diceDisabled
+            }
+            className="dice"
+            diePosition={diePosition}
+            onClick={() => handleScore(game.currentPlayer, value, index)}
+          >
+            <img src={die} alt="dice" />
+          </Die>
+        );
       })}
     </DiceDiv>
   );

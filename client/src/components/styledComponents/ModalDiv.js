@@ -12,18 +12,6 @@ export const ModalDiv = styled.div`
   #publicModal {
     display: ${(props) => (props.modal === false ? "block" : "none")};
   }
-  #myBtn {
-    pointer-events: unset !important;
-    @media (max-width: 800px) {
-      width: 94%;
-      margin: 0 auto;
-    }
-    @media (max-width: 500px) {
-      width: 98%;
-      margin: 0 auto;
-    }
-
-  }
 
   #publicModal {
     .modal-content {

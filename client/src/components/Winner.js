@@ -14,7 +14,7 @@ export default function Winner() {
   // assign classname based on current player or winner to styling
   const classname = "winner";
   const position = game.gameOver ? "0" : "-150vw";
-  const imagePosition = game.gameOver ? "0" : "-100px";
+  const imagePosition = game.gameOver ? "60px" : "80px";
 
   // show tie game or winner
   const winner =
@@ -32,8 +32,8 @@ export default function Winner() {
       imagePosition={imagePosition}
       className="player-area"
     >
-      <img className="dice-area-logo" src={threes} alt="threesLogo" />
       {winner}
+      <img className="dice-area-logo" src={threes} alt="threesLogo" />
     </WinnerDiv>
   );
 }

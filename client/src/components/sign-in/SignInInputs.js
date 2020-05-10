@@ -8,6 +8,7 @@ function SignInInputs() {
   const [password, setPassword] = useState("");
 
   function handleUser(e) {
+    console.log(e);
     setPlayer(e.target.value);
   }
   function handleRoom(e) {
@@ -21,28 +22,28 @@ function SignInInputs() {
 
   const passwordInput = game.public ? null : (
     <>
-    <label id="password-label">*required</label>
-    <input
-      className="sign-in-input"
-      type="password"
-      autocomplete="off"
-      id="room-password"
-      value={password}
-      onChange={handlePassword}
-      placeholder="Enter password"
-    />
+      <label id="password-label">*required</label>
+      <input
+        className="sign-in-input"
+        type="password"
+        autocomplete="off"
+        id="room-password"
+        value={password}
+        onChange={handlePassword}
+        placeholder="Enter password"
+      />
     </>
   );
   return (
     <>
-        <label id="top-label">*required</label>
+      <label id="top-label">*required</label>
       <input
         className="sign-in-input"
         value={player}
         onChange={handleUser}
         placeholder="Enter your username"
-        />
-        <label id="bottom-label">*required</label>
+      />
+      <label id="bottom-label">*required</label>
 
       <input
         className="sign-in-input"

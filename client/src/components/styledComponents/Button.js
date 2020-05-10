@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
+
   font-size: 1.25rem;
   text-transform: capitalize;
   cursor: pointer;

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const Die = styled.button`
+  position: relative;
+  left: ${(props) => props.diePosition};
+  top: 15px;
+  transition: left 1s;
   width: 6rem;
   height: 6rem;
   img {
@@ -61,7 +65,7 @@ export const Die = styled.button`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     width: 4rem;
     height: 4rem;
     img {

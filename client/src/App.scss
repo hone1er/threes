@@ -1,4 +1,5 @@
 .App {
+  overflow-x: hidden;
   text-align: center;
   height: 850px;
   display: flex;
@@ -34,6 +35,13 @@
 
 .chat-area {
   grid-area: chat;
+  @media (max-width: 650px){
+    margin-top: -195px !important;
+  }
+  @media (max-width: 425px){
+    margin-top: -145px !important;
+  }
+  
 }
 
 .logout-area {
@@ -57,12 +65,25 @@
 
 .dice-area {
   grid-area: dice;
+  @media (max-width: 800px){
+  bottom: 75px;
+overflow-x: hidden;
+height: 225px;
+  }
 }
 
 .roll-area {
   grid-area: roll;
   display: flex;
   flex-direction: column;
+  position: relative;
+  bottom: 100px;
+  @media (max-width: 800px){
+    bottom: 200px;
+  }
+  @media (max-width: 425px){
+    bottom: 150px;
+  }
 }
 
 .modal-area {

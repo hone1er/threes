@@ -11,11 +11,14 @@ export const SignInDiv = styled.div`
   height: 100vh;
   background-image: url(${threesimg});
   background-size: contain;
-  background-position: top;
+  background-position-y: -40px;
   background-repeat: no-repeat;
+  background-position-x: center;
 
   a {
-    pointer-events: ${(props) => ((props.player === "" || props.room === "") ? "none" : "unset")};
+    display: none;
+    pointer-events: ${(props) =>
+      props.player === "" || props.room === "" ? "none" : "unset"};
     text-decoration: none;
   }
   select {
@@ -24,12 +27,14 @@ export const SignInDiv = styled.div`
     padding: 10px;
   }
   #top-label {
-    margin-top: 45vh;
+    margin-top: 35vh;
     @media (max-width: 500px) {
-      margin-top: 25vh;
+      margin-top: 18vh;
     }
   }
-  #top-label, #bottom-label, #password-label{
+  #top-label,
+  #bottom-label,
+  #password-label {
     width: 90%;
     min-width: 290px;
     max-width: 600px;
@@ -51,24 +56,26 @@ export const SignInDiv = styled.div`
     padding: 10px;
     min-width: 290px;
     max-width: 600px;
-    
   }
 
   .sign-in-button {
     border-radius: 8px;
-    background: ${(props) => ((props.player === "" || props.room === "") ? "#555" : "#222")};
-    pointer-events: ${(props) => ((props.player === "" || props.room === "") ? "none" : "unset")};
+    background: ${(props) =>
+      props.player === "" || props.room === "" ? "#555" : "#222"};
+    pointer-events: ${(props) =>
+      props.player === "" || props.room === "" ? "none" : "unset"};
 
     color: #f8f8f8;
     :hover {
       background: #111;
     }
     @media (max-width: 800px) {
-      width: 90%;
+      width: 86%;
       margin: 0 auto;
     }
   }
   .rules {
+    pointer-events: all;
     background: #222;
     @media (max-width: 800px) {
       width: 100%;
