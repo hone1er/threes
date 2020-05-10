@@ -21,9 +21,11 @@ export default function Winner() {
     lowScores.length > 1 ? (
       <h1 className={classname}>Winner: tie game</h1>
     ) : (
-      <h1 className={classname}>
+      <div className={classname}>
+      <h1 className="rainbow-text">
         Winner: {game.names[game.scores.indexOf(lowScores[0])]}
       </h1>
+      </div>
     );
 
   return (

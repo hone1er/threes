@@ -15,6 +15,10 @@ export const SignInDiv = styled.div`
   background-repeat: no-repeat;
   background-position-x: center;
 
+  @media (max-width: 472px){
+    background-position-y: 5vw;
+  }
+
   a {
     display: none;
     pointer-events: ${(props) =>

@@ -17,38 +17,56 @@ export const WinnerDiv = styled.div`
     font-size: 2.5rem;
   }
   .winner {
-    font-size: 3rem;
     position: relative;
     bottom: 20px;
     right: ${(props) => (props.position ? props.position : 0)};
     transition: right 0.5s;
-    -webkit-animation-name: bounce;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-duration: 1s;
-
     animation-name: bounce;
     animation-iteration-count: infinite;
     animation-duration: 1s;
   }
 
+  .rainbow-text {
+    font-size: 3rem;
 
-  @-webkit-keyframes bounce {
-    from, to  {
-      bottom: 0;
-      -webkit-animation-timing-function: ease-out;
+    background-image: repeating-linear-gradient(
+      45deg,
+      violet,
+      indigo,
+      blue,
+      green,
+      yellow,
+      orange,
+      red,
+      violet
+    );
+    text-align: center;
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 6s ease infinite;
+  }
+  @keyframes rainbow {
+    0% {
+      background-position: 0% 50%;
     }
     50% {
-      bottom: 5px;
-      -webkit-animation-timing-function: ease-in;
+      background-position: 100% 25%;
+    }
+    100% {
+      background-position: 0% 50%;
     }
   }
+  
+
   @keyframes bounce {
-    from, to  {
+    from,
+    to {
       botttom: 0;
       animation-timing-function: ease-out;
     }
     50% {
-      bottom: 5px;
+      bottom: 10px;
       animation-timing-function: ease-in;
     }
   }
