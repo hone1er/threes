@@ -1,6 +1,6 @@
 # Threes
 
-## rules
+## Rules
   * This is a turn based game
   * Lowest score at the end of the game wins
   * Each player will start their turn with 5 dice
@@ -10,11 +10,13 @@
   * When chosen, each die adds its face value to the current players score, except 3, 3 adds 0 to the score
 
 
-## features
-
+## Features
   * Real time multiplayer dice game
   * Real time chat
-  * Public or private rooms
+  * Chat & game audio
+  * Create new rooms
+  * Join previously created rooms
+  * Choose between public or private(password protected) rooms
   
 
 
