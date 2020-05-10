@@ -14,6 +14,10 @@ export const ModalDiv = styled.div`
   }
   #myBtn {
     pointer-events: unset !important;
+    @media (max-width: 800px) {
+      width: 94%;
+      margin: 0 auto;
+    }
 
   }
 
