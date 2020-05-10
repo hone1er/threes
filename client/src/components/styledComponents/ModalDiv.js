@@ -18,6 +18,10 @@ export const ModalDiv = styled.div`
       width: 94%;
       margin: 0 auto;
     }
+    @media (max-width: 500px) {
+      width: 98%;
+      margin: 0 auto;
+    }
 
   }
 

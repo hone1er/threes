@@ -8,7 +8,7 @@ function SignInInputs() {
   const [password, setPassword] = useState("");
 
   function handleUser(e) {
-    setPlayer(e.target.value);
+    setPlayer({e.target.value});
   }
   function handleRoom(e) {
     setRoom(e.target.value);
@@ -25,6 +25,7 @@ function SignInInputs() {
     <input
       className="sign-in-input"
       autocomplete="off"
+      type="password"
       id="room-password"
       value={Array(password.length).fill("*").join("")}
       onChange={handlePassword}
