@@ -8,7 +8,7 @@ function SignInInputs() {
   const [password, setPassword] = useState("");
 
   function handleUser(e) {
-    setPlayer({e.target.value});
+    setPlayer(e.target.value);
   }
   function handleRoom(e) {
     setRoom(e.target.value);
@@ -24,10 +24,10 @@ function SignInInputs() {
     <label id="password-label">*required</label>
     <input
       className="sign-in-input"
-      autocomplete="off"
       type="password"
+      autocomplete="off"
       id="room-password"
-      value={Array(password.length).fill("*").join("")}
+      value={password}
       onChange={handlePassword}
       placeholder="Enter password"
     />
