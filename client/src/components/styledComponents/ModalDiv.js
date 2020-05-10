@@ -12,6 +12,10 @@ export const ModalDiv = styled.div`
   #publicModal {
     display: ${(props) => (props.modal === false ? "block" : "none")};
   }
+  #myBtn {
+    pointer-events: unset !important;
+
+  }
 
   #publicModal {
     .modal-content {
