@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import threesimg from "./threesCropped.jpg";
+import threesimg from "./images/threesCropped.jpg";
 
 export const SignInDiv = styled.div`
   position: relative;

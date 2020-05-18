@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { ModalDiv } from "./styledComponents/ModalDiv";
-import { PrimaryBtn } from "./styledComponents/PrimaryBtn";
-import rules from "./styledComponents/rules(1).jpg";
+import { ModalDiv } from "../styledComponents/ModalDiv";
+import { PrimaryBtn } from "../styledComponents/PrimaryBtn";
+import rules from "../styledComponents/images/rules(1).jpg";
 
 export default function Modal(props) {
   const [modalState, setModalState] = useState(true);

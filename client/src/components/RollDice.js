@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { GameContext } from "./GameProvider";
-import { Button } from "./styledComponents/Button";
-import diceAudio from "../diceSound.mp3";
+import { Button } from "../styledComponents/Button";
+import diceAudio from "../audio/diceSound.mp3";
 
 var audio = new Audio(diceAudio);
 export default function RollDice() {

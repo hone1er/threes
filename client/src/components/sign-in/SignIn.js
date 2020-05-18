@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { GameContext } from "../GameProvider";
-import { SignInDiv } from "../styledComponents/SignInDiv";
+import { SignInDiv } from "../../styledComponents/SignInDiv";
 import Modal from "../Modal";
 import { Link } from "react-router-dom";
-import { PrimaryBtn } from "../styledComponents/PrimaryBtn";
+import { PrimaryBtn } from "../../styledComponents/PrimaryBtn";
 import Radios from "./Radios";
 import SignInInputs from "./SignInInputs";
+
 
 export default function SignIn() {
   const { sock, player, game } = useContext(GameContext);

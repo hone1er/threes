@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GameContext } from "./GameProvider";
-import { ChatDiv } from "./styledComponents/ChatDiv";
+import { ChatDiv } from "../styledComponents/ChatDiv";
 import { GoMute } from "react-icons/go";
 import { GoUnmute } from "react-icons/go";
 import { MdSend } from "react-icons/md";

@@ -1,6 +1,6 @@
 import React from "react";
-import { PrimaryBtn } from "./styledComponents/PrimaryBtn";
-import { LogoutDiv } from "./styledComponents/LogoutDiv";
+import { PrimaryBtn } from "../styledComponents/PrimaryBtn";
+import { LogoutDiv } from "../styledComponents/LogoutDiv";
 export default function Logout() {
   return (
     <LogoutDiv className="logout-area">

@@ -8,7 +8,6 @@ function SignInInputs() {
   const [password, setPassword] = useState("");
 
   function handleUser(e) {
-    console.log(e);
     setPlayer(e.target.value);
   }
   function handleRoom(e) {

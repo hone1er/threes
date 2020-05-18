@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { GameContext } from "./GameProvider";
-import { Die } from "./styledComponents/Die";
-import { DiceDiv } from "./styledComponents/DiceDiv";
+import { DiceDiv } from "../styledComponents/DiceDiv";
 import die1 from "../diceSVG/U+2680.svg";
 import die2 from "../diceSVG/U+2681.svg";
 import die3 from "../diceSVG/U+2682.svg";
 import die4 from "../diceSVG/U+2683.svg";
 import die5 from "../diceSVG/U+2684.svg";
 import die6 from "../diceSVG/U+2685.svg";
+import Die from "./Die";
 
-export default function Dice() {
+export default function Dice({ numberOfDice }) {
   const { game, handleScore, player } = useContext(GameContext);
   const diceImages = [die1, die2, die3, die4, die5, die6];
 
@@ -32,12 +32,10 @@ export default function Dice() {
                 ? true
                 : game.diceDisabled
             }
-            className="dice"
             diePosition={diePosition}
             onClick={() => handleScore(game.currentPlayer, value, index)}
-          >
-            <img src={die} alt="dice" />
-          </Die>
+            dieImg={die}
+          />
         );
       })}
     </DiceDiv>

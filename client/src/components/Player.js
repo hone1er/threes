@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { GameContext } from "./GameProvider";
-import { PlayerDiv } from "./styledComponents/PlayerDiv";
+import { PlayerDiv } from "../styledComponents/PlayerDiv";
 
 export default function Player(props) {
   const { game } = useContext(GameContext);

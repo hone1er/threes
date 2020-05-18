@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import chatAudio from "../intuition.mp3";
+import chatAudio from "../audio/intuition.mp3";
 const audio = new Audio(chatAudio);
 
 function Sound({ chat, chatSound }) {

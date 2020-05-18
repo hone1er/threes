@@ -6,11 +6,10 @@ const app = express();
 const clientPath = `${__dirname}/build`;
 // keep track of the number of clients connected
 let count = 0;
-// chat log
-let chat = [];
+// store the rooms as key(roomName): value(gameObject) pairs for quick lookup
 let rooms = {};
 
-// server side game state
+// server side new game state
 const newGame = {
   currentPlayer: 0,
   playerTurns: 5,
@@ -18,6 +17,7 @@ const newGame = {
   dieVisable: Array(5).fill(true),
   names: [],
   scores: [],
+  chat: [],
   currentRoom: "",
   rollDisabled: false,
   rolling: false,
@@ -53,6 +53,7 @@ io.on("connection", (sock) => {
     if (rooms[room]) {
       sock.emit("joinFailed", "roomTaken");
     } else {
+      // remove the player from any other rooms they may have been connected to before allowing them to create a new room
       if (userGame) {
         let currentGame = userGame;
         if (currentGame.names.indexOf(sockUser) !== -1) {
@@ -70,6 +71,7 @@ io.on("connection", (sock) => {
         }
       }
       sock.leaveAll();
+
       sock.join(room);
       sockUser = player;
       userRoom = room;
@@ -159,13 +161,15 @@ io.on("connection", (sock) => {
   });
 
   sock.on("sendMessage", (message) => {
-    chat.push(message);
-    sock.broadcast.to(userRoom).emit("receiveMessage", chat);
+    rooms[userRoom].chat.push(message);
+    sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);
   });
 
   sock.on("disconnect", (user) => {
-    chat.push(`${sockUser} disconnected`);
-    sock.broadcast.to(userRoom).emit("receiveMessage", chat);
+    if (rooms[userRoom]){
+    rooms[userRoom].chat.push(`${sockUser} disconnected`);
+    sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);
+    }
     let tempGame = userGame;
     count -= 1;
 
@@ -199,8 +203,6 @@ server.on("error", (error) => {
 
 server.listen(process.env.PORT, () => {
   console.log(
-    "Threes server started on port: " +
-      process.env.PORT +
-      "............................"
+    "Threes server started on port: " + process.env.PORT + "............................"
   );
 });

@@ -1,43 +1,46 @@
 import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
+import swish from "../audio/swish.mp3";
+
+const swishSound = new Audio(swish);
 export const GameContext = createContext();
 const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
 
 sock.on("joinFailed", (reason) => {
   switch (reason) {
     case "userNameTaken":
-      userNameTaken()
+      userNameTaken();
       break;
     case "roomTaken":
-      roomNameTaken()
+      roomNameTaken();
       break;
-      case "roomDoesNotExist":
-      roomDoesNotExist()
+    case "roomDoesNotExist":
+      roomDoesNotExist();
       break;
-      case "wrongPassword":
-      wrongPassword()
+    case "wrongPassword":
+      wrongPassword();
       break;
-      case "publicStatusError":
-        publicStatusError()
-        break;
-        case "privateStatusError":
-        privateStatusError()
-        break;
+    case "publicStatusError":
+      publicStatusError();
+      break;
+    case "privateStatusError":
+      privateStatusError();
+      break;
     default:
       break;
   }
-})
+});
 
 function publicStatusError() {
   alert(
     `The room you are trying to join is set to public. Please select the public option and try again`
-  )
+  );
 }
 
 function privateStatusError() {
   alert(
     `The room you are trying to join is set to private. Please select the private option, enter the correct password, and try again`
-  )
+  );
 }
 
 function roomNameTaken() {
@@ -46,10 +49,14 @@ function roomNameTaken() {
   );
 }
 function userNameTaken() {
-  alert(`A player in the room you are joining has already used that username. Please select another usename and try again`);
+  alert(
+    `A player in the room you are joining has already used that username. Please select another usename and try again`
+  );
 }
 function wrongPassword() {
-  alert(`The room you are trying to join is set to private. Please select the private option, enter the correct password, and try again`)
+  alert(
+    `The room you are trying to join is set to private. Please select the private option, enter the correct password, and try again`
+  );
 }
 function roomDoesNotExist() {
   alert(
@@ -60,16 +67,16 @@ function roomDoesNotExist() {
 sock.on("joinSuccess", (reason) => {
   switch (reason) {
     case "join":
-      document.getElementById("join").click();      
+      document.getElementById("join").click();
       break;
-      case "new":
-      document.getElementById("new").click();      
+    case "new":
+      document.getElementById("new").click();
       break;
     default:
       break;
   }
-  return
-}) 
+  return;
+});
 
 export function GameProvider(props) {
   const [player, setPlayer] = useState("");
@@ -90,6 +97,7 @@ export function GameProvider(props) {
   });
 
   function handleScore(playerid, value, die) {
+    swishSound.play();
     const tempGame = game;
     if (value !== 3) {
       tempGame.scores[playerid] += value;

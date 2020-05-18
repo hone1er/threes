@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Die = styled.button`
+export const DieDiv = styled.button`
   position: relative;
   left: ${(props) => props.diePosition};
   top: 15px;

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GameContext } from "./GameProvider";
-import { WinnerDiv } from "./styledComponents/WinnerDiv";
-import threes from "./styledComponents/threesMain.jpg";
+import threes from "../styledComponents/images/threesMain.jpg";
+import { WinnerDiv } from "../styledComponents/WinnerDiv";
 
 export default function Winner() {
   const { game } = useContext(GameContext);

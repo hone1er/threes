@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ScoreBoardDiv } from "./styledComponents/ScoreBoardDiv";
+import { ScoreBoardDiv } from "../styledComponents/ScoreBoardDiv";
 import { GameContext } from "./GameProvider";
 import Player from "./Player";
 
