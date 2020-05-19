@@ -44,18 +44,20 @@ export default function Chat() {
   }
 
   function sendMessage() {
-    sock.emit("sendMessage", player + ": " + message);
     const el = document.createElement("li");
-    el.innerHTML = gif
-      ? `${player}: ${message} <br/><iframe title=${gif.title} class="chat-gif" src=${gif.embed_url} width="262" height="198" frameBorder="0" class="giphy-embed"></iframe><p><a href=${gif.url}>via GIPHY</a></p>`
-      : player + ": " + message;
+    const messageHolder = gif ? `${message} <br/><iframe title=${gif.title} class="chat-gif" src=${gif.embed_url} width="262" height="198" frameBorder="0" class="giphy-embed"></iframe><p><a href=${gif.url}>via GIPHY</a></p>`
+    : message;
+    
+    sock.emit("sendMessage", player + ": " + messageHolder);
+    el.innerHTML =`${player}: ${messageHolder} `;
+
 
     document.querySelector("#chat").appendChild(el);
     setMessage("");
     const elem = document.getElementById("chat");
     elem.scrollTop = elem.scrollHeight;
     let tempChat = chat;
-    tempChat.push(message);
+    tempChat.push(messageHolder);
     setChat(tempChat);
     closePreview();
   }
@@ -74,7 +76,7 @@ export default function Chat() {
             width="240"
             height="180"
             frameBorder="0"
-            class="giphy-embed"
+            className="giphy-embed"
           ></iframe>
           <p>
             <a href={gif.url}>via GIPHY</a>
@@ -121,14 +123,14 @@ export default function Chat() {
         {gif ? gifPreviewElement : null}
         <div id="gif-preview"></div>
         <div className="buttonWrapper">
+          <button id="chat-mute" onClick={handleSound}>
+            {chatSound ? <GoUnmute /> : <GoMute />}
+          </button>
           <GiphyModal
             className="giphy-modal"
             setGif={setGif}
             setMessage={setMessage}
           />
-          <button id="chat-mute" onClick={handleSound}>
-            {chatSound ? <GoUnmute /> : <GoMute />}
-          </button>
         </div>
       </div>
       <Sound chat={chat} chatSound={chatSound} />

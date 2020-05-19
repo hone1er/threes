@@ -89,7 +89,7 @@ export const ChatDiv = styled.div`
     background: #f8f8f8;
     height: 60vh;
     overflow-y: scroll;
-    border: 2px solid black;
+    border: 1px solid black;
     list-style: none;
     text-align: left;
   }
@@ -103,6 +103,9 @@ export const ChatDiv = styled.div`
     color: #444;
     display: flex;
     flex-direction: column;
+    height: auto;
+    min-height: fit-content;
+    
   }
   input {
     width: calc(100% - 56px);
@@ -152,6 +155,7 @@ export const ChatDiv = styled.div`
     }
 
     input {
+    width: calc(100% - 68px);
     border-radius: 0 !important;
     }
   }
