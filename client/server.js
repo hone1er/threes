@@ -161,8 +161,12 @@ io.on("connection", (sock) => {
   });
 
   sock.on("sendMessage", (message) => {
+    if (rooms[userRoom]){
     rooms[userRoom].chat.push(message);
     sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);
+    return
+  }
+    return
   });
 
   sock.on("disconnect", (user) => {

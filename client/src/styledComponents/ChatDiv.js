@@ -113,6 +113,14 @@ export const ChatDiv = styled.div`
     }
   }
 
+  .buttonWrapper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 15px;
+    margin-bottom: 75px;
+  }
+
 #sound {
   display: none;
 }

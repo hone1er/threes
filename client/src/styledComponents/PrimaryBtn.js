@@ -1,6 +1,17 @@
 import styled from "styled-components";
 
 export const PrimaryBtn = styled.div`
+&.gifBtn {
+  border-radius: 0;
+  position: relative;
+  left: 25px;
+  width: 100px;
+  background: rgb(0, 255, 153);
+  color: rgb(46, 46, 46);
+&:hover {
+  color: #f8f8f8;
+}
+}
   &:focus {
     outline: 5px auto rgba(0, 150, 255, 1);
     -webkit-outline: 5px auto rgba(0, 150, 255, 1);

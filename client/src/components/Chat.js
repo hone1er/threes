@@ -5,6 +5,7 @@ import { GoMute } from "react-icons/go";
 import { GoUnmute } from "react-icons/go";
 import { MdSend } from "react-icons/md";
 import Sound from "./Sound";
+import GiphyModal from "./GiphyModal";
 
 export default function Chat() {
   const { sock, player } = useContext(GameContext);
@@ -30,10 +31,13 @@ export default function Chat() {
     }
   }
 
+
+
   function sendMessage() {
     sock.emit("sendMessage", player + ": " + message);
     const el = document.createElement("li");
-    el.innerHTML = player + ": " + message;
+   el.innerHTML = player + ": " + message;
+  
     document.querySelector("#chat").appendChild(el);
     setMessage("");
     const elem = document.getElementById("chat");
@@ -76,9 +80,12 @@ export default function Chat() {
             <MdSend />
           </button>
         </div>
+        <div className="buttonWrapper">
         <button id="chat-mute" onClick={handleSound}>
           {chatSound ? <GoUnmute /> : <GoMute />}
         </button>
+        <GiphyModal className="giphy-modal" setMessage={setMessage} />
+        </div>
       </div>
       <Sound chat={chat} chatSound={chatSound} />
     </ChatDiv>

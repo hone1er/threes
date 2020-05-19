@@ -1,14 +1,23 @@
 import styled from "styled-components";
 export const ModalDiv = styled.div`
+
+.gifContent {
+  top: 20vh;
+  -webkit-animation-name: gifanimatetop !important;
+  -webkit-animation-duration: 0.4s;
+  animation-name: gifanimatetop !important;
+  animation-duration: 0.4s;
+  width: max-content !important;
+}
   &.game-room-rules {
     width: unset;
   }
   display: flex;
   justify-self: end;
-  #myModal {
+  #rulesModal, #myModal {
     display: ${(props) => (props.modal === false ? "block" : "none")};
   }
-  #myModal,
+  #rulesModal, #myModal,
   #publicModal {
     display: ${(props) => (props.modal === false ? "block" : "none")};
   }
@@ -81,6 +90,29 @@ export const ModalDiv = styled.div`
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s;
+  }
+  
+  /* Add GIPHY Animation */
+  @-webkit-keyframes gifanimatetop {
+    from {
+      top: -300px;
+      opacity: 0;
+    }
+    to {
+      top: 150px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes gifanimatetop {
+    from {
+      top: -300px;
+      opacity: 0;
+    }
+    to {
+      top: 150px;
+      opacity: 1;
+    }
   }
 
   /* Add Animation */

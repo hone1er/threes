@@ -6,7 +6,7 @@ import rules from "../styledComponents/images/rules(1).jpg";
 export default function Modal(props) {
   const [modalState, setModalState] = useState(true);
   // Get the modal
-  var modal = document.getElementById("myModal");
+  var modal = document.getElementById("rulesModal");
   // When the user clicks on the button, open the modal
   function handleButtonClick() {
     setModalState(!modalState);
@@ -39,7 +39,7 @@ export default function Modal(props) {
         Rules
       </PrimaryBtn>
 
-      <div id="myModal" className="modal">
+      <div id="rulesModal" className="modal">
         <div className="modal-content">
           <span onClick={handleButtonClick} className="close">
             &times;
