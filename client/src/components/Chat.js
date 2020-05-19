@@ -6,12 +6,14 @@ import { GoUnmute } from "react-icons/go";
 import { MdSend } from "react-icons/md";
 import Sound from "./Sound";
 import GiphyModal from "./GiphyModal";
+import Modal from "./Modal";
 
 export default function Chat() {
   const { sock, player } = useContext(GameContext);
 
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
+  const [gif, setGif] = useState(undefined);
   const [chatSound, setChatSound] = useState(true);
 
   function handleSound() {
@@ -30,14 +32,24 @@ export default function Chat() {
       document.getElementById("chat-btn").click();
     }
   }
-
-
+  function closePreview() {
+    if (gif) {
+      const preview = document.getElementById("gif-preview");
+      while (preview.childNodes.length > 0) {
+        preview.removeChild(preview.childNodes[0]);
+      }
+      setGif(undefined);
+    }
+    return;
+  }
 
   function sendMessage() {
     sock.emit("sendMessage", player + ": " + message);
     const el = document.createElement("li");
-   el.innerHTML = player + ": " + message;
-  
+    el.innerHTML = gif
+      ? `${player}: ${message} <br/><iframe title=${gif.title} class="chat-gif" src=${gif.embed_url} width="262" height="198" frameBorder="0" class="giphy-embed"></iframe><p><a href=${gif.url}>via GIPHY</a></p>`
+      : player + ": " + message;
+
     document.querySelector("#chat").appendChild(el);
     setMessage("");
     const elem = document.getElementById("chat");
@@ -45,7 +57,33 @@ export default function Chat() {
     let tempChat = chat;
     tempChat.push(message);
     setChat(tempChat);
+    closePreview();
   }
+
+  let gifPreviewElement;
+  if (gif) {
+    gifPreviewElement = (
+      <div id="gif-preview">
+        <span className="gif-close" onClick={closePreview}>
+          &times;
+        </span>
+        <div className="inner-preview">
+          <iframe
+            title={gif.title}
+            src={gif.embed_url}
+            width="240"
+            height="180"
+            frameBorder="0"
+            class="giphy-embed"
+          ></iframe>
+          <p>
+            <a href={gif.url}>via GIPHY</a>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   useEffect(() => {
     const el = document.createElement("li");
     el.innerHTML = chat[chat.length - 1] || "";
@@ -74,20 +112,27 @@ export default function Chat() {
           ></input>
           <button
             id="chat-btn"
-            disabled={message.length === 0}
+            disabled={message.length === 0 && gif === undefined}
             onClick={sendMessage}
           >
             <MdSend />
           </button>
         </div>
+        {gif ? gifPreviewElement : null}
+        <div id="gif-preview"></div>
         <div className="buttonWrapper">
-        <button id="chat-mute" onClick={handleSound}>
-          {chatSound ? <GoUnmute /> : <GoMute />}
-        </button>
-        <GiphyModal className="giphy-modal" setMessage={setMessage} />
+          <GiphyModal
+            className="giphy-modal"
+            setGif={setGif}
+            setMessage={setMessage}
+          />
+          <button id="chat-mute" onClick={handleSound}>
+            {chatSound ? <GoUnmute /> : <GoMute />}
+          </button>
         </div>
       </div>
       <Sound chat={chat} chatSound={chatSound} />
+      <Modal class="game-room-rules modal-area" />
     </ChatDiv>
   );
 }

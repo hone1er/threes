@@ -21,6 +21,16 @@ export const ModalDiv = styled.div`
   #publicModal {
     display: ${(props) => (props.modal === false ? "block" : "none")};
   }
+  #rulesModal {
+    ul {
+      border: none;
+      list-style: dotted;
+      li {
+        border: none;
+        margin: 10px;
+      }
+    }
+  }
 
   #publicModal {
     .modal-content {

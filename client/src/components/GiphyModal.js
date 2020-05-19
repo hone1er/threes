@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { ModalDiv } from "../styledComponents/ModalDiv";
 import { PrimaryBtn } from "../styledComponents/PrimaryBtn";
-import ReactGiphySearchbox from 'react-giphy-searchbox'
+import ReactGiphySearchbox from "react-giphy-searchbox";
 
 export default function GiphyModal(props) {
   const [gifModalState, setGifModalState] = useState(true);
 
   function sendGif(obj) {
-    setGifModalState(!gifModalState)
-    props.setMessage(`<iframe src=${obj.embed_url} width="240" height="180" frameBorder="0" class="giphy-embed"></iframe><p><a href=${obj.url}>via GIPHY</a></p>`)
+    setGifModalState(!gifModalState);
+    props.setGif(obj);
   }
 
   // Get the modal
@@ -42,7 +42,7 @@ export default function GiphyModal(props) {
         tabIndex="0"
         onKeyUp={handleGiphyEnter}
       >
-        GIFS
+        GIFs
       </PrimaryBtn>
 
       <div id="myModal" className="modal gifModal">
@@ -51,10 +51,15 @@ export default function GiphyModal(props) {
             &times;
           </span>
           <ReactGiphySearchbox
-    apiKey="Is2BWZVtVFQshcll1slyZ1MUeLkBhKlJ" // Required: get your on https://developers.giphy.com
-    onSelect={item => sendGif(item, gifModalState)}
-    masonryConfig={[{ columns: 3, imageWidth: 120, gutter: 5 }]}
-  />
+            apiKey="Is2BWZVtVFQshcll1slyZ1MUeLkBhKlJ" // Required: get your on https://developers.giphy.com
+            onSelect={(item) => sendGif(item, gifModalState)}
+            masonryConfig={[
+              { columns: 2, imageWidth: 140, gutter: 10 },
+              { mq: "700px", columns: 3, imageWidth: 200, gutter: 10 },
+              { mq: "1000px", columns: 4, imageWidth: 220, gutter: 10 },
+            ]}
+            rating="r"
+          />
         </div>
       </div>
     </ModalDiv>

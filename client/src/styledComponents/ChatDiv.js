@@ -1,10 +1,25 @@
 import styled from "styled-components";
 
 export const ChatDiv = styled.div`
+#gif-preview {
+  position: relative;
+  top: 15px;
+  display: flex;
+
+  span {
+    cursor: pointer;
+    font-size: 2rem;
+    width: 45px;
+    margin-right: 10px;
+    text-align: left;
+    position: relative;
+    bottom: 15px;
+  }
+}
+
   width: 100%;
   margin: auto;
   margin-top: 25px;
-  height: 100vh;
 
   h1 {
     font-size: 1.4rem;
@@ -38,6 +53,10 @@ export const ChatDiv = styled.div`
         fill: #111
       }
     }
+  }
+  .chat-gif {
+    align-self: center;
+    justify-self: center;
   }
   #chat-mute {
     width: fit-content;
@@ -82,9 +101,11 @@ export const ChatDiv = styled.div`
     padding: 2px 0 2px 10px;
     letter-spacing: 0.05rem;
     color: #444;
+    display: flex;
+    flex-direction: column;
   }
   input {
-    width: calc(100% - 71px);
+    width: calc(100% - 56px);
     margin: auto;
     height: 2.3rem;
     font-size: 1rem;
@@ -131,7 +152,6 @@ export const ChatDiv = styled.div`
     }
 
     input {
-    width: calc(100% - 75px);
     border-radius: 0 !important;
     }
   }

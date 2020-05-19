@@ -88,7 +88,10 @@ height: 225px;
 
 .modal-area {
   grid-area: modal;
-
+  justify-content: flex-end;
+  div{
+  border-radius: 0;
+  }
   @media (max-width: 800px){
   width: 90%;
   }

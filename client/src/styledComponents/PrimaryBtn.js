@@ -4,12 +4,10 @@ export const PrimaryBtn = styled.div`
 &.gifBtn {
   border-radius: 0;
   position: relative;
-  left: 25px;
   width: 100px;
-  background: rgb(0, 255, 153);
-  color: rgb(46, 46, 46);
-&:hover {
-  color: #f8f8f8;
+  &:hover {
+    background: rgb(0, 255, 153);
+    color: rgb(46, 46, 46);
 }
 }
   &:focus {
@@ -41,7 +39,7 @@ export const PrimaryBtn = styled.div`
   }
 
   &#logout {
-    border-radius: 0 0 0 8px;
+    border-radius: 0;
     @media (max-width: 500px) {
       font-size: 0.8rem;
     }

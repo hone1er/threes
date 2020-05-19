@@ -6,7 +6,6 @@ import Dice from "./components/Dice";
 import RollDice from "./components/RollDice";
 import "react-dice-complete/dist/react-dice-complete.css";
 import Chat from "./components/Chat";
-import Modal from "./components/Modal";
 import Logout from "./components/Logout";
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
       <Dice />
       <RollDice />
       <Chat />
-      <Modal class="game-room-rules modal-area" />
+
     </div>
   );
 }
