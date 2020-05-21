@@ -38,6 +38,11 @@ export const ChatDiv = styled.div`
     margin: auto;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 800px){
+      position: relative;
+      top: 2px;
+    }
   }
   #chat-btn {
     background: white;

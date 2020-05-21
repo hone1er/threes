@@ -10,10 +10,8 @@ import Chat from "./components/Chat";
 import Logout from "./components/Logout";
 
 
-function initializeReactGA() {
-  ReactGA.initialize('UA-146246516-6');
-  ReactGA.pageview('/game');
-}
+ReactGA.initialize('UA-146246516-6');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 function App() {
   return (
