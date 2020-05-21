@@ -41,7 +41,7 @@ export const ChatDiv = styled.div`
 
     @media (max-width: 800px){
       position: relative;
-      top: 2px;
+      top: 4px;
     }
   }
   #chat-btn {
