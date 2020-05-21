@@ -2,8 +2,8 @@ import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import swish from "../audio/swish.mp3";
 
-const swishSound = new Audio(swish);
 export const GameContext = createContext();
+const swishSound = new Audio(swish);
 const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
 
 sock.on("joinFailed", (reason) => {
