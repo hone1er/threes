@@ -59,7 +59,9 @@ io.on("connection", (sock) => {
         if (currentGame.names.indexOf(sockUser) !== -1) {
           currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
           currentGame.names.splice(currentGame.names.indexOf(sockUser), 1);
-          chat.push(`${sockUser} disconnected`);
+          if (rooms[room]){
+          rooms[room].chat.push(`${sockUser} disconnected`);
+          }
           sock.broadcast.to(userRoom).emit("receiveMessage", chat);
           sock.leave(userRoom);
           console.log(`\n${player} disconnected from room: ${userRoom}\n`);
@@ -205,8 +207,8 @@ server.on("error", (error) => {
   console.error("server error: ", error);
 });
 
-server.listen(process.env.PORT, () => {
+server.listen(5000, () => {
   console.log(
-    "Threes server started on port: " + process.env.PORT + "............................"
+    "Threes server started on port: " + 5000 + "............................"
   );
 });
