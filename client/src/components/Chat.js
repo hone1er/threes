@@ -6,7 +6,6 @@ import { GoUnmute } from "react-icons/go";
 import { MdSend } from "react-icons/md";
 import Sound from "./Sound";
 import GiphyModal from "./GiphyModal";
-import Modal from "./Modal";
 
 export default function Chat() {
   const { sock, player } = useContext(GameContext);
@@ -134,7 +133,7 @@ export default function Chat() {
         </div>
       </div>
       <Sound chat={chat} chatSound={chatSound} />
-      <Modal class="game-room-rules modal-area" />
+
     </ChatDiv>
   );
 }

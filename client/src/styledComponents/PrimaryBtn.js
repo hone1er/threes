@@ -39,7 +39,7 @@ export const PrimaryBtn = styled.div`
   }
 
   &#logout {
-    border-radius: 0;
+    border-radius: 0 0 0 8px;
     @media (max-width: 500px) {
       font-size: 0.8rem;
     }

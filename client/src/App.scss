@@ -4,7 +4,6 @@
   height: 850px;
   display: flex;
   flex-direction: column;
-  align-content: center;
 }
 
 .App-logo {
@@ -103,6 +102,7 @@ color: #ff7070;
 
 .App {
   height: 100%;
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 5fr 2fr;
   grid-template-areas:

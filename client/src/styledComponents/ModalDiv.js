@@ -1,6 +1,8 @@
 import styled from "styled-components";
 export const ModalDiv = styled.div`
-
+#gifBtn {
+  border-radius: 8px;
+}
 .gifContent {
   top: 20vh;
   -webkit-animation-name: gifanimatetop !important;
