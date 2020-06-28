@@ -8,6 +8,7 @@ import RollDice from "./components/RollDice";
 import "react-dice-complete/dist/react-dice-complete.css";
 import Chat from "./components/Chat";
 import Logout from "./components/Logout";
+import Modal from './components/Modal';
 
 
 ReactGA.initialize('UA-146246516-6');
@@ -22,7 +23,7 @@ function App() {
       <Dice />
       <RollDice />
       <Chat />
-
+      <Modal class="game-room-rules modal-area" />
     </div>
   );
 }

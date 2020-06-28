@@ -50,6 +50,7 @@ export const ChatDiv = styled.div`
     height: auto;
     postion: relative;
     top: 10px;
+    padding: 1px 0px 1px 5px;
     svg {
       width: 30px;
       height: 30px;
