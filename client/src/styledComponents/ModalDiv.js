@@ -19,6 +19,15 @@ export const ModalDiv = styled.div`
   #rulesModal, #myModal {
     display: ${(props) => (props.modal === false ? "block" : "none")};
   }
+  .sign-in-rules {
+    border-radius: 8px;
+  }
+  .game-room-rules {
+    border-radius: 8px 0 0 0;
+    height: fit-content;
+    position: absolute;
+    bottom: 0;
+  }
   #rulesModal, #myModal,
   #publicModal {
     display: ${(props) => (props.modal === false ? "block" : "none")};
