@@ -85,6 +85,27 @@ height: 225px;
   }
 }
 
+.game-room-rules {
+  &.modal-area {
+    grid-area: modal;
+    justify-content: flex-end;
+    div {
+    border-radius: 8px 0 0 0;
+    height: fit-content;
+    align-self: flex-end;
+    @media (max-width: 800px) {
+      border-radius: 8px 8px 0 0;
+    }
+    @media (max-width: 650px) {
+      border-radius: 8px 0 0 0;
+    }
+    }
+  
+    @media (max-width: 800px) {
+      width: 90%;
+  }
+}
+}
 .modal-area {
   grid-area: modal;
   justify-content: flex-end;

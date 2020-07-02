@@ -30,7 +30,7 @@ export default function Modal(props) {
   return (
     <ModalDiv className={props.class} modal={modalState}>
       <PrimaryBtn
-        className={props.class}
+        className="rules sign-in-button"
         onClick={handleButtonClick}
         id="myBtn"
         tabIndex="0"

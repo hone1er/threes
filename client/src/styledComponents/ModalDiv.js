@@ -1,5 +1,6 @@
 import styled from "styled-components";
 export const ModalDiv = styled.div`
+
 #gifBtn {
   border-radius: 8px;
 }
@@ -113,6 +114,7 @@ export const ModalDiv = styled.div`
     animation-duration: 0.4s;
   }
   
+  
   /* Add GIPHY Animation */
   @-webkit-keyframes gifanimatetop {
     from {
@@ -189,4 +191,5 @@ export const ModalDiv = styled.div`
     background-color: #5cb85c;
     color: white;
   }
+
 `;
