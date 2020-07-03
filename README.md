@@ -1,5 +1,5 @@
 # Threes
-
+Check out the game at [honecode.com](honecode.com)
 ## Rules
   * This is a turn based game
   * Lowest score at the end of the game wins
