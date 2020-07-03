@@ -87,13 +87,14 @@ export const ChatDiv = styled.div`
     letter-spacing: 0.1rem;
   }
   ul {
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     padding: 0 1px;
     overflow-x: hidden;
     margin: auto;
     background: #f8f8f8;
-    height: 60vh;
+    height: 560px;
     overflow-y: scroll;
     border: 1px solid black;
     list-style: none;

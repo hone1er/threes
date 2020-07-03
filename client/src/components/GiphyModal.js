@@ -51,7 +51,7 @@ export default function GiphyModal(props) {
             &times;
           </span>
           <ReactGiphySearchbox
-            apiKey="Is2BWZVtVFQshcll1slyZ1MUeLkBhKlJ" // Required: get your on https://developers.giphy.com
+            apiKey={process.env.giphyAPI} // Required: get your on https://developers.giphy.com
             onSelect={(item) => sendGif(item, gifModalState)}
             masonryConfig={[
               { columns: 2, imageWidth: 140, gutter: 10 },
