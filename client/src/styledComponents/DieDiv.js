@@ -7,6 +7,7 @@ export const DieDiv = styled.button`
   transition: left 1s;
   width: 6rem;
   height: 6rem;
+  border: none;
   img {
     width: 6rem;
   }
@@ -66,10 +67,10 @@ export const DieDiv = styled.button`
   }
 
   @media (max-width: 800px) {
-    width: 4rem;
-    height: 4rem;
+    width: 3.75rem;
+    height: 3.75rem;
     img {
-      width: 4rem;
+      width: 3.75rem;
     }
   }
 `;
