@@ -107,8 +107,9 @@ export const SignInDiv = styled.div`
       margin-top: 4vh;
     }
   }
-
+ 
   .sign-in-buttons {
+
     display: flex;
     justify-content: space-between;
     width: 100%;

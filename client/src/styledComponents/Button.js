@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-
+  
   font-size: 1.25rem;
   text-transform: capitalize;
   cursor: pointer;
@@ -20,7 +20,6 @@ export const Button = styled.button`
   border: none;
   max-width: 130px;
   align-self: center;
-
   &:hover {
     background: ${(props) =>
       props.disabled ? " 	#444" : props.reset ? "#111" : "#111"};

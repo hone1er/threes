@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const PrimaryBtn = styled.div`
+
 &.gifBtn {
   border-radius: 0;
   position: relative;
