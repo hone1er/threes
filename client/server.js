@@ -34,6 +34,22 @@ app.get("*", (req, res) => {
   express.static(path.resolve(__dirname, "build"));
 });
 
+
+
+// LOCAL SERVER
+// const PORT = process.env.PORT || 5000;
+// const INDEX = "build/index.html";
+// const server = express()
+//   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+//   .listen(PORT, () => console.log(`\n\n\nListening on ${PORT}.............................................................\n\n\n`));
+
+// BUILD SERVER
+port = process.env.PORT
+server.listen(port, () => {
+  console.log(
+    "Threes server started on port: " + port + "............................"
+  );
+});
 const server = http.createServer(app);
 
 const io = socketio(server);
@@ -207,8 +223,5 @@ server.on("error", (error) => {
   console.error("server error: ", error);
 });
 
-server.listen(process.env.PORT, () => {
-  console.log(
-    "Threes server started on port: " + process.env.PORT + "............................"
-  );
-});
+
+

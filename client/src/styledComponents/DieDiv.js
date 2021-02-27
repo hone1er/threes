@@ -27,15 +27,24 @@ export const DieDiv = styled.button`
   transform-origin: 0 0; /* Standard Property */
 
   &:hover {
-    zoom: 1.1; /* IE */
-    -moz-transform: scale(1.1); /* Firefox */
+    zoom: 1.00001; /* IE */
+    -moz-transform: scale(1.025); /* Firefox */
     -moz-transform-origin: 0 0;
-    -o-transform: scale(1.1); /* Opera */
+    -o-transform: scale(1.025); /* Opera */
     -o-transform-origin: 0 0;
-    -webkit-transform: scale(1.1); /* Safari And Chrome */
+    -webkit-transform: scale(1.025); /* Safari And Chrome */
     -webkit-transform-origin: 0 0;
-    transform: scale(1.1); /* Standard Property */
+    transform: scale(1.025); /* Standard Property */
     transform-origin: 0 0; /* Standard Property */
+  }
+  &:focus {
+    outline: none !important;
+    -webkit-outline: none !important;
+    -moz-outline: none !important;
+    -ms-outline: none !important;
+    -o-outline: none !important;
+    /* Use a border to apply the outline */
+    border: 1px solid rgba(0, 0, 0, 0);
   }
 
   &.rolling:nth-child(odd) {

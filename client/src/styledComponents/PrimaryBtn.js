@@ -12,11 +12,11 @@ export const PrimaryBtn = styled.div`
 }
 }
   &:focus {
-    outline: 5px auto rgba(0, 150, 255, 1);
-    -webkit-outline: 5px auto rgba(0, 150, 255, 1);
-    -moz-outline: 5px auto rgba(0, 150, 255, 1);
-    -ms-outline: 5px auto rgba(0, 150, 255, 1);
-    -o-outline: 5px auto rgba(0, 150, 255, 1);
+    outline: none !important;
+    -webkit-outline: none !important;
+    -moz-outline: none !important;
+    -ms-outline: none !important;
+    -o-outline: none !important;
     /* Use a border to apply the outline */
     border: 1px solid rgba(0, 0, 0, 0);
   }

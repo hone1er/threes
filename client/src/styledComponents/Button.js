@@ -24,6 +24,15 @@ export const Button = styled.button`
     background: ${(props) =>
       props.disabled ? " 	#444" : props.reset ? "#111" : "#111"};
   }
+  &:focus {
+    outline: none !important;
+    -webkit-outline: none !important;
+    -moz-outline: none !important;
+    -ms-outline: none !important;
+    -o-outline: none !important;
+    /* Use a border to apply the outline */
+    border: 1px solid rgba(0, 0, 0, 0);
+  }
 
   @media (max-media: 800px) {
     &:hover {
