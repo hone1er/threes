@@ -4,7 +4,7 @@ import swish from "../audio/swish.mp3";
 
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
-const sock = socketIOClient("enigmatic-stream-22705.herokuapp.com");
+const sock = socketIOClient("throwthrees.herokuapp.com/");
 
 sock.on("joinFailed", (reason) => {
   switch (reason) {
