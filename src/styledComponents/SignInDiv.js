@@ -31,9 +31,12 @@ export const SignInDiv = styled.div`
     padding: 10px;
   }
   #top-label {
-    margin-top: 35vh;
-    @media (max-width: 500px) {
-      margin-top: 18vh;
+    margin-top: 30vh;
+    @media (max-width: 814px) {
+      margin-top: 275px;
+    }
+    @media (max-width: 400px) {
+      margin-top: 175px;
     }
   }
   #top-label,

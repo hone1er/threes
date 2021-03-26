@@ -37,14 +37,14 @@ app.get("*", (req, res) => {
 
 
 // LOCAL SERVER
-// const PORT = process.env.PORT || 5000;
-// const INDEX = "build/index.html";
-// const server = express()
-//   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-//   .listen(PORT, () => console.log(`\n\n\nListening on ${PORT}.............................................................\n\n\n`));
+const PORT = process.env.PORT || 5000;
+const INDEX = "build/index.html";
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`\n\n\nListening on ${PORT}.............................................................\n\n\n`));
 
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
 
 const io = socketio(server);
 
@@ -219,11 +219,11 @@ server.on("error", (error) => {
 });
 
 // BUILD SERVER
-port = process.env.PORT
-server.listen(port, () => {
-  console.log(
-    "Threes server started on port: " + port + "............................"
-  );
-});
+// port = process.env.PORT
+// server.listen(port, () => {
+//   console.log(
+//     "Threes server started on port: " + port + "............................"
+//   );
+// });
 
 

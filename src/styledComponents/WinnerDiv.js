@@ -5,7 +5,7 @@ export const WinnerDiv = styled.div`
   img {
     width: 70%;
     position: relative;
-    bottom: ${(props) => (props.imagePosition ? props.imagePosition : 0)};
+    bottom: 60px;
     transition: bottom 0.5s;
     z-index: -1;
 

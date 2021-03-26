@@ -163,7 +163,7 @@ export const ModalDiv = styled.div`
 
   /* The Close Button */
   .close {
-    color: white;
+    color: #000;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -171,7 +171,6 @@ export const ModalDiv = styled.div`
 
   .close:hover,
   .close:focus {
-    color: #000;
     text-decoration: none;
     cursor: pointer;
   }
