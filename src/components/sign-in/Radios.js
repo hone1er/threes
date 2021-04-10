@@ -25,7 +25,7 @@ function Radios() {
         checked={publicRoom}
         onChange={handlePublic}
       />
-      <label>public</label>
+      <label>Login</label>
 
       <input
         type="radio"
@@ -33,7 +33,7 @@ function Radios() {
         checked={privateRoom}
         onChange={handlePublic}
       />
-      <label>private</label>
+      <label>register</label>
     </div>
   );
 }

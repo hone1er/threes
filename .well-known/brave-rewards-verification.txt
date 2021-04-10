@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: throwthrees.herokuapp.com
+Token: eeb221c7439d71d6d5fcaf5151ae5d7eef266b2f006dbddb37a8de558505d051

@@ -1,6 +1,56 @@
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
+// var mysql = require("mysql");
+
+// var db = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "gamedb",
+// });
+
+// db.connect(function (err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+// });
+
+// function createUser(userName, password, email) {
+//   let user = {
+//     username: userName,
+//     password: password,
+//     email: email,
+//   };
+//   let sql = `INSERT INTO players ${user}`;
+//   db.query(sql, user, (err, result) => {
+//     if (err) throw err;
+//     console.log(result);
+//   });
+// }
+
+// function recordGame(userList) {
+//   let sql;
+//   userList.forEach((user) => {
+//     if (user.won) {
+//       sql = `UPDATE winloss SET wins = wins+1 WHERE id = ${user.id}`;
+
+//       db.query(sql, (err, result) => {
+//         if (err) {
+//           throw err;
+//         }
+//         console.log(result);
+//       });
+//     } else if (!user.won) {
+//       sql = `UPDATE winloss SET wins = wins+1 WHERE id = ${user.id}`;
+//       db.query(sql, (err, result) => {
+//         if (err) {
+//           throw err;
+//         }
+//         console.log(result);
+//       });
+//     }
+//   });
+// }
 
 const app = express();
 const clientPath = `${__dirname}/build`;
@@ -34,15 +84,16 @@ app.get("*", (req, res) => {
   express.static(path.resolve(__dirname, "build"));
 });
 
-
-
 // LOCAL SERVER
 // const PORT = process.env.PORT || 5000;
 // const INDEX = "build/index.html";
 // const server = express()
 //   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-//   .listen(PORT, () => console.log(`\n\n\nListening on ${PORT}.............................................................\n\n\n`));
-
+//   .listen(PORT, () =>
+//     console.log(
+//       `\n\n\nListening on ${PORT}.............................................................\n\n\n`
+//     )
+//   );
 
 const server = http.createServer(app);
 
@@ -69,8 +120,8 @@ io.on("connection", (sock) => {
         if (currentGame.names.indexOf(sockUser) !== -1) {
           currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
           currentGame.names.splice(currentGame.names.indexOf(sockUser), 1);
-          if (rooms[room]){
-          rooms[room].chat.push(`${sockUser} disconnected`);
+          if (rooms[room]) {
+            rooms[room].chat.push(`${sockUser} disconnected`);
           }
           sock.broadcast.to(userRoom).emit("receiveMessage", rooms[room].chat);
           sock.leave(userRoom);
@@ -173,18 +224,18 @@ io.on("connection", (sock) => {
   });
 
   sock.on("sendMessage", (message) => {
-    if (rooms[userRoom]){
-    rooms[userRoom].chat.push(message);
-    sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);
-    return
-  }
-    return
+    if (rooms[userRoom]) {
+      rooms[userRoom].chat.push(message);
+      sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);
+      return;
+    }
+    return;
   });
 
   sock.on("disconnect", (user) => {
-    if (rooms[userRoom]){
-    rooms[userRoom].chat.push(`${sockUser} disconnected`);
-    sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);
+    if (rooms[userRoom]) {
+      rooms[userRoom].chat.push(`${sockUser} disconnected`);
+      sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);
     }
     let tempGame = userGame;
     count -= 1;
@@ -213,17 +264,14 @@ io.on("connection", (sock) => {
   });
 });
 
-
 server.on("error", (error) => {
   console.error("server error: ", error);
 });
 
-// BUILD SERVER
+// // BUILD SERVER
 var port = process.env.PORT
 server.listen(port, () => {
   console.log(
     "Threes server started on port: " + port + "............................"
   );
 });
-
-

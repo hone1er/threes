@@ -18,7 +18,7 @@ export default function Winner() {
   // show tie game or winner
   const winner =
     lowScores.length > 1 ? (
-      <h1 className={classname}>Winner: tie game</h1>
+      <h1 className={classname}>TIE GAME</h1>
     ) : (
       <div className={classname}>
       <h1 className="rainbow-text">
