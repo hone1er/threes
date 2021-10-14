@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@usedapp/core": "^0.5.4",
     "emoji-picker-react": "^3.4.2",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
@@ -24,7 +25,8 @@
     "react-scripts": "^3.4.4",
     "socket.io": "^2.4.1",
     "socket.io-client": "^2.3.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "web3": "^1.6.0"
   },
   "scripts": {
     "start": "react-scripts start",

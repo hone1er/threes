@@ -1,9 +1,7 @@
 import React, { useState, useContext } from "react";
 import { GameContext } from "../GameProvider";
-
 function SignInInputs() {
   const { player, setPlayer, game, setGame } = useContext(GameContext);
-
   const [room, setRoom] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,6 +16,33 @@ function SignInInputs() {
     setPassword(e.target.value);
     setGame({ ...game, password: e.target.value });
   }
+
+  const metamask = async () => {
+    if (window.ethereum) { //check if Metamask is installed
+          try {
+              const address = await window.ethereum.enable(); //connect Metamask
+              const obj = {
+                      connectedStatus: true,
+                      status: "",
+                      address: address
+                  }
+                  setPlayer(obj.address[0])
+                  return obj;
+               
+          } catch (error) {
+              return {
+                  connectedStatus: false,
+                  status: "🦊 Connect to Metamask using the button on the top right."
+              }
+          }
+          
+    } else {
+          return {
+              connectedStatus: false,
+              status: "🦊 You must install Metamask into your browser: https://metamask.io/download.html"
+          }
+        } 
+  };
 
   const passwordInput = game.public ? null : (
     <>
@@ -52,6 +77,7 @@ function SignInInputs() {
         placeholder="Enter room"
       />
       {passwordInput}
+      <button onClick={metamask}>Login with metamask</button>
     </>
   );
 }

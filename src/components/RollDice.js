@@ -54,6 +54,7 @@ export default function RollDice() {
     };
   }, [game.rolling]);
 
+
   return (
     <div className="roll-area">
       <Button
