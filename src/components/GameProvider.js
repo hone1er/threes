@@ -80,6 +80,7 @@ sock.on("joinSuccess", (reason) => {
 
 export function GameProvider(props) {
   const [player, setPlayer] = useState("");
+  const [status, setStatus] = useState("");
   const [game, setGame] = useState({
     currentPlayer: 0,
     playerTurns: 5,
@@ -176,6 +177,8 @@ export function GameProvider(props) {
         setPlayer,
         player,
         handleReset,
+        setStatus,
+        status
       }}
     >
       {props.children}

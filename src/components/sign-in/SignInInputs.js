@@ -2,10 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import { GameContext } from "../GameProvider";
 import {getCurrentWalletConnected} from "./interact";
 function SignInInputs() {
-  const { player, setPlayer, game, setGame } = useContext(GameContext);
+  const { player, setPlayer, game, setGame, status, setStatus} = useContext(GameContext);
   const [room, setRoom] = useState("");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState("")
+
+
+  var Web3 = require("web3")
+  var web3 = new Web3(window.ethereum);
+  var ens = web3.eth.ens;
 
   function handleUser(e) {
     setPlayer(e.target.value);
@@ -27,7 +31,28 @@ function SignInInputs() {
       setStatus(status)
   }
   current()
-  },[setPlayer]);
+  
+  },[ ]);
+
+  useEffect(() => {
+    if (String(player).substring(player.length -4) === ".eth"){
+    async function checkENS(){
+      try{
+      const ensAddress = await ens.getAddress(String(player));
+      setStatus("connected")
+      return ensAddress
+      }
+      catch (error) {
+        console.log(error)
+        return player
+      }
+    
+      }
+    checkENS().then(function (res) {
+      setPlayer(res)
+    });
+  }
+  }, [player])
 
   const metamask = async () => {
     if (window.ethereum) {
@@ -92,7 +117,7 @@ function SignInInputs() {
         placeholder="Enter room"
       />
       {passwordInput}
-      <button onClick={metamask}>{status === "connected" ?  "Connected" :"Login with metamask"}</button>
+      <button onClick={metamask}>{status === "connected" ?  "Connected with metamask" :"Login with metamask"}</button>
       
     </>
   );

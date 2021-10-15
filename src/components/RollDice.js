@@ -6,6 +6,8 @@ import diceAudio from "../audio/diceSound.mp3";
 var audio = new Audio(diceAudio);
 export default function RollDice() {
   const { game, setGame, handleReset, sock, player } = useContext(GameContext);
+  
+  
   function handleRoll() {
     audio.play();
     let value = [Array(5).fill(null)];
@@ -35,7 +37,8 @@ export default function RollDice() {
       rolling: !game.rolling,
     });
   }
-
+  
+  
   useEffect(() => {
     setTimeout(() => {
       let el = document.getElementsByClassName("dice");
@@ -54,7 +57,6 @@ export default function RollDice() {
     };
   }, [game.rolling]);
 
-
   return (
     <div className="roll-area">
       <Button
@@ -66,7 +68,13 @@ export default function RollDice() {
         {game.gameOver || !game.names[game.currentPlayer]
           ? "game over "
           : game.names[game.currentPlayer] !== player
-          ? `${game.names[game.currentPlayer].length > 12 ? String(game.names[game.currentPlayer]).substring(0, 7) +          "..." +          String(game.names[game.currentPlayer]).substring(38) : game.names[game.currentPlayer]}'s turn`
+          ? `${
+              game.names[game.currentPlayer].length > 12
+                ? String(game.names[game.currentPlayer]).substring(0, 7) +
+                  "..." +
+                  String(game.names[game.currentPlayer]).substring(38)
+                : game.names[game.currentPlayer]
+            }'s turn`
           : "roll the dice"}
       </Button>
       <Button reset={!game.gameOver} onClick={handleReset}>
