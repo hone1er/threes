@@ -66,7 +66,7 @@ export default function RollDice() {
         {game.gameOver || !game.names[game.currentPlayer]
           ? "game over "
           : game.names[game.currentPlayer] !== player
-          ? `${game.names[game.currentPlayer]}'s turn`
+          ? `${game.names[game.currentPlayer].length > 12 ? String(game.names[game.currentPlayer]).substring(0, 7) +          "..." +          String(game.names[game.currentPlayer]).substring(38) : game.names[game.currentPlayer]}'s turn`
           : "roll the dice"}
       </Button>
       <Button reset={!game.gameOver} onClick={handleReset}>

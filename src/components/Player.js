@@ -9,7 +9,7 @@ export default function Player(props) {
       <div className="player" player={props.player}>
         <h1>
           {" "}
-          {game.names[props.playerNumber]}: {game.scores[props.playerNumber]}
+          {game.names[props.playerNumber].length > 12 ? String(game.names[props.playerNumber]).substring(0, 7) +          "..." +          String(game.names[props.playerNumber]).substring(38) : game.names[props.playerNumber]}: {game.scores[props.playerNumber]}
         </h1>
       </div>
     </PlayerDiv>

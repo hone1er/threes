@@ -105,20 +105,15 @@ export function GameProvider(props) {
     tempGame.dieVisable[die] = false;
     tempGame.playerTurns -= 1;
 
-    setGame({
+    let gameStats = {
       ...game,
       scores: tempGame.scores,
       dieVisable: tempGame.dieVisable,
       playerTurns: tempGame.playerTurns,
       rollDisabled: false,
-    });
-    sock.emit("setGame", {
-      ...game,
-      scores: tempGame.scores,
-      dieVisable: tempGame.dieVisable,
-      playerTurns: tempGame.playerTurns,
-      rollDisabled: false,
-    });
+    }
+    setGame(gameStats);
+    sock.emit("setGame", gameStats);
   }
 
   function handleReset() {
@@ -151,22 +146,17 @@ export function GameProvider(props) {
       tempGame.dieVisable = Array(5).fill(true);
       tempGame.diceDisabled = true;
 
-      setGame({
+      let gameObj = {
         ...game,
         currentPlayer: tempGame.currentPlayer,
         diceDisabled: tempGame.diceDisabled,
         dieVisable: tempGame.dieVisable,
         gameOver: game.currentPlayer === game.names.length,
         rollDisabled: game.currentPlayer === game.names.length,
-      });
-      sock.emit("setGame", {
-        ...game,
-        currentPlayer: tempGame.currentPlayer,
-        diceDisabled: tempGame.diceDisabled,
-        dieVisable: tempGame.dieVisable,
-        gameOver: game.currentPlayer === game.names.length,
-        rollDisabled: game.currentPlayer === game.names.length,
-      });
+      }
+
+      setGame(gameObj);
+      sock.emit("setGame", gameObj);
     } else {
       return;
     }
