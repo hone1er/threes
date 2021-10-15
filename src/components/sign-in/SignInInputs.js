@@ -29,7 +29,8 @@ function SignInInputs() {
       console.log(status)
       setPlayer(address);
       setStatus(status)
-  }
+      
+    }
   current()
   
   },[ ]);
@@ -40,6 +41,7 @@ function SignInInputs() {
       try{
       const ensAddress = await ens.getAddress(String(player));
       setStatus("connected")
+
       return ensAddress
       }
       catch (error) {
@@ -52,10 +54,12 @@ function SignInInputs() {
       setPlayer(res)
     });
   }
+
   }, [player])
 
   const metamask = async () => {
     if (window.ethereum) {
+
       //check if Metamask is installed
       try {
         const address = await window.ethereum.enable(); //connect Metamask
@@ -65,6 +69,7 @@ function SignInInputs() {
           status: "",
           address: address,
         };
+
         setPlayer(obj.address[0]);
         setStatus("connected")
         return obj;
@@ -117,7 +122,7 @@ function SignInInputs() {
         placeholder="Enter room"
       />
       {passwordInput}
-      <button onClick={metamask}>{status === "connected" ?  "Connected with metamask" :"Login with metamask"}</button>
+      <button className="btn btn-secondary" onClick={metamask}>{status === "connected" ?  "Connected with metamask" :"Login with metamask"}</button>
       
     </>
   );
