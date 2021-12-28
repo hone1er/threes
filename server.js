@@ -85,7 +85,7 @@ app.get("*", (req, res) => {
 });
 
 // LOCAL SERVER
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 const INDEX = "build/index.html";
 const server = express()
   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))

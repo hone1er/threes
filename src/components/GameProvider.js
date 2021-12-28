@@ -1,10 +1,11 @@
 import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import swish from "../audio/swish.mp3";
+import { Provider as HookProvider } from "@web3-ui/hooks";
 
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
-const sock = socketIOClient("http://localhost:5000");
+const sock = socketIOClient("http://localhost:8000");
 
 sock.on("joinFailed", (reason) => {
   switch (reason) {
@@ -112,7 +113,7 @@ export function GameProvider(props) {
       dieVisable: tempGame.dieVisable,
       playerTurns: tempGame.playerTurns,
       rollDisabled: false,
-    }
+    };
     setGame(gameStats);
     sock.emit("setGame", gameStats);
   }
@@ -154,7 +155,7 @@ export function GameProvider(props) {
         dieVisable: tempGame.dieVisable,
         gameOver: game.currentPlayer === game.names.length,
         rollDisabled: game.currentPlayer === game.names.length,
-      }
+      };
 
       setGame(gameObj);
       sock.emit("setGame", gameObj);
@@ -168,20 +169,22 @@ export function GameProvider(props) {
   });
 
   return (
-    <GameContext.Provider
-      value={{
-        game,
-        setGame,
-        handleScore,
-        sock,
-        setPlayer,
-        player,
-        handleReset,
-        setStatus,
-        status
-      }}
-    >
-      {props.children}
-    </GameContext.Provider>
+    <HookProvider>
+      <GameContext.Provider
+        value={{
+          game,
+          setGame,
+          handleScore,
+          sock,
+          setPlayer,
+          player,
+          handleReset,
+          setStatus,
+          status,
+        }}
+      >
+        {props.children}
+      </GameContext.Provider>
+    </HookProvider>
   );
 }
