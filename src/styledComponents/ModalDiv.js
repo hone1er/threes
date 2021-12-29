@@ -1,23 +1,27 @@
 import styled from "styled-components";
 export const ModalDiv = styled.div`
+  #gifBtn {
+    border-radius: 8px;
+  }
+  .gifContent {
+    top: 20vh;
+    -webkit-animation-name: gifanimatetop !important;
+    -webkit-animation-duration: 0.4s;
+    animation-name: gifanimatetop !important;
+    animation-duration: 0.4s;
+    width: max-content !important;
 
-#gifBtn {
-  border-radius: 8px;
-}
-.gifContent {
-  top: 20vh;
-  -webkit-animation-name: gifanimatetop !important;
-  -webkit-animation-duration: 0.4s;
-  animation-name: gifanimatetop !important;
-  animation-duration: 0.4s;
-  width: max-content !important;
-}
+    button {
+      background-color: transparent;
+    }
+  }
   &.game-room-rules {
     width: unset;
   }
   display: flex;
   justify-self: end;
-  #rulesModal, #myModal {
+  #rulesModal,
+  #myModal {
     display: ${(props) => (props.modal === false ? "block" : "none")};
   }
   .sign-in-rules {
@@ -29,7 +33,8 @@ export const ModalDiv = styled.div`
     position: absolute;
     bottom: 0;
   }
-  #rulesModal, #myModal,
+  #rulesModal,
+  #myModal,
   #publicModal {
     display: ${(props) => (props.modal === false ? "block" : "none")};
   }
@@ -113,8 +118,7 @@ export const ModalDiv = styled.div`
     animation-name: animatetop;
     animation-duration: 0.4s;
   }
-  
-  
+
   /* Add GIPHY Animation */
   @-webkit-keyframes gifanimatetop {
     from {
@@ -190,5 +194,4 @@ export const ModalDiv = styled.div`
     background-color: #5cb85c;
     color: white;
   }
-
 `;

@@ -38,7 +38,10 @@ export const ChatDiv = styled.div`
     margin: auto;
     display: flex;
     flex-direction: column;
-
+     #input-div {
+       margin-top: 15px;
+      text-align: start;
+    }
     @media (max-width: 800px){
       position: relative;
       top: 4px;
@@ -116,6 +119,7 @@ export const ChatDiv = styled.div`
   }
   input {
     width: calc(100% - 56px);
+    border: 1px solid black;
     margin: auto;
     height: 2.3rem;
     font-size: 1rem;
@@ -123,6 +127,8 @@ export const ChatDiv = styled.div`
     padding-left: 5px;
     letter-spacing: 0.05rem;
     color: #444;
+
+    
   }
   button {
       letter-spacing: 0.05rem;

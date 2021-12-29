@@ -1,16 +1,15 @@
 import styled from "styled-components";
 
 export const PrimaryBtn = styled.div`
-
-&.gifBtn {
-  border-radius: 0;
-  position: relative;
-  width: 100px;
-  &:hover {
-    background: rgb(0, 255, 153);
-    color: rgb(46, 46, 46);
-}
-}
+  &.gifBtn {
+    border-radius: 0;
+    position: relative;
+    width: 100px;
+    &:hover {
+      background: rgb(0, 255, 153);
+      color: rgb(46, 46, 46);
+    }
+  }
   &:focus {
     outline: none !important;
     -webkit-outline: none !important;
@@ -28,7 +27,7 @@ export const PrimaryBtn = styled.div`
   border: 2px solid black;
   text-align: center;
   width: 150px;
-  heigth: 60px;
+  height: 44px;
   border-radius: 8px;
   text-decoration: none;
   background: #222;

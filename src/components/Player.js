@@ -19,7 +19,8 @@ export default function Player(props) {
   return (
     <PlayerDiv current={props.current}>
       <div className="player" player={game.names[props.playerNumber]}>
-        <Address value={display} shortened />
+        <Address value={display} shortened /> :{" "}
+        {game.scores[props.playerNumber]}
       </div>
     </PlayerDiv>
   );

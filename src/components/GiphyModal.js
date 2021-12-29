@@ -47,9 +47,12 @@ export default function GiphyModal(props) {
 
       <div id="myModal" className="modal gifModal">
         <div className="modal-content gifContent">
-          <span onClick={handleButtonClick} className="close">
-            &times;
-          </span>
+          <button className="float-right">
+            <span onClick={handleButtonClick} className="close">
+              &times;
+            </span>
+          </button>
+
           <ReactGiphySearchbox
             apiKey="Is2BWZVtVFQshcll1slyZ1MUeLkBhKlJ" // Required: get your on https://developers.giphy.com
             onSelect={(item) => sendGif(item, gifModalState)}

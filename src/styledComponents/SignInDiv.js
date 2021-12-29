@@ -5,7 +5,7 @@ export const SignInDiv = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
   width: 100%;
   height: 100vh;
@@ -14,8 +14,19 @@ export const SignInDiv = styled.div`
   background-position-y: -40px;
   background-repeat: no-repeat;
   background-position-x: center;
+  padding-bottom: 25px;
 
-  @media (max-width: 472px){
+  .addy-wrap {
+    width: 100%;
+    place-content: center;
+
+    p {
+      margin: auto;
+      background-color: #ffffff;
+    }
+  }
+
+  @media (max-width: 472px) {
     background-position-y: 5vw;
   }
 
@@ -84,6 +95,8 @@ export const SignInDiv = styled.div`
   .rules {
     pointer-events: all;
     background: #222;
+    border-radius: 8px;
+    color: #f8f8f8;
     @media (max-width: 800px) {
       width: 100%;
       background: #111;
@@ -110,9 +123,8 @@ export const SignInDiv = styled.div`
       margin-top: 4vh;
     }
   }
- 
-  .sign-in-buttons {
 
+  .sign-in-buttons {
     display: flex;
     justify-content: space-between;
     width: 100%;

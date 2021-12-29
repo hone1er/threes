@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { GameContext } from "../GameProvider";
 import { Address } from "@web3-ui/components";
 import { useWallet } from "@web3-ui/hooks";
+import { Button } from "@chakra-ui/react";
+import { PrimaryBtn } from "../../styledComponents/PrimaryBtn";
 function SignInInputs() {
   const { player, setPlayer, game, setGame } = useContext(GameContext);
   const [room, setRoom] = useState("");
@@ -12,6 +14,8 @@ function SignInInputs() {
   useEffect(() => {
     if (connected) {
       setPlayer(connection.ens || connection.userAddress);
+    } else {
+      setPlayer("");
     }
   }, [connected, connection, setPlayer]);
 
@@ -26,7 +30,18 @@ function SignInInputs() {
 
   return (
     <>
-      <Address value={player} />
+      {!connected ? (
+        <PrimaryBtn>
+          <Button onClick={connectWallet}>Connect wallet</Button>
+        </PrimaryBtn>
+      ) : (
+        <PrimaryBtn>
+          <Button onClick={disconnectWallet}>Disconnect wallet</Button>
+        </PrimaryBtn>
+      )}
+      <div className="addy-wrap">
+        <Address value={player} shortened />
+      </div>
 
       <label id="bottom-label" className="text-2xl">
         *required
@@ -52,15 +67,6 @@ function SignInInputs() {
             placeholder="Enter password"
           />
         </>
-      )}
-      {!connected ? (
-        <div className="sign-in-rules rules p-10" onClick={connectWallet}>
-          Connect wallet
-        </div>
-      ) : (
-        <div className="sign-in-rules rules p-10" onClick={disconnectWallet}>
-          Disconnect wallet
-        </div>
       )}
     </>
   );

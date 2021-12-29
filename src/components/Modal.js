@@ -41,9 +41,11 @@ export default function Modal(props) {
 
       <div id="rulesModal" className="modal">
         <div className="modal-content">
-          <span onClick={handleButtonClick} className="close">
-            &times;
-          </span>
+          <button>
+            <span onClick={handleButtonClick} className="close">
+              &times;
+            </span>
+          </button>
           <img src={rules} alt="rules" />
           <ul>
             <li>This is a turn based game</li>

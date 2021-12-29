@@ -4,6 +4,7 @@ export const WinnerDiv = styled.div`
   overflow-x: hidden;
   img {
     width: 70%;
+    margin: auto;
     position: relative;
     bottom: 60px;
     transition: bottom 0.5s;
@@ -24,6 +25,15 @@ export const WinnerDiv = styled.div`
     animation-name: bounce;
     animation-iteration-count: infinite;
     animation-duration: 1s;
+
+    p {
+      margin: auto;
+      font-size: 2rem;
+      font-weight: bold;
+      background-color: rgb(255 255 255 / 90%);
+      border-radius: 5 px;
+      padding: 0 10px;
+    }
   }
 
   .rainbow-text {
@@ -57,7 +67,6 @@ export const WinnerDiv = styled.div`
       background-position: 0% 50%;
     }
   }
-  
 
   @keyframes bounce {
     from,

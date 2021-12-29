@@ -7,7 +7,6 @@ import { MdSend } from "react-icons/md";
 import Sound from "./Sound";
 import GiphyModal from "./GiphyModal";
 
-
 export default function Chat() {
   const { sock, player } = useContext(GameContext);
 
@@ -104,9 +103,9 @@ export default function Chat() {
       <h1>chat</h1>
       <ul id="chat"></ul>
       <div id="chat-input-div">
-          {gif ? gifPreviewElement : null}
-          <div id="gif-preview"></div>
-        <div>
+        {gif ? gifPreviewElement : null}
+        <div id="gif-preview"></div>
+        <div id="input-div">
           <input
             id="chat-input"
             value={message}
@@ -134,7 +133,6 @@ export default function Chat() {
         </div>
       </div>
       <Sound chat={chat} chatSound={chatSound} />
-
     </ChatDiv>
   );
 }
