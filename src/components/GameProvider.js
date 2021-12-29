@@ -169,7 +169,7 @@ export function GameProvider(props) {
   });
 
   return (
-    <HookProvider>
+    <HookProvider network={1}>
       <GameContext.Provider
         value={{
           game,
