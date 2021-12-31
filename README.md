@@ -1,5 +1,5 @@
 # Threes
-Check out the game at [honecode.com](https://www.honecode.com)
+Check out the game at [webthrees.herokuapp.com](https://www.webthrees.herokuapp.com)
 ## Rules
   * This is a turn based game
   * Lowest score at the end of the game wins
