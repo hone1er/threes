@@ -8,7 +8,7 @@ export const SignInDiv = styled.div`
   justify-content: end;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100vh !important;
   background-image: url(${threesimg});
   background-size: contain;
   background-position-y: -40px;
