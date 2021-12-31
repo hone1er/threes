@@ -9,6 +9,7 @@ export const SignInDiv = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh !important;
+  min-height: 700px
   background-image: url(${threesimg});
   background-size: contain;
   background-position-y: -40px;
