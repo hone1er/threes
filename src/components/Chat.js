@@ -63,10 +63,7 @@ export default function Chat() {
       ? `${message} <br/><iframe title=${gif.title} class="chat-gif" src=${gif.embed_url} width="262" height="198" frameBorder="0" class="giphy-embed"></iframe><p><a href=${gif.url}>via GIPHY</a></p>`
       : message;
 
-    sock.emit(
-      "sendMessage",
-      connection.ens || connection.userAddress + ": " + messageHolder
-    );
+    sock.emit("sendMessage", displayAddress + ": " + messageHolder);
     el.innerHTML = `${displayAddress}: ${messageHolder} `;
 
     document.querySelector("#chat").appendChild(el);
