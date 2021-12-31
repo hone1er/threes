@@ -5,7 +5,7 @@ import "../index.css";
 import { NETWORKS, Provider as HookProvider } from "@web3-ui/hooks";
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
-const sock = socketIOClient("http://localhost:8000");
+const sock = socketIOClient("webthrees.herokuapp.com/");
 
 sock.on("joinFailed", (reason) => {
   switch (reason) {
