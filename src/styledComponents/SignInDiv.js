@@ -5,7 +5,7 @@ export const SignInDiv = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   height: 100vh !important;
