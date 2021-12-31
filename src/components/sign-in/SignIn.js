@@ -7,9 +7,9 @@ import { PrimaryBtn } from "../../styledComponents/PrimaryBtn";
 import Radios from "./Radios";
 import SignInInputs from "./SignInInputs";
 
-
 export default function SignIn() {
   const { sock, player, game } = useContext(GameContext);
+
   const room = game.currentRoom;
 
   function handleJoinRoom() {
@@ -41,10 +41,6 @@ export default function SignIn() {
     tempGame.names.push(player);
     tempGame.scores.push(0);
     localStorage.setItem("player", JSON.stringify(player));
-
- 
-  
- 
   }
 
   function handleJoinEnter(event) {

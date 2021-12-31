@@ -4,20 +4,27 @@ export const PlayerDiv = styled.div`
   .player {
     height: 100%;
     display: flex;
-    align-items: end;
     padding: 0 20px;
     background-color: ${(props) =>
       props.current === "current" ? "#222" : "#333"};
     margin: 1px;
+    align-items: center;
+    .wrap {
+      max-width: fit-content;
+      display: flex;
+    }
     h1 {
       font-size: 1.25rem;
       font-weight: 400;
+    }
+    p {
+      white-space: nowrap;
     }
   }
 
   @media (max-width: 800px) {
     width: unset;
-  height: 100%;
+    height: 100%;
 
     .player {
       align-items: center;

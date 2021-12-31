@@ -2,7 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import swish from "../audio/swish.mp3";
 import "../index.css";
-import { Provider as HookProvider } from "@web3-ui/hooks";
+import { NETWORKS, Provider as HookProvider } from "@web3-ui/hooks";
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
 const sock = socketIOClient("http://localhost:8000");
@@ -169,7 +169,7 @@ export function GameProvider(props) {
   });
 
   return (
-    <HookProvider network={1}>
+    <HookProvider network={NETWORKS.mainnet}>
       <GameContext.Provider
         value={{
           game,
