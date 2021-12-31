@@ -2,6 +2,7 @@ import styled from "styled-components";
 import threesimg from "./images/threesCropped.jpg";
 
 export const SignInDiv = styled.div`
+  background-image: url(${threesimg});
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,7 +11,6 @@ export const SignInDiv = styled.div`
   width: 100%;
   height: 100vh !important;
   min-height: 700px;
-  background-image: url(${threesimg});
   background-size: contain;
   background-position-y: -40px;
   background-repeat: no-repeat;
