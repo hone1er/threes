@@ -1,0 +1,5 @@
+GiphyModal example:
+
+```js
+<GiphyModal />
+```

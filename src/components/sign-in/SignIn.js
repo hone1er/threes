@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import { PrimaryBtn } from "../../styledComponents/PrimaryBtn";
 import Radios from "./Radios";
 import SignInInputs from "./SignInInputs";
-
+import { useWallet } from "@web3-ui/hooks";
 export default function SignIn() {
-  const { sock, player, game } = useContext(GameContext);
-
+  const { sock, player, game, setPlayer, setGame } = useContext(GameContext);
+  const { connection, connected, connectWallet, disconnectWallet } =
+    useWallet();
   const room = game.currentRoom;
 
   function handleJoinRoom() {
@@ -62,7 +63,16 @@ export default function SignIn() {
 
   return (
     <SignInDiv player={player} room={room}>
-      <SignInInputs />
+      <SignInInputs
+        player={player}
+        setPlayer={setPlayer}
+        game={game}
+        setGame={setGame}
+        connectWallet={connectWallet}
+        connected={connected}
+        disconnectWallet={disconnectWallet}
+        connection={connection}
+      />
       <Radios />
       <div className="sign-in-buttons">
         <PrimaryBtn

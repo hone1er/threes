@@ -15,10 +15,10 @@ function App() {
   const { sock, game, handleScore, player, setGame, handleReset } =
     useContext(GameContext);
 
-  const { connection } = useWallet();
+  const { connection, disconnectWallet } = useWallet();
   return (
     <div className="App">
-      <Logout />
+      <Logout disconnectWallet={disconnectWallet} />
       <ScoreBoard game={game} player={player} />
       <Winner game={game} />
       <Dice game={game} handleScore={handleScore} player={player} />
@@ -29,7 +29,7 @@ function App() {
         sock={sock}
         player={player}
       />
-      <Chat sock={sock} connection={connection} />
+      <Chat sock={sock} connection={connection} gifs sound />
       <Modal class="game-room-rules modal-area" />
     </div>
   );

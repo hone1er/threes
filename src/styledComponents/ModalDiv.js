@@ -18,10 +18,14 @@ export const ModalDiv = styled.div`
   &.game-room-rules {
     width: unset;
   }
+  .rules {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   display: flex;
   justify-self: end;
-  #rulesModal,
-  #myModal {
+  #rulesModal #myModal {
     display: ${(props) => (props.modal === false ? "block" : "none")};
   }
   .sign-in-rules {

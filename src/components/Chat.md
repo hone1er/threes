@@ -1,5 +1,5 @@
 Chat example:
 
 ```js
-<Chat />
+<Chat gifs sound />
 ```

@@ -19,6 +19,7 @@ export function ScoreBoard({ game, player }) {
                 ? "current"
                 : "not-current"
             }
+            game={game}
           />
         );
       })}

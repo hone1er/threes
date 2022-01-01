@@ -1,0 +1,5 @@
+Logout example:
+
+```js
+<Logout />
+```

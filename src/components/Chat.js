@@ -6,7 +6,12 @@ import { MdSend } from "react-icons/md";
 import Sound from "./Sound";
 import GiphyModal from "./GiphyModal";
 
-export default function Chat({ sock, connection }) {
+export default function Chat({
+  sock,
+  connection,
+  gifs = false,
+  sound = false,
+}) {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [gif, setGif] = useState(undefined);
@@ -61,14 +66,13 @@ export default function Chat({ sock, connection }) {
       ? `${message} <br/><iframe title=${gif.title} class="chat-gif" src=${gif.embed_url} width="262" height="198" frameBorder="0" class="giphy-embed"></iframe><p><a href=${gif.url}>via GIPHY</a></p>`
       : message;
 
-    if (sock) {
-      sock.emit("sendMessage", displayAddress + ": " + messageHolder);
-    }
+    sock && sock.emit("sendMessage", displayAddress + ": " + messageHolder);
+
     el.innerHTML = `${displayAddress}: ${messageHolder} `;
 
-    document.querySelector("#chat").appendChild(el);
+    document.querySelector("#chatRoom").appendChild(el);
     setMessage("");
-    const elem = document.getElementById("chat");
+    const elem = document.getElementById("chatRoom");
     elem.scrollTop = elem.scrollHeight;
     let tempChat = chat;
     tempChat.push(messageHolder);
@@ -103,22 +107,21 @@ export default function Chat({ sock, connection }) {
   useEffect(() => {
     const el = document.createElement("li");
     el.innerHTML = chat[chat.length - 1] || "";
-    document.getElementById("chat").appendChild(el);
-    const elem = document.getElementById("chat");
+    document.getElementById("chatRoom").appendChild(el);
+    const elem = document.getElementById("chatRoom");
     elem.scrollTop = elem.scrollHeight;
     // eslint-disable-next-line
   }, [chat]);
 
-  if (sock) {
+  sock &&
     sock.on("receiveMessage", (chat) => {
       setChat(chat);
     });
-  }
 
   return (
     <ChatDiv className="chat-area">
       <h1>chat</h1>
-      <ul id="chat"></ul>
+      <ul id="chatRoom"></ul>
       <div id="chat-input-div">
         {gif ? gifPreviewElement : null}
         <div id="gif-preview"></div>
@@ -139,17 +142,15 @@ export default function Chat({ sock, connection }) {
           </button>
         </div>
         <div className="buttonWrapper">
-          <GiphyModal
-            className="giphy-modal"
-            setGif={setGif}
-            setMessage={setMessage}
-          />
-          <button id="chat-mute" onClick={handleSound}>
-            {chatSound ? <GoUnmute /> : <GoMute />}
-          </button>
+          {gifs && <GiphyModal className="giphy-modal" setGif={setGif} />}
+          {sound && (
+            <button id="chat-mute" onClick={handleSound}>
+              {chatSound ? <GoUnmute /> : <GoMute />}
+            </button>
+          )}
         </div>
       </div>
-      <Sound chat={chat} chatSound={chatSound} />
+      {sound && <Sound chat={chat} chatSound={chatSound} />}
     </ChatDiv>
   );
 }

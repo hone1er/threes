@@ -1,0 +1,5 @@
+Modal example:
+
+```js
+<Modal />
+```

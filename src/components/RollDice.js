@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
+
 import { Button } from "../styledComponents/Button";
 import diceAudio from "../audio/diceSound.mp3";
-import { Address } from "@web3-ui/components";
 
 var audio = new Audio(diceAudio);
 export default function RollDice({ game, setGame, handleReset, sock, player }) {
@@ -61,13 +61,17 @@ export default function RollDice({ game, setGame, handleReset, sock, player }) {
         }
         onClick={handleRoll}
       >
-        {game.gameOver || !game.names[game.currentPlayer] ? (
-          "game over "
-        ) : game.names[game.currentPlayer] !== player ? (
-          <Address value={game.names[game.currentPlayer]} shortened />
-        ) : (
-          "roll the dice"
-        )}
+        {game.gameOver || !game.names[game.currentPlayer]
+          ? "game over "
+          : game.names[game.currentPlayer] !== player
+          ? `${
+              game.names[game.currentPlayer].length > 12
+                ? String(game.names[game.currentPlayer]).substring(0, 7) +
+                  "..." +
+                  String(game.names[game.currentPlayer]).substring(38)
+                : game.names[game.currentPlayer]
+            }'s turn`
+          : "roll the dice"}
       </Button>
       <Button reset={!game.gameOver} onClick={handleReset}>
         reset

@@ -1,16 +1,19 @@
-import React, { useState, useContext, useEffect } from "react";
-import { GameContext } from "../GameProvider";
+import React, { useState, useEffect } from "react";
 import { Address } from "@web3-ui/components";
-import { useWallet } from "@web3-ui/hooks";
-
 import { Button } from "@chakra-ui/react";
 import { PrimaryBtn } from "../../styledComponents/PrimaryBtn";
-function SignInInputs() {
-  const { player, setPlayer, game, setGame } = useContext(GameContext);
+function SignInInputs({
+  player,
+  setPlayer,
+  game,
+  setGame,
+  connection,
+  connected,
+  connectWallet,
+  disconnectWallet,
+}) {
   const [room, setRoom] = useState("");
   const [password, setPassword] = useState("");
-  const { connection, connected, connectWallet, disconnectWallet } =
-    useWallet();
 
   useEffect(() => {
     if (connected) {
@@ -55,7 +58,7 @@ function SignInInputs() {
         onChange={handleRoom}
         placeholder="Enter room"
       />
-      {!game.public && (
+      {game && !game.public && (
         <>
           <label id="password-label">*required</label>
           <input

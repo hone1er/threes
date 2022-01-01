@@ -67,6 +67,8 @@
 }
 .dice-area {
   grid-area: dice;
+  position: relative;
+  bottom: 100px;
 }
 @media (max-width: 800px) {
   .dice-area {

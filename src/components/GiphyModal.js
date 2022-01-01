@@ -3,12 +3,12 @@ import { ModalDiv } from "../styledComponents/ModalDiv";
 import { PrimaryBtn } from "../styledComponents/PrimaryBtn";
 import ReactGiphySearchbox from "react-giphy-searchbox";
 
-export default function GiphyModal(props) {
+export default function GiphyModal({ className, setGif }) {
   const [gifModalState, setGifModalState] = useState(true);
 
   function sendGif(obj) {
     setGifModalState(!gifModalState);
-    props.setGif(obj);
+    setGif(obj);
   }
 
   // Get the modal
@@ -34,7 +34,7 @@ export default function GiphyModal(props) {
     }
   }
   return (
-    <ModalDiv className={props.class} modal={gifModalState}>
+    <ModalDiv className={className} modal={gifModalState}>
       <PrimaryBtn
         className="gifBtn"
         onClick={handleButtonClick}

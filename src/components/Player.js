@@ -1,18 +1,15 @@
-import React, { useContext } from "react";
-import { GameContext } from "./GameProvider";
+import React from "react";
 import { PlayerDiv } from "../styledComponents/PlayerDiv";
 import { Address } from "@web3-ui/components";
 
-export default function Player(props) {
-  const { game } = useContext(GameContext);
-
-  let display = game.names[props.playerNumber];
+export default function Player({ game, playerNumber, current }) {
+  let display = game.names[playerNumber];
   return (
-    <PlayerDiv current={props.current}>
-      <div className="player" player={game.names[props.playerNumber]}>
+    <PlayerDiv current={current}>
+      <div className="player" player={game.names[playerNumber]}>
         <div className="wrap">
           <Address value={display} shortened />
-          <p>: {game.scores[props.playerNumber]}</p>
+          <p>: {game.scores[playerNumber]}</p>
         </div>
       </div>
     </PlayerDiv>

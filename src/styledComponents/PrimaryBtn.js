@@ -2,9 +2,12 @@ import styled from "styled-components";
 
 export const PrimaryBtn = styled.div`
   &.gifBtn {
+    display: flex;
+    justify-content: center;
     border-radius: 0;
     position: relative;
     width: 100px;
+    align-items: center;
     &:hover {
       background: rgb(0, 255, 153);
       color: rgb(46, 46, 46);

@@ -5,8 +5,8 @@ Dice example:
   game={{
     currentPlayer: 0,
     playerTurns: 5,
-    diceValues: Array(5).fill(1),
-    dieVisable: Array(5).fill(true),
+    diceValues: [5, 1, 4, 2, 3],
+    dieVisable: [true, true, true, true, true],
     names: [],
     scores: [],
     currentRoom: "hone",
