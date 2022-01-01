@@ -66,7 +66,7 @@ export default function RollDice({ game, setGame, handleReset, sock, player }) {
           : game.names[game.currentPlayer] !== player
           ? `${
               game.names[game.currentPlayer].length > 12
-                ? String(game.names[game.currentPlayer]).substring(0, 7) +
+                ? String(game.names[game.currentPlayer]).substring(0, 4) +
                   "..." +
                   String(game.names[game.currentPlayer]).substring(38)
                 : game.names[game.currentPlayer]
