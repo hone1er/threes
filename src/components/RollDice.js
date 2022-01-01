@@ -2,12 +2,12 @@ import React, { useContext, useEffect } from "react";
 import { GameContext } from "./GameProvider";
 import { Button } from "../styledComponents/Button";
 import diceAudio from "../audio/diceSound.mp3";
+import { Address } from "@web3-ui/components";
 
 var audio = new Audio(diceAudio);
 export default function RollDice() {
   const { game, setGame, handleReset, sock, player } = useContext(GameContext);
-  
-  
+
   function handleRoll() {
     audio.play();
     let value = [Array(5).fill(null)];
@@ -37,8 +37,7 @@ export default function RollDice() {
       rolling: !game.rolling,
     });
   }
-  
-  
+
   useEffect(() => {
     setTimeout(() => {
       let el = document.getElementsByClassName("dice");
@@ -68,13 +67,9 @@ export default function RollDice() {
         {game.gameOver || !game.names[game.currentPlayer]
           ? "game over "
           : game.names[game.currentPlayer] !== player
-          ? `${
-              game.names[game.currentPlayer].length > 12
-                ? String(game.names[game.currentPlayer]).substring(0, 7) +
-                  "..." +
-                  String(game.names[game.currentPlayer]).substring(38)
-                : game.names[game.currentPlayer]
-            }'s turn`
+          ? `${(
+              <Address value={game.names[game.currentPlayer]} shortened />
+            )}'s turn`
           : "roll the dice"}
       </Button>
       <Button reset={!game.gameOver} onClick={handleReset}>
