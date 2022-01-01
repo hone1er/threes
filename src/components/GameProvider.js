@@ -3,6 +3,14 @@ import socketIOClient from "socket.io-client";
 import swish from "../audio/swish.mp3";
 import "../index.css";
 import { NETWORKS, Provider as HookProvider } from "@web3-ui/hooks";
+import {
+  publicStatusError,
+  privateStatusError,
+  roomNameTaken,
+  userNameTaken,
+  wrongPassword,
+  roomDoesNotExist,
+} from "../helperMessages";
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
 const sock = socketIOClient("webthrees.herokuapp.com/");
@@ -32,39 +40,6 @@ sock.on("joinFailed", (reason) => {
   }
 });
 
-function publicStatusError() {
-  alert(
-    `The room you are trying to join is set to public. Please select the public option and try again`
-  );
-}
-
-function privateStatusError() {
-  alert(
-    `The room you are trying to join is set to private. Please select the private option, enter the correct password, and try again`
-  );
-}
-
-function roomNameTaken() {
-  alert(
-    `That room name has already been created. Join the room or start a new one with a different name`
-  );
-}
-function userNameTaken() {
-  alert(
-    `A player in the room you are joining has already used that username. Please select another usename and try again`
-  );
-}
-function wrongPassword() {
-  alert(
-    `The room you are trying to join is set to private. Please select the private option, enter the correct password, and try again`
-  );
-}
-function roomDoesNotExist() {
-  alert(
-    `There is no room by that name. Check the name and try again, or create a new room`
-  );
-}
-
 sock.on("joinSuccess", (reason) => {
   switch (reason) {
     case "join":
@@ -77,6 +52,10 @@ sock.on("joinSuccess", (reason) => {
       break;
   }
   return;
+});
+
+sock.on("ping", function (data) {
+  sock.emit("pong", { beat: 1 });
 });
 
 export function GameProvider(props) {

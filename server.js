@@ -34,7 +34,7 @@ app.get("*", (req, res) => {
   express.static(path.resolve(__dirname, "build"));
 });
 
-// LOCAL SERVER
+// LOCAL SERVER... un-comment out to use locally and comment out BUILD SERVER on line 221
 // const PORT = process.env.PORT || 8000;
 // const INDEX = "build/index.html";
 // const server = express()
@@ -49,6 +49,11 @@ const server = http.createServer(app);
 
 const io = socketio(server);
 
+function sendHeartbeat() {
+  setTimeout(sendHeartbeat, 8000);
+  io.sockets.emit("ping", { beat: 1 });
+}
+
 io.on("connection", (sock) => {
   // name of the socket user
   let sockUser;
@@ -60,6 +65,11 @@ io.on("connection", (sock) => {
       count +
       "...........................................\n"
   );
+
+  sock.on("pong", function (data) {
+    console.log("Pong received from client");
+  });
+
   sock.on("newRoom", ({ room, player, publicStatus, password }) => {
     if (rooms[room]) {
       sock.emit("joinFailed", "roomTaken");
@@ -213,6 +223,8 @@ io.on("connection", (sock) => {
     io.to(userRoom).emit("setGame", tempGame);
   });
 });
+
+setTimeout(sendHeartbeat, 8000);
 
 server.on("error", (error) => {
   console.error("server error: ", error);
