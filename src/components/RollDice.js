@@ -61,13 +61,16 @@ export default function RollDice({ game, setGame, handleReset, sock, player }) {
         }
         onClick={handleRoll}
       >
-        {game.gameOver || !game.names[game.currentPlayer]
-          ? "game over "
-          : game.names[game.currentPlayer] !== player
-          ? `${(
-              <Address value={game.names[game.currentPlayer]} shortened />
-            )}'s turn`
-          : "roll the dice"}
+        {game.gameOver || !game.names[game.currentPlayer] ? (
+          "game over "
+        ) : game.names[game.currentPlayer] !== player ? (
+          <>
+            <Address value={game.names[game.currentPlayer]} shortened />
+            <p>'s turn</p>
+          </>
+        ) : (
+          "roll the dice"
+        )}
       </Button>
       <Button reset={!game.gameOver} onClick={handleReset}>
         reset
