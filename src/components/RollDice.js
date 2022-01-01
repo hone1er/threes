@@ -64,10 +64,7 @@ export default function RollDice({ game, setGame, handleReset, sock, player }) {
         {game.gameOver || !game.names[game.currentPlayer] ? (
           "game over "
         ) : game.names[game.currentPlayer] !== player ? (
-          <>
-            <Address value={game.names[game.currentPlayer]} shortened />
-            <p>'s turn</p>
-          </>
+          <Address value={game.names[game.currentPlayer]} shortened />
         ) : (
           "roll the dice"
         )}
