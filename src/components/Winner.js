@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
-import { GameContext } from "./GameProvider";
+import React from "react";
 import threes from "../styledComponents/images/threesMain.jpg";
 import { WinnerDiv } from "../styledComponents/WinnerDiv";
 import { Address } from "@web3-ui/components";
 
-export default function Winner() {
-  const { game } = useContext(GameContext);
-
+export default function Winner({ game }) {
   // keep track of low score
   const lowScores = game.scores.filter((item) => {
     return item === Math.min(...game.scores);

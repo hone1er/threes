@@ -1,16 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
-import { GameContext } from "./GameProvider";
+import React, { useState, useEffect } from "react";
 import { ChatDiv } from "../styledComponents/ChatDiv";
 import { GoMute } from "react-icons/go";
 import { GoUnmute } from "react-icons/go";
 import { MdSend } from "react-icons/md";
 import Sound from "./Sound";
 import GiphyModal from "./GiphyModal";
-import { useWallet } from "@web3-ui/hooks";
 
-export default function Chat() {
-  const { sock } = useContext(GameContext);
-  const { connection } = useWallet();
+export default function Chat({ sock, connection }) {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [gif, setGif] = useState(undefined);
@@ -44,7 +40,9 @@ export default function Chat() {
   }
 
   function sendMessage() {
-    const playerName = connection.ens || connection.userAddress;
+    const playerName = connection
+      ? connection.ens || connection.userAddress
+      : "";
     // eslint-disable-next-line
     let displayAddress;
     if (
@@ -63,7 +61,9 @@ export default function Chat() {
       ? `${message} <br/><iframe title=${gif.title} class="chat-gif" src=${gif.embed_url} width="262" height="198" frameBorder="0" class="giphy-embed"></iframe><p><a href=${gif.url}>via GIPHY</a></p>`
       : message;
 
-    sock.emit("sendMessage", displayAddress + ": " + messageHolder);
+    if (sock) {
+      sock.emit("sendMessage", displayAddress + ": " + messageHolder);
+    }
     el.innerHTML = `${displayAddress}: ${messageHolder} `;
 
     document.querySelector("#chat").appendChild(el);
@@ -109,9 +109,11 @@ export default function Chat() {
     // eslint-disable-next-line
   }, [chat]);
 
-  sock.on("receiveMessage", (chat) => {
-    setChat(chat);
-  });
+  if (sock) {
+    sock.on("receiveMessage", (chat) => {
+      setChat(chat);
+    });
+  }
 
   return (
     <ChatDiv className="chat-area">

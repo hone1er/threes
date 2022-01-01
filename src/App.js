@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.css";
 import { ScoreBoard } from "./components/ScoreBoard";
 import Winner from "./components/Winner";
@@ -9,16 +9,27 @@ import Chat from "./components/Chat";
 import Logout from "./components/Logout";
 import Modal from "./components/Modal";
 import "./index.css";
-
+import { useWallet } from "@web3-ui/hooks";
+import { GameContext } from "./components/GameProvider";
 function App() {
+  const { sock, game, handleScore, player, setGame, handleReset } =
+    useContext(GameContext);
+
+  const { connection } = useWallet();
   return (
     <div className="App">
       <Logout />
-      <ScoreBoard />
-      <Winner />
-      <Dice />
-      <RollDice />
-      <Chat />
+      <ScoreBoard game={game} player={player} />
+      <Winner game={game} />
+      <Dice game={game} handleScore={handleScore} player={player} />
+      <RollDice
+        game={game}
+        setGame={setGame}
+        handleReset={handleReset}
+        sock={sock}
+        player={player}
+      />
+      <Chat sock={sock} connection={connection} />
       <Modal class="game-room-rules modal-area" />
     </div>
   );

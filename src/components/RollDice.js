@@ -1,13 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import { GameContext } from "./GameProvider";
+import React, { useEffect } from "react";
 import { Button } from "../styledComponents/Button";
 import diceAudio from "../audio/diceSound.mp3";
 import { Address } from "@web3-ui/components";
 
 var audio = new Audio(diceAudio);
-export default function RollDice() {
-  const { game, setGame, handleReset, sock, player } = useContext(GameContext);
-
+export default function RollDice({ game, setGame, handleReset, sock, player }) {
   function handleRoll() {
     audio.play();
     let value = [Array(5).fill(null)];

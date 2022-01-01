@@ -1,0 +1,5 @@
+Chat example:
+
+```js
+<Chat />
+```

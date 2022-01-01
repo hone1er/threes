@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { GameContext } from "./GameProvider";
+import React from "react";
 import { DiceDiv } from "../styledComponents/DiceDiv";
 import die1 from "../diceSVG/U+2680.svg";
 import die2 from "../diceSVG/U+2681.svg";
@@ -9,8 +8,7 @@ import die5 from "../diceSVG/U+2684.svg";
 import die6 from "../diceSVG/U+2685.svg";
 import Die from "./Die";
 
-export default function Dice({ numberOfDice }) {
-  const { game, handleScore, player } = useContext(GameContext);
+export default function Dice({ game, handleScore, player }) {
   const diceImages = [die1, die2, die3, die4, die5, die6];
 
   return (

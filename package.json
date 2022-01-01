@@ -59,7 +59,8 @@
   "devDependencies": {
     "@babel/cli": "^7.13.0",
     "@babel/core": "^7.13.8",
-    "@babel/preset-env": "^7.13.8"
+    "@babel/preset-env": "^7.13.8",
+    "react-styleguidist": "^11.1.7"
   },
   "author": "hone1er",
   "license": "ISC"

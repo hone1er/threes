@@ -1,11 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ScoreBoardDiv } from "../styledComponents/ScoreBoardDiv";
-import { GameContext } from "./GameProvider";
 import Player from "./Player";
 
-export function ScoreBoard() {
-  const { game, player } = useContext(GameContext);
-
+export function ScoreBoard({ game, player }) {
   return (
     <ScoreBoardDiv className="scoreboard-area">
       <div className="score-header-container">
