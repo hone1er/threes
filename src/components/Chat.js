@@ -70,6 +70,7 @@ export default function Chat({
     const messageEl = document.createElement("p");
 
     userEl.innerHTML = displayAddress;
+    userEl.className = "user";
     messageEl.innerHTML = messageHolder;
     messageEl.className = "message";
     el.appendChild(userEl);
@@ -117,8 +118,9 @@ export default function Chat({
       const messageEl = document.createElement("p");
 
       userEl.innerHTML = chat[chat.length - 1][0];
-      messageEl.innerHTML = messageHolder;
-      messageEl.className = chat[chat.length - 1][1];
+      userEl.className = "user";
+      messageEl.innerHTML = chat[chat.length - 1][1];
+      messageEl.className = "message";
       el.appendChild(userEl);
       el.appendChild(messageEl);
 
