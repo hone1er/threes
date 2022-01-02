@@ -69,7 +69,7 @@ export default function Chat({
     const userEl = document.createElement("p");
     const messageEl = document.createElement("p");
 
-    userEl.innerHTML = displayAddress + ": ";
+    userEl.innerHTML = displayAddress;
     userEl.className = "user";
     messageEl.innerHTML = messageHolder;
     messageEl.className = "message";
@@ -117,10 +117,12 @@ export default function Chat({
       const userEl = document.createElement("p");
       const messageEl = document.createElement("p");
 
-      userEl.innerHTML = chat[chat.length - 1][0] + ": ";
-      userEl.className = "user";
+      userEl.innerHTML = chat[chat.length - 1][0];
+      userEl.classList.add = "user";
+      userEl.classList.add = "otherPlayer";
       messageEl.innerHTML = chat[chat.length - 1][1];
-      messageEl.className = "message";
+      messageEl.classList.add = "message";
+      messageEl.classList.add = "otherMessage";
       el.appendChild(userEl);
       el.appendChild(messageEl);
 

@@ -109,13 +109,13 @@ export const ChatDiv = styled.div`
   li {
 
     font-size: 1.15rem;
-    border: 1px solid #e4e4e480;
     line-height: 1.5rem;
+    margin: 8px 0;
     padding: 2px 0 2px 10px;
     letter-spacing: 0.05rem;
     color: #444;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: auto;
     min-height: fit-content;
 
@@ -133,7 +133,20 @@ export const ChatDiv = styled.div`
     color: #ffffff;
     width: 100%; 
   }
+
+  .otherMessage {
+    background-color: rgb(37,40,42);
+    color: #ffffff;
+  }
   
+  .user {
+    align-self: flex-start;
+    font-size: .8rem;
+  }
+
+  .otherPlayer {
+    align-self: flex-end;
+  }
   input {
     width: calc(100% - 56px);
     border: 1px solid black;
