@@ -112,7 +112,8 @@ export default function Chat({
 
   useEffect(() => {
     const el = document.createElement("li");
-    el.innerHTML = chat[chat.length - 1] || "";
+    el.innerHTML =
+      chat[chat.length - 1][0] + ": " + chat[chat.length - 1][1] || "";
     document.getElementById("chatRoom").appendChild(el);
     const elem = document.getElementById("chatRoom");
     elem.scrollTop = elem.scrollHeight;
