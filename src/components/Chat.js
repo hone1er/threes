@@ -111,12 +111,22 @@ export default function Chat({
   }
 
   useEffect(() => {
-    const el = document.createElement("li");
-    el.innerHTML =
-      chat[chat.length - 1][0] + ": " + chat[chat.length - 1][1] || "";
-    document.getElementById("chatRoom").appendChild(el);
-    const elem = document.getElementById("chatRoom");
-    elem.scrollTop = elem.scrollHeight;
+    if (chat.length) {
+      const el = document.createElement("li");
+      const userEl = document.createElement("p");
+      const messageEl = document.createElement("p");
+
+      userEl.innerHTML = chat[chat.length - 1][0];
+      messageEl.innerHTML = messageHolder;
+      messageEl.className = chat[chat.length - 1][1];
+      el.appendChild(userEl);
+      el.appendChild(messageEl);
+
+      document.getElementById("chatRoom").appendChild(el);
+      const elem = document.getElementById("chatRoom");
+      elem.scrollTop = elem.scrollHeight;
+    }
+
     // eslint-disable-next-line
   }, [chat]);
 
