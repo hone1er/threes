@@ -37,6 +37,7 @@
 }
 .chat-area {
   grid-area: chat;
+  margin-right: 15px !important;
 }
 @media (max-width: 650px) {
   .chat-area {

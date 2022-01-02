@@ -45,7 +45,7 @@ export default function Chat({
   }
 
   function sendMessage() {
-    const playerName = connection
+    const playerName = connection.userAddress
       ? connection.ens || connection.userAddress
       : "";
     // eslint-disable-next-line
@@ -61,14 +61,20 @@ export default function Chat({
         playerName.length - 4
       )}`.toLowerCase();
     }
-    const el = document.createElement("li");
     const messageHolder = gif
       ? `${message} <br/><iframe title=${gif.title} class="chat-gif" src=${gif.embed_url} width="262" height="198" frameBorder="0" class="giphy-embed"></iframe><p><a href=${gif.url}>via GIPHY</a></p>`
       : message;
 
-    sock && sock.emit("sendMessage", displayAddress + ": " + messageHolder);
+    const el = document.createElement("li");
+    const userEl = document.createElement("p");
+    const messageEl = document.createElement("p");
 
-    el.innerHTML = `${displayAddress}: ${messageHolder} `;
+    userEl.innerHTML = displayAddress;
+    messageEl.innerHTML = messageHolder;
+    messageEl.className = "message";
+    el.appendChild(userEl);
+    el.appendChild(messageEl);
+    sock && sock.emit("sendMessage", [userEl.innerHTML, messageEl.innerHTML]);
 
     document.querySelector("#chatRoom").appendChild(el);
     setMessage("");

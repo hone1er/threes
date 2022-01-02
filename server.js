@@ -34,7 +34,7 @@ app.get("*", (req, res) => {
   express.static(path.resolve(__dirname, "build"));
 });
 
-// LOCAL SERVER... un-comment out to use locally and comment out BUILD SERVER on line 221
+// LOCAL SERVER... un-comment out to use locally and comment out BUILD SERVER on line 221 and server on line 48
 // const PORT = process.env.PORT || 8000;
 // const INDEX = "build/index.html";
 // const server = express()
@@ -184,6 +184,7 @@ io.on("connection", (sock) => {
   });
 
   sock.on("sendMessage", (message) => {
+    console.log(message);
     if (rooms[userRoom]) {
       rooms[userRoom].chat.push(message);
       sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);

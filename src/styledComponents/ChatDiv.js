@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ChatDiv = styled.div`
+
 #gif-preview {
   position: relative;
   top: 15px;
@@ -99,12 +100,14 @@ export const ChatDiv = styled.div`
     background: #f8f8f8;
     height: 560px;
     overflow-y: scroll;
-    border: 1px solid black;
+    box-shadow: 0px 0px 15px 5px rgb(0 0 0 / 8%);
+    border-radius: 8px;
     list-style: none;
     text-align: left;
   }
 
   li {
+
     font-size: 1.15rem;
     border: 1px solid #e4e4e480;
     line-height: 1.5rem;
@@ -112,11 +115,25 @@ export const ChatDiv = styled.div`
     letter-spacing: 0.05rem;
     color: #444;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: auto;
     min-height: fit-content;
+
+    p {
+      display: flex;
+      align-items: center;
+    }
     
   }
+  .message {
+    padding: 10px 10px;
+    border-radius: 24px;
+    height: 100%; 
+    background-color: rgb(0, 120, 254);
+    color: #ffffff;
+    width: 100%; 
+  }
+  
   input {
     width: calc(100% - 56px);
     border: 1px solid black;
