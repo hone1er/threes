@@ -140,12 +140,12 @@ export const ChatDiv = styled.div`
   }
   
   .user {
-    align-self: flex-start;
+    align-self: flex-end;
     font-size: .8rem;
   }
-
+  
   .otherPlayer {
-    align-self: flex-end;
+    align-self: flex-start;
   }
   input {
     width: calc(100% - 56px);
