@@ -81,7 +81,7 @@ io.on("connection", (sock) => {
           currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
           currentGame.names.splice(currentGame.names.indexOf(sockUser), 1);
           if (rooms[room]) {
-            rooms[room].chat.push(`${sockUser} disconnected`);
+            rooms[room].chat.push([sockUser, "disconnected"]);
           }
           sock.broadcast.to(userRoom).emit("receiveMessage", rooms[room].chat);
           sock.leave(userRoom);
@@ -129,7 +129,7 @@ io.on("connection", (sock) => {
         if (currentGame.names.indexOf(sockUser) !== -1) {
           currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
           currentGame.names.splice(currentGame.names.indexOf(sockUser), 1);
-          rooms[room].chat.push(`${sockUser} disconnected`);
+          rooms[room].chat.push([sockUser, "disconnected"]);
           sock.broadcast.to(userRoom).emit("receiveMessage", rooms[room].chat);
           sock.leave(userRoom);
           console.log(`\n${player} disconnected from room: ${userRoom}\n`);
@@ -195,7 +195,7 @@ io.on("connection", (sock) => {
 
   sock.on("disconnect", (user) => {
     if (rooms[userRoom]) {
-      rooms[userRoom].chat.push(`${sockUser} disconnected`);
+      rooms[userRoom].chat.push([sockUser, "disconnected"]);
       sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);
     }
     let tempGame = userGame;
