@@ -45,7 +45,7 @@ export default function Chat({
   }
 
   function sendMessage() {
-    const playerName = connection.userAddress
+    const playerName = connection?.userAddress
       ? connection.ens || connection.userAddress
       : "";
     // eslint-disable-next-line

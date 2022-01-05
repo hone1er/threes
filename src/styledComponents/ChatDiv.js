@@ -49,7 +49,7 @@ export const ChatDiv = styled.div`
     }
   }
   #chat-btn {
-    background: white;
+    background: transparent;
     width: fit-content;
     height: auto;
     postion: relative;
@@ -100,7 +100,7 @@ export const ChatDiv = styled.div`
     background: #f8f8f8;
     height: 560px;
     overflow-y: scroll;
-    box-shadow: 0px 0px 15px 5px rgb(0 0 0 / 8%);
+    box-shadow: 0px 0px 7px 5px rgb(0 0 0 / 8%);
     border-radius: 8px;
     list-style: none;
     text-align: left;
@@ -134,7 +134,6 @@ export const ChatDiv = styled.div`
     height: 100%; 
     background-color: rgb(0, 120, 254);
     color: #ffffff;
-    width: 100%; 
   }
 
   .otherMessage {
@@ -147,7 +146,6 @@ export const ChatDiv = styled.div`
     height: 100%; 
     background-color: rgb(37,40,42);
     color: #ffffff;
-    width: 100%; 
   }
   
   .user {
@@ -163,7 +161,9 @@ export const ChatDiv = styled.div`
   }
   input {
     width: calc(100% - 56px);
-    border: 1px solid black;
+    box-shadow: 0px 0px 7px 5px rgb(0 0 0 / 8%);
+    border: none;
+    border-radius: 8px;
     margin: auto;
     height: 2.3rem;
     font-size: 1rem;
@@ -176,6 +176,7 @@ export const ChatDiv = styled.div`
   }
   button {
       letter-spacing: 0.05rem;
+
     position: relative;
     bottom: 1.5px;
     width: 60px;
@@ -213,7 +214,6 @@ export const ChatDiv = styled.div`
 
     input {
     width: calc(100% - 68px);
-    border-radius: 0 !important;
     }
   }
   @media (max-width: 650px) {
