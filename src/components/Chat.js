@@ -73,7 +73,14 @@ export default function Chat({
     userEl.className = "user";
     messageEl.innerHTML = messageHolder;
     messageEl.className = "message";
-    el.appendChild(userEl);
+    if (chat.length >= 1) {
+      if (displayAddress !== chat[chat.length - 1][0]){
+        el.appendChild(userEl);
+      };
+    }
+    else {
+      el.appendChild(userEl)
+    }
     el.appendChild(messageEl);
     sock && sock.emit("sendMessage", [userEl.innerHTML, messageEl.innerHTML]);
 
@@ -82,7 +89,7 @@ export default function Chat({
     const elem = document.getElementById("chatRoom");
     elem.scrollTop = elem.scrollHeight;
     let tempChat = chat;
-    tempChat.push(messageHolder);
+    tempChat.push([userEl.innerHTML, messageHolder]);
     setChat(tempChat);
     closePreview();
   }
@@ -116,15 +123,21 @@ export default function Chat({
       const el = document.createElement("li");
       const userEl = document.createElement("p");
       const messageEl = document.createElement("p");
-
       userEl.innerHTML = chat[chat.length - 1][0];
-      userEl.classList.add = "user";
-      userEl.classList.add = "otherPlayer";
+      if (chat.length > 1) {
+        if (chat[chat.length -2][0] !== chat[chat.length - 1][0]){
+          el.appendChild(userEl);
+        };
+      }
+      else {
+        el.appendChild(userEl)
+      }
       messageEl.innerHTML = chat[chat.length - 1][1];
-      messageEl.classList.add = "message";
-      messageEl.classList.add = "otherMessage";
-      el.appendChild(userEl);
       el.appendChild(messageEl);
+      userEl.className = "otherPlayer";
+
+      messageEl.className = "otherMessage";
+
 
       document.getElementById("chatRoom").appendChild(el);
       const elem = document.getElementById("chatRoom");
