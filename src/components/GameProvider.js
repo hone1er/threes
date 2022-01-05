@@ -13,7 +13,7 @@ import {
 } from "../helperMessages";
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
-const sock = socketIOClient("localhost:8000");
+const sock = socketIOClient("webthrees.herokuapp.com/");
 
 sock.on("joinFailed", (reason) => {
   switch (reason) {
@@ -148,7 +148,7 @@ export function GameProvider(props) {
   });
 
   return (
-    <HookProvider network={NETWORKS.mainnet} infuraId="a3090ec014104abfb043ed19d87caa92">
+    <HookProvider network={NETWORKS.mainnet}>
       <GameContext.Provider
         value={{
           game,
