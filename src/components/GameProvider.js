@@ -13,7 +13,7 @@ import {
 } from "../helperMessages";
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
-const sock = socketIOClient("webthrees.herokuapp.com/");
+const sock = socketIOClient("localhost:8000");
 
 sock.on("joinFailed", (reason) => {
   switch (reason) {
@@ -68,6 +68,7 @@ export function GameProvider(props) {
     dieVisable: Array(5).fill(true),
     names: [],
     scores: [],
+    chat: [],
     currentRoom: "",
     password: "",
     rollDisabled: false,
