@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ChatDiv } from "../styledComponents/ChatDiv";
 import { GoMute } from "react-icons/go";
 import { GoUnmute } from "react-icons/go";
@@ -11,7 +11,6 @@ export default function Chat({
   connection,
   gifs = false,
   sound = false,
-  game,
   index,
 }) {
   const [message, setMessage] = useState("");
@@ -27,8 +26,10 @@ export default function Chat({
         node.scrollTop = node.getBoundingClientRect().height + 100000000;
       }
     },
+    // eslint-disable-next-line
     [chat, message]
   );
+
   function handleSound() {
     setChatSound(!chatSound);
   }
@@ -116,13 +117,9 @@ export default function Chat({
         )}`.toLowerCase()
       );
     }
+
     // eslint-disable-next-line
   }, [chat, connection.ens]);
-
-  useEffect(() => {
-    setChat(game.chat);
-    return () => {};
-  }, [game.chat]);
 
   sock &&
     sock.on("receiveMessage", (chat) => {
@@ -135,53 +132,58 @@ export default function Chat({
       <h1>chat</h1>
       <ul ref={chatBottom} id="chatRoom">
         {chat &&
-          chat.slice(index).map((message, idx) => {
-            if (message)
-              return (
-                <li key={idx}>
-                  {idx === 0 ? (
-                    <p
-                      className={
-                        message[0] === displayAddress ? "user" : "otherPlayer"
-                      }
-                    >
-                      {message[0]}
-                    </p>
-                  ) : chat[idx][0] === chat[idx - 1][0] ? null : (
-                    <p
-                      className={
-                        message[0] === displayAddress ? "user" : "otherPlayer"
-                      }
-                    >
-                      {message[0]}
-                    </p>
-                  )}
-
-                  <p
-                    className={
-                      message[0] === displayAddress ? "message" : "otherMessage"
-                    }
-                  >
-                    {message[1].message}
-
-                    {message[1]?.title && (
-                      <>
-                        <br />
-                        <iframe
-                          title={message[1].title}
-                          src={message[1].embed_url}
-                          width="262"
-                          height="198"
-                          frameBorder="0"
-                          className="giphy-embed"
-                        ></iframe>
-                        <a href={message[1].url}>via GIPHY</a>
-                      </>
+          chat
+            .map((message, idx) => {
+              if (message)
+                return (
+                  <li key={idx}>
+                    {idx === 0 ? (
+                      <p
+                        className={
+                          message[0] === displayAddress ? "user" : "otherPlayer"
+                        }
+                      >
+                        {message[0]}
+                      </p>
+                    ) : chat[idx][0] === chat[idx - 1][0] ? null : (
+                      <p
+                        className={
+                          message[0] === displayAddress ? "user" : "otherPlayer"
+                        }
+                      >
+                        {message[0]}
+                      </p>
                     )}
-                  </p>
-                </li>
-              );
-          })}
+
+                    <p
+                      className={
+                        message[0] === displayAddress
+                          ? "message"
+                          : "otherMessage"
+                      }
+                    >
+                      {message[1].message}
+
+                      {message[1]?.title && (
+                        <>
+                          <br />
+                          <iframe
+                            title={message[1].title}
+                            src={message[1].embed_url}
+                            width="262"
+                            height="198"
+                            frameBorder="0"
+                            className="giphy-embed"
+                          ></iframe>
+                          <a href={message[1].url}>via GIPHY</a>
+                        </>
+                      )}
+                    </p>
+                  </li>
+                );
+              return null;
+            })
+            .slice(index >= chat.length ? 0 : index)}
       </ul>
       <div id="chat-input-div">
         {gif ? gifPreviewElement : null}

@@ -71,6 +71,7 @@ export function GameProvider(props) {
     dieVisable: Array(5).fill(true),
     names: [],
     scores: [],
+    chat: [],
     currentRoom: "",
     password: "",
     rollDisabled: false,
