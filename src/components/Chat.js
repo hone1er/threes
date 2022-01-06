@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ChatDiv } from "../styledComponents/ChatDiv";
 import { GoMute } from "react-icons/go";
 import { GoUnmute } from "react-icons/go";
@@ -11,12 +11,24 @@ export default function Chat({
   connection,
   gifs = false,
   sound = false,
+  game,
+  index,
 }) {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
+
   const [gif, setGif] = useState(undefined);
   const [chatSound, setChatSound] = useState(true);
-
+  const [displayAddress, setDisplayAddress] = useState();
+  const chatBottom = useCallback(
+    (node) => {
+      if (node !== null) {
+        console.log("HEIGHT: ", node.getBoundingClientRect().height);
+        node.scrollTop = node.getBoundingClientRect().height + 100000000;
+      }
+    },
+    [chat, message]
+  );
   function handleSound() {
     setChatSound(!chatSound);
   }
@@ -45,51 +57,19 @@ export default function Chat({
   }
 
   function sendMessage() {
-    const playerName = connection?.userAddress
-      ? connection.ens || connection.userAddress
-      : "";
-    // eslint-disable-next-line
-    let displayAddress;
-    if (
-      playerName.includes(".eth") ||
-      playerName === "" ||
-      playerName === "Not connected"
-    ) {
-      displayAddress = playerName;
-    } else {
-      displayAddress = `${playerName.substring(0, 4)}...${playerName.substring(
-        playerName.length - 4
-      )}`.toLowerCase();
-    }
     const messageHolder = gif
-      ? `${message} <br/><iframe title=${gif.title} class="chat-gif" src=${gif.embed_url} width="262" height="198" frameBorder="0" class="giphy-embed"></iframe><p><a href=${gif.url}>via GIPHY</a></p>`
-      : message;
+      ? {
+          message: message,
+          title: gif.title,
+          embed_url: gif.embed_url,
+          url: gif.url,
+        }
+      : { message: message };
 
-    const el = document.createElement("li");
-    const userEl = document.createElement("p");
-    const messageEl = document.createElement("p");
-
-    userEl.innerHTML = displayAddress;
-    userEl.className = "user";
-    messageEl.innerHTML = messageHolder;
-    messageEl.className = "message";
-    if (chat.length >= 1) {
-      if (displayAddress !== chat[chat.length - 1][0]){
-        el.appendChild(userEl);
-      };
-    }
-    else {
-      el.appendChild(userEl)
-    }
-    el.appendChild(messageEl);
-    sock && sock.emit("sendMessage", [userEl.innerHTML, messageEl.innerHTML]);
-
-    document.querySelector("#chatRoom").appendChild(el);
+    sock && sock.emit("sendMessage", [displayAddress, messageHolder]);
     setMessage("");
-    const elem = document.getElementById("chatRoom");
-    elem.scrollTop = elem.scrollHeight;
     let tempChat = chat;
-    tempChat.push([userEl.innerHTML, messageHolder]);
+    tempChat.push([displayAddress, messageHolder]);
     setChat(tempChat);
     closePreview();
   }
@@ -119,43 +99,90 @@ export default function Chat({
   }
 
   useEffect(() => {
-    if (chat.length) {
-      const el = document.createElement("li");
-      const userEl = document.createElement("p");
-      const messageEl = document.createElement("p");
-      userEl.innerHTML = chat[chat.length - 1][0];
-      if (chat.length > 1) {
-        if (chat[chat.length -2][0] !== chat[chat.length - 1][0]){
-          el.appendChild(userEl);
-        };
-      }
-      else {
-        el.appendChild(userEl)
-      }
-      messageEl.innerHTML = chat[chat.length - 1][1];
-      el.appendChild(messageEl);
-      userEl.className = "otherPlayer";
-
-      messageEl.className = "otherMessage";
-
-
-      document.getElementById("chatRoom").appendChild(el);
-      const elem = document.getElementById("chatRoom");
-      elem.scrollTop = elem.scrollHeight;
-    }
-
+    const playerName = connection?.userAddress
+      ? connection.ens || connection.userAddress
+      : "";
     // eslint-disable-next-line
-  }, [chat]);
+    if (
+      playerName.includes(".eth") ||
+      playerName === "" ||
+      playerName === "Not connected"
+    ) {
+      setDisplayAddress(playerName);
+    } else {
+      setDisplayAddress(
+        `${playerName.substring(0, 4)}...${playerName.substring(
+          playerName.length - 4
+        )}`.toLowerCase()
+      );
+    }
+    // eslint-disable-next-line
+  }, [chat, connection.ens]);
+
+  useEffect(() => {
+    setChat(game.chat);
+    return () => {};
+  }, [game.chat]);
 
   sock &&
     sock.on("receiveMessage", (chat) => {
+      console.log("RECIEVED: ", chat);
       setChat(chat);
     });
 
   return (
     <ChatDiv className="chat-area">
       <h1>chat</h1>
-      <ul id="chatRoom"></ul>
+      <ul ref={chatBottom} id="chatRoom">
+        {chat &&
+          chat.slice(index).map((message, idx) => {
+            if (message)
+              return (
+                <li key={idx}>
+                  {idx === 0 ? (
+                    <p
+                      className={
+                        message[0] === displayAddress ? "user" : "otherPlayer"
+                      }
+                    >
+                      {message[0]}
+                    </p>
+                  ) : chat[idx][0] === chat[idx - 1][0] ? null : (
+                    <p
+                      className={
+                        message[0] === displayAddress ? "user" : "otherPlayer"
+                      }
+                    >
+                      {message[0]}
+                    </p>
+                  )}
+
+                  <p
+                    className={
+                      message[0] === displayAddress ? "message" : "otherMessage"
+                    }
+                  >
+                    {message[1].message}
+
+                    {message[1]?.title && (
+                      <>
+                        <br />
+                        <iframe
+                          title={message[1].title}
+                          src={message[1].embed_url}
+                          width="262"
+                          height="198"
+                          frameBorder="0"
+                          className="giphy-embed"
+                        ></iframe>
+                        <a href={message[1].url}>via GIPHY</a>
+                      </>
+                    )}
+                  </p>
+                </li>
+              );
+          })}
+      </ul>
       <div id="chat-input-div">
         {gif ? gifPreviewElement : null}
         <div id="gif-preview"></div>

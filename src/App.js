@@ -12,7 +12,7 @@ import "./index.css";
 import { useWallet } from "@web3-ui/hooks";
 import { GameContext } from "./components/GameProvider";
 function App() {
-  const { sock, game, handleScore, player, setGame, handleReset } =
+  const { sock, game, handleScore, player, setGame, handleReset, index } =
     useContext(GameContext);
 
   const { connection, disconnectWallet } = useWallet();
@@ -29,7 +29,14 @@ function App() {
         sock={sock}
         player={player}
       />
-      <Chat sock={sock} connection={connection} gifs sound />
+      <Chat
+        sock={sock}
+        connection={connection}
+        game={game}
+        index={index}
+        gifs
+        sound
+      />
       <Modal class="game-room-rules modal-area" />
     </div>
   );

@@ -96,10 +96,10 @@ export const ChatDiv = styled.div`
     flex-direction: column;
     padding: 0 1px;
     overflow-x: hidden;
+    overflow-y: scroll;
     margin: auto;
     background: #f8f8f8;
     height: 560px;
-    overflow-y: scroll;
     box-shadow: 0px 0px 7px 5px rgb(0 0 0 / 8%);
     border-radius: 8px;
     list-style: none;
@@ -134,6 +134,7 @@ export const ChatDiv = styled.div`
     height: 100%; 
     background-color: rgb(0, 120, 254);
     color: #ffffff;
+    overflow-wrap: anywhere;
   }
 
   .otherMessage {
@@ -146,6 +147,8 @@ export const ChatDiv = styled.div`
     height: 100%; 
     background-color: rgb(37,40,42);
     color: #ffffff;
+    overflow-wrap: anywhere;
+
   }
   
   .user {
