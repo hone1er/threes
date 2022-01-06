@@ -13,8 +13,8 @@ import {
 } from "../helperMessages";
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
-const sock = socketIOClient("localhost:8000");
-
+const sock = socketIOClient("webthrees.herokuapp.com");
+let index = 0;
 sock.on("joinFailed", (reason) => {
   switch (reason) {
     case "userNameTaken":
@@ -41,11 +41,14 @@ sock.on("joinFailed", (reason) => {
 });
 
 sock.on("joinSuccess", (reason) => {
-  switch (reason) {
-    case "join":
+  console.log("REASON: ", reason["join"]);
+  let response = reason["join"] || "create";
+  switch (response) {
+    case reason["join"]:
       document.getElementById("join").click();
+      index = reason["join"];
       break;
-    case "new":
+    case "create":
       document.getElementById("new").click();
       break;
     default:
@@ -68,7 +71,6 @@ export function GameProvider(props) {
     dieVisable: Array(5).fill(true),
     names: [],
     scores: [],
-    chat: [],
     currentRoom: "",
     password: "",
     rollDisabled: false,
@@ -161,6 +163,7 @@ export function GameProvider(props) {
           handleReset,
           setStatus,
           status,
+          index,
         }}
       >
         {props.children}

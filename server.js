@@ -35,17 +35,17 @@ app.get("*", (req, res) => {
 });
 
 // LOCAL SERVER... un-comment out to use locally and comment out BUILD SERVER on line 221 and server on line 48
-const PORT = process.env.PORT || 8000;
-const INDEX = "build/index.html";
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () =>
-    console.log(
-      `\n\n\nListening on ${PORT}.............................................................\n\n\n`
-    )
-  );
+// const PORT = process.env.PORT || 8000;
+// const INDEX = "build/index.html";
+// const server = express()
+//   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+//   .listen(PORT, () =>
+//     console.log(
+//       `\n\n\nListening on ${PORT}.............................................................\n\n\n`
+//     )
+//   );
 
-// const server = http.createServer(app);
+const server = http.createServer(app);
 
 const io = socketio(server);
 
@@ -81,7 +81,7 @@ io.on("connection", (sock) => {
           currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
           currentGame.names.splice(currentGame.names.indexOf(sockUser), 1);
           if (rooms[room]) {
-            rooms[room].chat.push([sockUser, "disconnected"]);
+            rooms[room].chat.push([sockUser, { message: "disconnected" }]);
           }
           sock.broadcast.to(userRoom).emit("receiveMessage", rooms[room].chat);
           sock.leave(userRoom);
@@ -106,7 +106,7 @@ io.on("connection", (sock) => {
       rooms[room] = tempGame;
       userGame = rooms[room];
 
-      sock.emit("joinSuccess", "new");
+      sock.emit("joinSuccess", "create");
       io.to(room).emit("setGame", tempGame);
       console.log(`\n${player} has succefully CREATED room: ${room}\n`);
     }
@@ -129,7 +129,7 @@ io.on("connection", (sock) => {
         if (currentGame.names.indexOf(sockUser) !== -1) {
           currentGame.scores.splice(currentGame.names.indexOf(sockUser), 1);
           currentGame.names.splice(currentGame.names.indexOf(sockUser), 1);
-          rooms[room].chat.push([sockUser, "disconnected"]);
+          rooms[room].chat.push([sockUser, { message: "disconnected" }]);
           sock.broadcast.to(userRoom).emit("receiveMessage", rooms[room].chat);
           sock.leave(userRoom);
           console.log(`\n${player} disconnected from room: ${userRoom}\n`);
@@ -151,6 +151,7 @@ io.on("connection", (sock) => {
         // join the game if everything is correct
         sock.join(room);
         currentGame = rooms[room];
+        currentGame.chatIndex = currentGame.chat.length;
         currentGame.names.push(player);
         currentGame.scores.push(0);
         sockUser = player;
@@ -158,7 +159,7 @@ io.on("connection", (sock) => {
         rooms[room] = currentGame;
         userGame = rooms[room];
         console.log(`\n${sockUser} has succefully JOINED room: ${room}\n`);
-        sock.emit("joinSuccess", "join");
+        sock.emit("joinSuccess", { join: currentGame.chat.length });
         return io.to(room).emit("setGame", currentGame);
       }
       // wrong password error
@@ -175,7 +176,9 @@ io.on("connection", (sock) => {
   });
 
   sock.on("setGame", (data) => {
+    tempChat = rooms[userRoom].chat;
     rooms[userRoom] = data;
+    rooms[userRoom].chat = tempChat;
     sock.broadcast.to(userRoom).emit("setGame", data);
   });
 
@@ -187,7 +190,6 @@ io.on("connection", (sock) => {
     if (rooms[userRoom]) {
       rooms[userRoom].chat.push(message);
       sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);
-      console.log(rooms[userRoom]?.chat);
       return;
     }
     return;
@@ -195,7 +197,7 @@ io.on("connection", (sock) => {
 
   sock.on("disconnect", (user) => {
     if (rooms[userRoom]) {
-      rooms[userRoom].chat.push([sockUser, "disconnected"]);
+      rooms[userRoom].chat.push([sockUser, { message: "disconnected" }]);
       sock.broadcast.to(userRoom).emit("receiveMessage", rooms[userRoom].chat);
     }
     let tempGame = userGame;
@@ -232,9 +234,9 @@ server.on("error", (error) => {
 });
 
 // // // BUILD SERVER
-// var port = process.env.PORT;
-// server.listen(port, () => {
-//   console.log(
-//     "Threes server started on port: " + port + "............................"
-//   );
-// });
+var port = process.env.PORT;
+server.listen(port, () => {
+  console.log(
+    "Threes server started on port: " + port + "............................"
+  );
+});
