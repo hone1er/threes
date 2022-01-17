@@ -2,7 +2,11 @@ import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import swish from "../audio/swish.mp3";
 import "../index.css";
-import { NETWORKS, Provider as HookProvider } from "@web3-ui/hooks";
+import {
+  NETWORKS,
+  Provider as HookProvider,
+  useContract,
+} from "@web3-ui/hooks";
 import {
   publicStatusError,
   privateStatusError,
@@ -13,7 +17,7 @@ import {
 } from "../helperMessages";
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
-const sock = socketIOClient("webthrees.herokuapp.com");
+const sock = socketIOClient("localhost:8000");
 let index = 0;
 sock.on("joinFailed", (reason) => {
   switch (reason) {
@@ -64,7 +68,7 @@ sock.on("ping", function (data) {
 export function GameProvider(props) {
   const [player, setPlayer] = useState("");
   const [status, setStatus] = useState("");
-  const [game, setGame] = useState({
+  const [game, setClientGame] = useState({
     currentPlayer: 0,
     playerTurns: 5,
     diceValues: Array(5).fill(5),
@@ -97,7 +101,7 @@ export function GameProvider(props) {
       playerTurns: tempGame.playerTurns,
       rollDisabled: false,
     };
-    setGame(gameStats);
+    setClientGame(gameStats);
     sock.emit("setGame", gameStats);
   }
 
@@ -119,7 +123,7 @@ export function GameProvider(props) {
       public: true,
     };
 
-    setGame(newGame);
+    setClientGame(newGame);
     sock.emit("setGame", newGame);
   }
   // handles the switching of players when playerTurns run out and checks for winner
@@ -140,7 +144,7 @@ export function GameProvider(props) {
         rollDisabled: game.currentPlayer === game.names.length,
       };
 
-      setGame(gameObj);
+      setClientGame(gameObj);
       sock.emit("setGame", gameObj);
     } else {
       return;
@@ -148,15 +152,15 @@ export function GameProvider(props) {
   }, [game]);
 
   sock.on("setGame", (data) => {
-    setGame(data);
+    setClientGame(data);
   });
 
   return (
-    <HookProvider network={NETWORKS.mainnet}>
+    <HookProvider network={NETWORKS.ropsten}>
       <GameContext.Provider
         value={{
           game,
-          setGame,
+          setClientGame,
           handleScore,
           sock,
           setPlayer,

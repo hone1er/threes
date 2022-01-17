@@ -4,14 +4,20 @@ import { Button } from "../styledComponents/Button";
 import diceAudio from "../audio/diceSound.mp3";
 
 var audio = new Audio(diceAudio);
-export default function RollDice({ game, setGame, handleReset, sock, player }) {
+export default function RollDice({
+  game,
+  setClientGame,
+  handleReset,
+  sock,
+  player,
+}) {
   function handleRoll() {
     audio.play();
     let value = [Array(5).fill(null)];
 
     for (let i = 0; i < game.diceValues.length; i++) {
       value[i] = Math.ceil(Math.random() * 6);
-      setGame({
+      setClientGame({
         ...game,
         diceValues: value,
         rollDisabled: true,
@@ -19,7 +25,7 @@ export default function RollDice({ game, setGame, handleReset, sock, player }) {
         rolling: !game.rolling,
       });
     }
-    setGame({
+    setClientGame({
       ...game,
       diceValues: value,
       rollDisabled: true,

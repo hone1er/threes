@@ -12,7 +12,7 @@ import "./index.css";
 import { useWallet } from "@web3-ui/hooks";
 import { GameContext } from "./components/GameProvider";
 function App() {
-  const { sock, game, handleScore, player, setGame, handleReset, index } =
+  const { sock, game, handleScore, player, setClientGame, handleReset, index } =
     useContext(GameContext);
 
   const { connection, disconnectWallet } = useWallet();
@@ -24,7 +24,7 @@ function App() {
       <Dice game={game} handleScore={handleScore} player={player} />
       <RollDice
         game={game}
-        setGame={setGame}
+        setClientGame={setClientGame}
         handleReset={handleReset}
         sock={sock}
         player={player}

@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const PrimaryBtn = styled.div`
+  &.etherscan {
+    margin-top: 10px;
+  }
   &.gifBtn {
     display: flex;
     justify-content: center;
