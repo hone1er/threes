@@ -38,7 +38,7 @@ export default function SignIn() {
       alert(`Password cannot be the same as the room name`);
       return;
     }
-    const roomId = await contract.getGameByRoom(room);
+    const roomId = await contract.getGameId(room);
     const joinGameTxn = await contract.joinGame(roomId);
 
     console.log("Mining...", joinGameTxn.hash);
