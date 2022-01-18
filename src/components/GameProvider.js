@@ -11,10 +11,12 @@ import {
   wrongPassword,
   roomDoesNotExist,
 } from "../helperMessages";
+
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
 const sock = socketIOClient("webthrees.herokuapp.com");
 let index = 0;
+
 sock.on("joinFailed", (reason) => {
   switch (reason) {
     case "userNameTaken":
@@ -62,8 +64,13 @@ sock.on("ping", function (data) {
 });
 
 export function GameProvider(props) {
+  const [bet, setBet] = useState(0);
   const [player, setPlayer] = useState("");
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [betPlaced, setBetPlaced] = useState(false);
+  const [clientScore, setClientScore] = useState(null);
+  const [etherscan, setEtherscan] = useState("https://ropsten.etherscan.io/");
   const [game, setClientGame] = useState({
     currentPlayer: 0,
     playerTurns: 5,
@@ -80,10 +87,7 @@ export function GameProvider(props) {
     gameOver: false,
     public: true,
   });
-  const [loading, setLoading] = useState(false);
-  const [etherscan, setEtherscan] = useState("https://ropsten.etherscan.io/");
-  const [bet, setBet] = useState(0);
-  const [clientScore, setClientScore] = useState(null);
+
   function handleScore(playerid, value, die) {
     swishSound.play();
     const tempGame = game;
@@ -145,6 +149,9 @@ export function GameProvider(props) {
       };
 
       setClientGame(gameObj);
+      if (game.names[game.currentPlayer] == player) {
+        setBetPlaced(false);
+      }
       sock.emit("setGame", gameObj);
     } else {
       return;
@@ -161,24 +168,26 @@ export function GameProvider(props) {
     <HookProvider network={NETWORKS.ropsten}>
       <GameContext.Provider
         value={{
-          game,
-          setClientGame,
-          handleScore,
-          sock,
-          setPlayer,
-          player,
-          handleReset,
-          setStatus,
-          status,
-          index,
-          loading,
-          setLoading,
-          etherscan,
           setEtherscan,
-          bet,
+          setLoading,
+          betPlaced,
+          setStatus,
+          etherscan,
+          setPlayer,
+          loading,
+          player,
+          status,
           setBet,
-          clientScore,
+          index,
+          sock,
+          game,
+          bet,
           setClientScore,
+          clientScore,
+          handleScore,
+          handleReset,
+          setBetPlaced,
+          setClientGame,
         }}
       >
         {props.children}

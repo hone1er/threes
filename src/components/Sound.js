@@ -12,6 +12,7 @@ function Sound({ chat, chatSound }) {
   function handleClick() {
     audio.play();
   }
+
   return (
     <div id="sound-div">
       <button id="sound" onClick={handleClick}></button>

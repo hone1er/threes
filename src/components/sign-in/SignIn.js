@@ -121,7 +121,7 @@ export default function SignIn() {
   }
 
   function openEtherscan() {
-    window.open(etherscan);
+    window.open(etherscan, "_blank");
   }
 
   return (

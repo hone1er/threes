@@ -1,27 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
-import { abi } from "./DiceGame.json";
 import { Button } from "../styledComponents/Button";
 import diceAudio from "../audio/diceSound.mp3";
-import BetInput from "./BetInput";
 import { GameContext } from "./GameProvider";
 import { useContract } from "@web3-ui/hooks";
-import { MdGames } from "react-icons/md";
+import { abi } from "./DiceGame.json";
+import BetInput from "./BetInput";
+
 var audio = new Audio(diceAudio);
+
 export default function RollDice({
-  setClientGame,
-  handleReset,
-  sock,
-  player,
   bet,
+  sock,
   setBet,
+  player,
   betPlaced,
+  handleReset,
   setBetPlaced,
-  clientScore,
   setClientScore,
+  setClientGame,
 }) {
+  const [roomId, setRoomId] = useState();
+
   const { game, loading, setLoading, etherscan, setEtherscan } =
     useContext(GameContext);
-  const [roomId, setRoomId] = useState();
+
   const contract = useContract(
     "0xd5626c12DA885C44E5780296f56cd0B46F7812a8",
     abi
@@ -30,12 +32,17 @@ export default function RollDice({
   let overrides = {
     value: String(bet), // ether in this case MUST be a string
   };
+
+  let currentPlayer = game.names[game.currentPlayer];
+
+  // Gets the total bet
   useEffect(() => {
     async function checkBet() {
       if (contract.checkBet === undefined) return;
       try {
         if (!roomId) {
           const roomIdx = await contract.getGameId(game.currentRoom);
+
           setRoomId(roomIdx);
         }
         const currentBet = await contract.checkBet(roomId);
@@ -48,7 +55,7 @@ export default function RollDice({
     // eslint-disable-next-line
   }, [contract]);
 
-  // handles the sending score
+  // Sets the score on-chain
   useEffect(() => {
     async function sendScore() {
       try {
@@ -58,34 +65,44 @@ export default function RollDice({
         );
 
         setLoading(true);
-        setEtherscan("https://ropsten.etherscan.io/tx/" + scoreTxn.hash);
         setClientScore(game.scores[game.currentPlayer]);
+        setEtherscan("https://ropsten.etherscan.io/tx/" + scoreTxn.hash);
+
         await scoreTxn.wait();
+
         setClientScore(null);
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     }
-
     if (game.playerTurns <= 0 && game.currentPlayer < game.names.length) {
-      if (player !== game.names[game.currentPlayer]) return;
+      if (player !== currentPlayer) return;
       sendScore();
       setBet(0);
-    }
-    // eslint-disable-next-line
+    } // eslint-disable-next-line
   }, [game]);
 
-  async function handleSendBet() {
-    const betTxn = await contract.placeBet(overrides);
-    setLoading(true);
-    setEtherscan("https://ropsten.etherscan.io/tx/" + betTxn.hash);
-    await betTxn.wait();
-    setLoading(false);
-    setBetPlaced(true);
-    setBet(0);
-  }
+  // handle the rolling dice UI effect. Timeout controls length of dice roll animation
+  useEffect(() => {
+    setTimeout(() => {
+      let el = document.getElementsByClassName("dice");
+      for (let i = 0; i < el.length; i++) {
+        el[i].classList.remove("rolling");
+      }
+    }, 500);
+    return () => {
+      setTimeout(() => {
+        let el = document.getElementsByClassName("dice");
+        for (let i = 0; i < el.length; i++) {
+          el[i].classList.add("rolling");
+        }
+      }, 0);
+      return;
+    };
+  }, [game.rolling]);
 
+  // Set new dice numbers and emit rollDice event
   function handleRoll() {
     if (!betPlaced) return;
     audio.play();
@@ -117,26 +134,26 @@ export default function RollDice({
     });
   }
 
-  useEffect(() => {
-    setTimeout(() => {
-      let el = document.getElementsByClassName("dice");
-      for (let i = 0; i < el.length; i++) {
-        el[i].classList.remove("rolling");
-      }
-    }, 500);
-    return () => {
-      setTimeout(() => {
-        let el = document.getElementsByClassName("dice");
-        for (let i = 0; i < el.length; i++) {
-          el[i].classList.add("rolling");
-        }
-      }, 0);
-      return;
-    };
-  }, [game.rolling]);
+  // Set the bet on-chain
+  async function handleSendBet() {
+    const betTxn = await contract.placeBet(overrides);
+
+    setLoading(true);
+    setEtherscan("https://ropsten.etherscan.io/tx/" + betTxn.hash);
+
+    await betTxn.wait();
+
+    setLoading(false);
+    setBetPlaced(true);
+    setBet(0);
+  }
+
+  function shortenName(name) {
+    return String(name).substring(0, 4) + "..." + String(name).substring(38);
+  }
 
   function openEtherscan() {
-    window.open(etherscan);
+    window.open(etherscan, "_blank");
   }
 
   return (
@@ -157,20 +174,16 @@ export default function RollDice({
         )
       ) : (
         <Button
-          disabled={
-            player !== game.names[game.currentPlayer] ? true : game.rollDisabled
-          }
+          disabled={player !== currentPlayer ? true : game.rollDisabled}
           onClick={handleRoll}
         >
-          {game.gameOver || !game.names[game.currentPlayer]
+          {game.gameOver || !currentPlayer
             ? "game over "
-            : game.names[game.currentPlayer] !== player
+            : currentPlayer !== player
             ? `${
-                game.names[game.currentPlayer].length > 12
-                  ? String(game.names[game.currentPlayer]).substring(0, 4) +
-                    "..." +
-                    String(game.names[game.currentPlayer]).substring(38)
-                  : game.names[game.currentPlayer]
+                currentPlayer.length > 12
+                  ? shortenName(currentPlayer)
+                  : currentPlayer
               }'s turn`
             : "roll the dice"}
         </Button>
