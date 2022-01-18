@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./App.css";
 import { ScoreBoard } from "./components/ScoreBoard";
 import Winner from "./components/Winner";
@@ -12,10 +12,23 @@ import "./index.css";
 import { useWallet } from "@web3-ui/hooks";
 import { GameContext } from "./components/GameProvider";
 function App() {
-  const { sock, game, handleScore, player, setClientGame, handleReset, index } =
-    useContext(GameContext);
+  const {
+    sock,
+    game,
+    handleScore,
+    player,
+    setClientGame,
+    clientScore,
+    setClientScore,
+    handleReset,
+    index,
+    bet,
+    setBet,
+  } = useContext(GameContext);
 
   const { connection, disconnectWallet } = useWallet();
+  const [betPlaced, setBetPlaced] = useState(false);
+
   return (
     <div className="App">
       <Logout disconnectWallet={disconnectWallet} />
@@ -28,6 +41,12 @@ function App() {
         handleReset={handleReset}
         sock={sock}
         player={player}
+        bet={bet}
+        setBet={setBet}
+        betPlaced={betPlaced}
+        setBetPlaced={setBetPlaced}
+        clientScore={clientScore}
+        setClientScore={setClientScore}
       />
       <Chat
         sock={sock}

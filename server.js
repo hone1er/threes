@@ -176,7 +176,7 @@ io.on("connection", (sock) => {
   });
 
   sock.on("setGame", (data) => {
-    tempChat = rooms[userRoom].chat;
+    tempChat = rooms[userRoom]?.chat;
     rooms[userRoom] = data;
     rooms[userRoom].chat = tempChat;
     sock.broadcast.to(userRoom).emit("setGame", data);

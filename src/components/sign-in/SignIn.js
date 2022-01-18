@@ -6,23 +6,30 @@ import { Link } from "react-router-dom";
 import { PrimaryBtn } from "../../styledComponents/PrimaryBtn";
 import Radios from "./Radios";
 import SignInInputs from "./SignInInputs";
-import { useContract, useWallet } from "@web3-ui/hooks";
-import { abi } from "../DiceGame.json";
-import { Button } from "@chakra-ui/react";
+import { useWallet, useContract } from "@web3-ui/hooks";
 import { Address } from "@web3-ui/components";
-
+import { Button } from "@chakra-ui/react";
+import { abi } from "../DiceGame.json";
 export default function SignIn() {
-  const { sock, player, game, setPlayer, setClientGame } =
-    useContext(GameContext);
+  const {
+    sock,
+    player,
+    game,
+    setPlayer,
+    setClientGame,
+    loading,
+    setLoading,
+    etherscan,
+    setEtherscan,
+  } = useContext(GameContext);
   const { connection, connected, connectWallet, disconnectWallet } =
     useWallet();
-  const [loading, setLoading] = useState(false);
-  const [etherscan, setEtherscan] = useState("https://ropsten.etherscan.io/");
-  const [signed, setSigned] = useState(true);
   const contract = useContract(
-    "0x346A8C192b68963210658A70Becc4AEB88c0258d",
+    "0xd5626c12DA885C44E5780296f56cd0B46F7812a8",
     abi
   );
+
+  const [signed, setSigned] = useState(true);
 
   const room = game.currentRoom;
   useEffect(() => {

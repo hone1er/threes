@@ -2,11 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import swish from "../audio/swish.mp3";
 import "../index.css";
-import {
-  NETWORKS,
-  Provider as HookProvider,
-  useContract,
-} from "@web3-ui/hooks";
+import { NETWORKS, Provider as HookProvider } from "@web3-ui/hooks";
 import {
   publicStatusError,
   privateStatusError,
@@ -84,7 +80,10 @@ export function GameProvider(props) {
     gameOver: false,
     public: true,
   });
-
+  const [loading, setLoading] = useState(false);
+  const [etherscan, setEtherscan] = useState("https://ropsten.etherscan.io/");
+  const [bet, setBet] = useState(0);
+  const [clientScore, setClientScore] = useState(null);
   function handleScore(playerid, value, die) {
     swishSound.play();
     const tempGame = game;
@@ -129,6 +128,7 @@ export function GameProvider(props) {
   // handles the switching of players when playerTurns run out and checks for winner
   useEffect(() => {
     const tempGame = game;
+    if (clientScore !== null) return;
     if (game.playerTurns <= 0 && game.currentPlayer < game.names.length) {
       tempGame.currentPlayer = tempGame.currentPlayer + 1;
       tempGame.playerTurns = 5;
@@ -149,10 +149,12 @@ export function GameProvider(props) {
     } else {
       return;
     }
-  }, [game]);
+    // eslint-disable-next-line
+  }, [clientScore]);
 
   sock.on("setGame", (data) => {
     setClientGame(data);
+    setClientScore(null);
   });
 
   return (
@@ -169,6 +171,14 @@ export function GameProvider(props) {
           setStatus,
           status,
           index,
+          loading,
+          setLoading,
+          etherscan,
+          setEtherscan,
+          bet,
+          setBet,
+          clientScore,
+          setClientScore,
         }}
       >
         {props.children}
