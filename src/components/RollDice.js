@@ -5,6 +5,7 @@ import diceAudio from "../audio/diceSound.mp3";
 import BetInput from "./BetInput";
 import { GameContext } from "./GameProvider";
 import { useContract } from "@web3-ui/hooks";
+import { MdGames } from "react-icons/md";
 var audio = new Audio(diceAudio);
 export default function RollDice({
   setClientGame,
@@ -68,7 +69,7 @@ export default function RollDice({
     }
 
     if (game.playerTurns <= 0 && game.currentPlayer < game.names.length) {
-      if (player == game.currentPlayer) return;
+      if (player !== game.names[game.currentPlayer]) return;
       sendScore();
       setBet(0);
     }
