@@ -6,8 +6,6 @@ import { MdSend } from "react-icons/md";
 import Sound from "./Sound";
 import GiphyModal from "./GiphyModal";
 
-
-
 export default function Chat({
   sock,
   connection,
@@ -15,10 +13,10 @@ export default function Chat({
   sound = false,
   index,
 }) {
-  
-  const [chat, setChat] = useState([]);
-  const [gif, setGif] = useState(undefined);
   const [message, setMessage] = useState("");
+  const [chat, setChat] = useState([]);
+
+  const [gif, setGif] = useState(undefined);
   const [chatSound, setChatSound] = useState(true);
   const [displayAddress, setDisplayAddress] = useState();
   const chatBottom = useCallback(
@@ -31,36 +29,6 @@ export default function Chat({
     // eslint-disable-next-line
     [chat, message]
   );
-
-  useEffect(() => {
-    const playerName = connection?.userAddress
-      ? connection.ens || connection.userAddress
-      : "";
-    // eslint-disable-next-line
-    if (
-      playerName.includes(".eth") ||
-      playerName === "" ||
-      playerName === "Not connected"
-    ) {
-      setDisplayAddress(playerName);
-    } else {
-      setDisplayAddress(
-        `${playerName.substring(0, 4)}...${playerName.substring(
-          playerName.length - 4
-        )}`.toLowerCase()
-      );
-    }
-
-    // eslint-disable-next-line
-  }, [chat, connection.ens]);
-
-
-  sock &&
-    sock.on("receiveMessage", (chat) => {
-      console.log("RECIEVED: ", chat);
-      setChat(chat);
-    });
-
 
   function handleSound() {
     setChatSound(!chatSound);
@@ -78,7 +46,6 @@ export default function Chat({
       document.getElementById("chat-btn").click();
     }
   }
-  
   function closePreview() {
     if (gif) {
       const preview = document.getElementById("gif-preview");
@@ -109,7 +76,6 @@ export default function Chat({
   }
 
   let gifPreviewElement;
-
   if (gif) {
     gifPreviewElement = (
       <div id="gif-preview">
@@ -133,7 +99,33 @@ export default function Chat({
     );
   }
 
-  
+  useEffect(() => {
+    const playerName = connection?.userAddress
+      ? connection.ens || connection.userAddress
+      : "";
+    // eslint-disable-next-line
+    if (
+      playerName.includes(".eth") ||
+      playerName === "" ||
+      playerName === "Not connected"
+    ) {
+      setDisplayAddress(playerName);
+    } else {
+      setDisplayAddress(
+        `${playerName.substring(0, 4)}...${playerName.substring(
+          playerName.length - 4
+        )}`.toLowerCase()
+      );
+    }
+
+    // eslint-disable-next-line
+  }, [chat, connection.ens]);
+
+  sock &&
+    sock.on("receiveMessage", (chat) => {
+      console.log("RECIEVED: ", chat);
+      setChat(chat);
+    });
 
   return (
     <ChatDiv className="chat-area">
@@ -141,10 +133,11 @@ export default function Chat({
       <ul ref={chatBottom} id="chatRoom">
         {chat &&
           chat
-            .map((data, idx) => {
-              if (data)
-                let address = data[0];
-                let message = data[1]
+            .map((message, idx) => {
+              let address = message ? message[0] : undefined;
+              let messageData = message ? message[1] : undefined;
+
+              if (message)
                 return (
                   <li key={idx}>
                     {idx === 0 ? (
@@ -167,25 +160,23 @@ export default function Chat({
 
                     <p
                       className={
-                        address === displayAddress
-                          ? "message"
-                          : "otherMessage"
+                        address === displayAddress ? "message" : "otherMessage"
                       }
                     >
-                      {message.message}
+                      {messageData.message}
 
-                      {message?.title && (
+                      {messageData?.title && (
                         <>
                           <br />
                           <iframe
-                            title={message.title}
-                            src={message.embed_url}
+                            title={messageData.title}
+                            src={messageData.embed_url}
                             width="262"
                             height="198"
                             frameBorder="0"
                             className="giphy-embed"
                           ></iframe>
-                          <a href={message.url}>via GIPHY</a>
+                          <a href={messageData.url}>via GIPHY</a>
                         </>
                       )}
                     </p>
