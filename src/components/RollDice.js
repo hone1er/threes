@@ -68,7 +68,7 @@ export default function RollDice({
     }
 
     if (game.playerTurns <= 0 && game.currentPlayer < game.names.length) {
-      if (player !== game.currentPlayer) return;
+      if (player == game.currentPlayer) return;
       sendScore();
       setBet(0);
     }
