@@ -1,26 +1,26 @@
-import React, { useContext, useEffect, useState } from "react";
-import { GameContext } from "../GameProvider";
-import { SignInDiv } from "../../styledComponents/SignInDiv";
 import Modal from "../Modal";
-import { Link } from "react-router-dom";
-import { PrimaryBtn } from "../../styledComponents/PrimaryBtn";
 import Radios from "./Radios";
-import SignInInputs from "./SignInInputs";
-import { useWallet, useContract } from "@web3-ui/hooks";
-import { Address } from "@web3-ui/components";
-import { Button } from "@chakra-ui/react";
 import { abi } from "../DiceGame.json";
+import { Link } from "react-router-dom";
+import { Button } from "@chakra-ui/react";
+import SignInInputs from "./SignInInputs";
+import { GameContext } from "../GameProvider";
+import { Address } from "@web3-ui/components";
+import { useWallet, useContract } from "@web3-ui/hooks";
+import { SignInDiv } from "../../styledComponents/SignInDiv";
+import React, { useContext, useEffect, useState } from "react";
+import { PrimaryBtn } from "../../styledComponents/PrimaryBtn";
 export default function SignIn() {
   const {
+    game,
     sock,
     player,
-    game,
-    setPlayer,
-    setClientGame,
     loading,
-    setLoading,
     etherscan,
+    setPlayer,
+    setLoading,
     setEtherscan,
+    setClientGame,
   } = useContext(GameContext);
   const { connection, connected, connectWallet, disconnectWallet } =
     useWallet();
@@ -157,14 +157,14 @@ export default function SignIn() {
         </PrimaryBtn>
       )}
       <SignInInputs
+        game={game}
         player={player}
         setPlayer={setPlayer}
-        game={game}
+        connected={connected}
+        connection={connection}
         setClientGame={setClientGame}
         connectWallet={connectWallet}
-        connected={connected}
         disconnectWallet={disconnectWallet}
-        connection={connection}
       />
       <Radios />
       <div className="sign-in-buttons">

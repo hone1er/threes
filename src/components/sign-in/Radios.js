@@ -1,15 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
 import { GameContext } from "../GameProvider";
+import React, { useContext, useState, useEffect } from "react";
 
 // radio inputs to set room to public or private
 function Radios() {
-  const { game, setClientGame } = useContext(GameContext);
   const [publicRoom, setPublicRoom] = useState(true);
   const [privateRoom, setPrivateRoom] = useState(false);
+  const { game, setClientGame } = useContext(GameContext);
 
   function handlePublic() {
-    setPrivateRoom(!privateRoom);
     setPublicRoom(!publicRoom);
+    setPrivateRoom(!privateRoom);
   }
 
   useEffect(() => {

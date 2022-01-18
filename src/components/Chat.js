@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { ChatDiv } from "../styledComponents/ChatDiv";
-import { GoMute } from "react-icons/go";
-import { GoUnmute } from "react-icons/go";
-import { MdSend } from "react-icons/md";
 import Sound from "./Sound";
 import GiphyModal from "./GiphyModal";
+import { MdSend } from "react-icons/md";
+import { GoMute, GoUnmute } from "react-icons/go";
+import { ChatDiv } from "../styledComponents/ChatDiv";
+import React, { useState, useEffect, useCallback } from "react";
 
 export default function Chat({
   sock,
@@ -13,10 +12,9 @@ export default function Chat({
   sound = false,
   index,
 }) {
-  const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
-
   const [gif, setGif] = useState(undefined);
+  const [message, setMessage] = useState("");
   const [chatSound, setChatSound] = useState(true);
   const [displayAddress, setDisplayAddress] = useState();
   const chatBottom = useCallback(

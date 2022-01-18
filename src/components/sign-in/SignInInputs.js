@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-function SignInInputs({
-  player,
-  setPlayer,
-  game,
-  setClientGame,
-  connection,
-  connected,
-  connectWallet,
-  disconnectWallet,
-}) {
+function SignInInputs({ game, setClientGame }) {
   const [room, setRoom] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,22 +19,22 @@ function SignInInputs({
       </label>
 
       <input
-        className="sign-in-input"
-        id="enter-room"
         value={room}
+        id="enter-room"
         onChange={handleRoom}
         placeholder="Enter room"
+        className="sign-in-input"
       />
       {game && !game.public && (
         <>
           <label id="password-label">*required</label>
           <input
-            className="sign-in-input"
             type="password"
+            value={password}
             autocomplete="off"
             id="room-password"
-            value={password}
             onChange={handlePassword}
+            className="sign-in-input"
             placeholder="Enter password"
           />
         </>
