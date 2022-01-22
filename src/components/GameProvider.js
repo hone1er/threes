@@ -1,5 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
 import socketIOClient from "socket.io-client";
+import { useContract } from "@web3-ui/hooks";
+import { abi } from "./DiceGame.json";
 import swish from "../audio/swish.mp3";
 import "../index.css";
 import { NETWORKS, Provider as HookProvider } from "@web3-ui/hooks";
@@ -43,7 +45,6 @@ sock.on("joinFailed", (reason) => {
 });
 
 sock.on("joinSuccess", (reason) => {
-  console.log("REASON: ", reason["join"]);
   let response = reason["join"] || "create";
   switch (response) {
     case reason["join"]:
@@ -65,8 +66,10 @@ sock.on("ping", function (data) {
 
 export function GameProvider(props) {
   const [bet, setBet] = useState(0);
+  const [roomId, setRoomId] = useState();
   const [player, setPlayer] = useState("");
   const [status, setStatus] = useState("");
+  const [roomName, setRoomName] = useState("");
   const [loading, setLoading] = useState(false);
   const [betPlaced, setBetPlaced] = useState(false);
   const [clientScore, setClientScore] = useState(null);
@@ -87,6 +90,10 @@ export function GameProvider(props) {
     gameOver: false,
     public: true,
   });
+  const contract = useContract(
+    "0xd5626c12DA885C44E5780296f56cd0B46F7812a8",
+    abi
+  );
 
   function handleScore(playerid, value, die) {
     swishSound.play();
@@ -109,27 +116,30 @@ export function GameProvider(props) {
   }
 
   function handleReset() {
-    const elements = document.getElementsByClassName("dice");
-    for (let i = 0; i < elements.length; i++) {
-      document.getElementsByClassName("dice")[i].style.display = "unset";
-    }
-    const newGame = {
-      ...game,
-      currentPlayer: 0,
-      playerTurns: 5,
-      diceValues: Array(5).fill(5),
-      dieVisable: Array(5).fill(true),
-      scores: Array(game.names.length).fill(0),
-      rollDisabled: false,
-      diceDisabled: true,
-      gameOver: false,
-      public: true,
-    };
+    if (game.gameOver) {
+      const elements = document.getElementsByClassName("dice");
+      for (let i = 0; i < elements.length; i++) {
+        document.getElementsByClassName("dice")[i].style.display = "unset";
+      }
+      const newGame = {
+        ...game,
+        currentPlayer: 0,
+        playerTurns: 5,
+        diceValues: Array(5).fill(5),
+        dieVisable: Array(5).fill(true),
+        scores: Array(game.names.length).fill(0),
+        rollDisabled: false,
+        diceDisabled: true,
+        gameOver: false,
+        public: true,
+      };
 
-    setClientGame(newGame);
-    sock.emit("setGame", newGame);
+      setClientGame(newGame);
+      sock.emit("setGame", newGame);
+    }
   }
-  // handles the switching of players when playerTurns run out and checks for winner
+
+  // handles the switching of players when playerTurns run out
   useEffect(() => {
     const tempGame = game;
     if (clientScore !== null) return;
@@ -142,14 +152,14 @@ export function GameProvider(props) {
       let gameObj = {
         ...game,
         currentPlayer: tempGame.currentPlayer,
+        currentRoom: tempGame.currentRoom,
         diceDisabled: tempGame.diceDisabled,
         dieVisable: tempGame.dieVisable,
         gameOver: game.currentPlayer === game.names.length,
         rollDisabled: game.currentPlayer === game.names.length,
       };
-
       setClientGame(gameObj);
-      if (game.names[game.currentPlayer] == player) {
+      if (game.names[game.currentPlayer] === player) {
         setBetPlaced(false);
       }
       sock.emit("setGame", gameObj);
@@ -170,11 +180,15 @@ export function GameProvider(props) {
         value={{
           setEtherscan,
           setLoading,
+          setRoomId,
           betPlaced,
           setStatus,
           etherscan,
           setPlayer,
+          roomName,
+          contract,
           loading,
+          roomId,
           player,
           status,
           setBet,
@@ -183,6 +197,7 @@ export function GameProvider(props) {
           game,
           bet,
           setClientScore,
+          setRoomName,
           clientScore,
           handleScore,
           handleReset,

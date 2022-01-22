@@ -20,8 +20,8 @@ export default function RollDice({
   setClientGame,
 }) {
   const [roomId, setRoomId] = useState();
-
-  const { game, loading, setLoading, etherscan, setEtherscan } =
+  const [paid, setPaid] = useState(false);
+  const { game, loading, setLoading, etherscan, setEtherscan, roomName } =
     useContext(GameContext);
 
   const contract = useContract(
@@ -41,11 +41,11 @@ export default function RollDice({
       if (contract.checkBet === undefined) return;
       try {
         if (!roomId) {
-          const roomIdx = await contract.getGameId(game.currentRoom);
+          const roomIdx = await contract.getGameId(roomName);
 
           setRoomId(roomIdx);
         }
-        const currentBet = await contract.checkBet(roomId);
+        const currentBet = await contract.checkBet(parseInt(roomId));
         console.log(currentBet);
       } catch (error) {
         console.log(error);
@@ -60,7 +60,7 @@ export default function RollDice({
     async function sendScore() {
       try {
         const scoreTxn = await contract.setScore(
-          roomId,
+          parseInt(roomId),
           game.scores[game.currentPlayer]
         );
 
@@ -148,6 +148,20 @@ export default function RollDice({
     setBet(0);
   }
 
+  async function handleWinner() {
+    try {
+      const winTxn = await contract.payWinner(parseInt(roomId));
+      setLoading(true);
+      setEtherscan("https://ropsten.etherscan.io/tx/" + winTxn.hash);
+
+      await winTxn.wait();
+
+      setLoading(false);
+      setPaid(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   function shortenName(name) {
     return String(name).substring(0, 4) + "..." + String(name).substring(38);
   }
@@ -188,8 +202,21 @@ export default function RollDice({
             : "roll the dice"}
         </Button>
       )}
-      <Button reset={!game.gameOver} onClick={handleReset}>
-        reset game
+      <Button
+        reset={!game.gameOver}
+        onClick={
+          !paid && !game.gameOver
+            ? null
+            : !paid && game.gameOver
+            ? handleWinner
+            : handleReset
+        }
+      >
+        {!paid && !game.gameOver
+          ? "disabled"
+          : !paid && game.gameOver
+          ? "pay winner"
+          : "reset game"}
       </Button>
     </div>
   );

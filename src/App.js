@@ -25,6 +25,7 @@ function App() {
     handleScore,
     clientScore,
     setBetPlaced,
+    handleWinner,
     setClientGame,
     setClientScore,
   } = useContext(GameContext);
@@ -47,6 +48,7 @@ function App() {
         handleReset={handleReset}
         clientScore={clientScore}
         setBetPlaced={setBetPlaced}
+        handleWinner={handleWinner}
         setClientGame={setClientGame}
         setClientScore={setClientScore}
       />

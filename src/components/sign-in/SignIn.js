@@ -14,8 +14,10 @@ export default function SignIn() {
   const {
     game,
     sock,
+    roomName,
     player,
     loading,
+    setRoomName,
     etherscan,
     setPlayer,
     setLoading,
@@ -28,7 +30,6 @@ export default function SignIn() {
     "0xd5626c12DA885C44E5780296f56cd0B46F7812a8",
     abi
   );
-
   const [signed, setSigned] = useState(true);
 
   const room = game.currentRoom;
@@ -55,6 +56,7 @@ export default function SignIn() {
     await joinGameTxn.wait();
     console.log("Mined -- ", loading, " ", joinGameTxn.hash);
     setLoading(false);
+    setRoomName(room);
     sock.emit("joinRoom", {
       room: room,
       player: player,
@@ -90,6 +92,7 @@ export default function SignIn() {
     console.log("Mined -- ", !loading, " ", setNewGameTxn.hash);
     setSigned(true);
     setLoading(false);
+    setRoomName(room);
 
     sock.emit("newRoom", {
       room: room,
@@ -100,7 +103,9 @@ export default function SignIn() {
     let tempGame = game;
     tempGame.names.push(player);
     tempGame.scores.push(0);
+    tempGame.currentRoom = room;
     localStorage.setItem("player", JSON.stringify(player));
+    setClientGame(tempGame);
   }
 
   function handleJoinEnter(event) {
@@ -158,7 +163,9 @@ export default function SignIn() {
       )}
       <SignInInputs
         game={game}
+        roomName={roomName}
         player={player}
+        setRoomName={setRoomName}
         setPlayer={setPlayer}
         connected={connected}
         connection={connection}

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-function SignInInputs({ game, setClientGame }) {
-  const [room, setRoom] = useState("");
+function SignInInputs({ game, setClientGame, roomName, setRoomName }) {
   const [password, setPassword] = useState("");
 
   function handleRoom(e) {
-    setRoom(e.target.value);
     setClientGame({ ...game, currentRoom: e.target.value });
+    setRoomName(e.target.value);
   }
   function handlePassword(e) {
     setPassword(e.target.value);
@@ -19,7 +18,7 @@ function SignInInputs({ game, setClientGame }) {
       </label>
 
       <input
-        value={room}
+        value={roomName}
         id="enter-room"
         onChange={handleRoom}
         placeholder="Enter room"
