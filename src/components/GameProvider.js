@@ -67,6 +67,7 @@ sock.on("ping", function (data) {
 export function GameProvider(props) {
   const [bet, setBet] = useState(0);
   const [roomId, setRoomId] = useState();
+  const [paid, setPaid] = useState(false);
   const [player, setPlayer] = useState("");
   const [status, setStatus] = useState("");
   const [roomName, setRoomName] = useState("");
@@ -133,7 +134,9 @@ export function GameProvider(props) {
         gameOver: false,
         public: true,
       };
-
+      setPaid(false);
+      setBetPlaced(false);
+      setBet(0);
       setClientGame(newGame);
       sock.emit("setGame", newGame);
     }
@@ -188,12 +191,14 @@ export function GameProvider(props) {
           roomName,
           contract,
           loading,
+          setPaid,
           roomId,
           player,
           status,
           setBet,
           index,
           sock,
+          paid,
           game,
           bet,
           setClientScore,

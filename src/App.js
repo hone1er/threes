@@ -14,20 +14,12 @@ import "react-dice-complete/dist/react-dice-complete.css";
 
 function App() {
   const {
-    bet,
     game,
     sock,
     index,
     player,
-    setBet,
-    betPlaced,
-    handleReset,
+
     handleScore,
-    clientScore,
-    setBetPlaced,
-    handleWinner,
-    setClientGame,
-    setClientScore,
   } = useContext(GameContext);
 
   const { connection, disconnectWallet } = useWallet();
@@ -38,20 +30,7 @@ function App() {
       <ScoreBoard game={game} player={player} />
       <Winner game={game} />
       <Dice game={game} handleScore={handleScore} player={player} />
-      <RollDice
-        bet={bet}
-        game={game}
-        sock={sock}
-        setBet={setBet}
-        player={player}
-        betPlaced={betPlaced}
-        handleReset={handleReset}
-        clientScore={clientScore}
-        setBetPlaced={setBetPlaced}
-        handleWinner={handleWinner}
-        setClientGame={setClientGame}
-        setClientScore={setClientScore}
-      />
+      <RollDice />
       <Chat
         gifs
         sound

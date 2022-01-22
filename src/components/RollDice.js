@@ -8,21 +8,27 @@ import BetInput from "./BetInput";
 
 var audio = new Audio(diceAudio);
 
-export default function RollDice({
-  bet,
-  sock,
-  setBet,
-  player,
-  betPlaced,
-  handleReset,
-  setBetPlaced,
-  setClientScore,
-  setClientGame,
-}) {
+export default function RollDice() {
   const [roomId, setRoomId] = useState();
-  const [paid, setPaid] = useState(false);
-  const { game, loading, setLoading, etherscan, setEtherscan, roomName } =
-    useContext(GameContext);
+  const {
+    game,
+    loading,
+    setLoading,
+    etherscan,
+    setEtherscan,
+    roomName,
+    paid,
+    setPaid,
+    bet,
+    sock,
+    setBet,
+    player,
+    betPlaced,
+    handleReset,
+    setBetPlaced,
+    setClientScore,
+    setClientGame,
+  } = useContext(GameContext);
 
   const contract = useContract(
     "0xd5626c12DA885C44E5780296f56cd0B46F7812a8",
