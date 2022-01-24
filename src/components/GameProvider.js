@@ -92,7 +92,7 @@ export function GameProvider(props) {
     public: true,
   });
   const contract = useContract(
-    "0x8e31C0e7155759E4345fDe0c825a7598E6cDaA72",
+    "0x95F2C4F28266F583AF174318955ff55B829c60F1",
     abi
   );
 
