@@ -27,7 +27,7 @@ export default function SignIn() {
   const { connection, connected, connectWallet, disconnectWallet } =
     useWallet();
   const contract = useContract(
-    "0xd5626c12DA885C44E5780296f56cd0B46F7812a8",
+    "0x8e31C0e7155759E4345fDe0c825a7598E6cDaA72",
     abi
   );
   const [signed, setSigned] = useState(true);
