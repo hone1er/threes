@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "../styledComponents/Button";
+import { contractAddress } from "../constants";
 import diceAudio from "../audio/diceSound.mp3";
 import { GameContext } from "./GameProvider";
 import { useContract } from "@web3-ui/hooks";
 import { abi } from "./DiceGame.json";
 import BetInput from "./BetInput";
-
 var audio = new Audio(diceAudio);
 
 export default function RollDice() {
@@ -30,10 +30,7 @@ export default function RollDice() {
     setClientGame,
   } = useContext(GameContext);
 
-  const contract = useContract(
-    "0x228d65C80a4D7072868034A2b503ec51eC75084b",
-    abi
-  );
+  const contract = useContract(contractAddress, abi);
 
   let overrides = {
     value: String(bet), // ether in this case MUST be a string

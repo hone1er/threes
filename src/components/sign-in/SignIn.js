@@ -6,6 +6,7 @@ import { Button } from "@chakra-ui/react";
 import SignInInputs from "./SignInInputs";
 import { GameContext } from "../GameProvider";
 import { Address } from "@web3-ui/components";
+import { contractAddress } from "../../constants";
 import { useWallet, useContract } from "@web3-ui/hooks";
 import { SignInDiv } from "../../styledComponents/SignInDiv";
 import React, { useContext, useEffect, useState } from "react";
@@ -26,10 +27,7 @@ export default function SignIn() {
   } = useContext(GameContext);
   const { connection, connected, connectWallet, disconnectWallet } =
     useWallet();
-  const contract = useContract(
-    "0x228d65C80a4D7072868034A2b503ec51eC75084b",
-    abi
-  );
+  const contract = useContract(contractAddress, abi);
   const [signed, setSigned] = useState(true);
 
   const room = game.currentRoom;

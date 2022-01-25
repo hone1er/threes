@@ -1,6 +1,20 @@
 # Threes
 
-Check out the game at [webthrees.herokuapp.com](https://webthrees.herokuapp.com/)
+A smart-contract based web3 dice game
+
+Built with:
+
+- [NextJS](https://nextjs.org/docs)
+- [NodeJS](https://nodejs.dev/)
+- [Web3-UI](https://github.com/Developer-DAO/web3-ui)
+- [Solidity](https://docs.soliditylang.org/en/v0.8.11/)
+
+> Check out the game at [webthrees.herokuapp.com](https://webthrees.herokuapp.com/)
+
+### Deployed Contract Address
+
+Ropsten Testnet
+[0x228d65C80a4D7072868034A2b503ec51eC75084b](https://ropsten.etherscan.io/address/0x228d65C80a4D7072868034A2b503ec51eC75084b)
 
 ## Rules
 
@@ -14,6 +28,8 @@ Check out the game at [webthrees.herokuapp.com](https://webthrees.herokuapp.com/
 
 ## Features
 
+- Connect Ethereum wallet
+- Smart-contract interactions
 - Real time multiplayer dice game
 - Real time chat
 - Chat & game audio
@@ -21,12 +37,12 @@ Check out the game at [webthrees.herokuapp.com](https://webthrees.herokuapp.com/
 - Join previously created rooms
 - Choose between public or private(password protected) rooms
 
-# What I learned making this game
+# Learnings
 
-The main goal of this project was to learn more about using web sockets and building a web apps with React, using hooks.
+- Building a web app with React using modern hooks and functional components
 
-I learned how to connect the client and server through a web socket and how to use this connection to communicate between clients. I also learned about the use of namespaces as they relate to sockets, and how to create, join, and communicate with rooms within each namespace.
+- Connecting the client and server through a web socket and use this connection to communicate between clients. The use of namespaces as they relate to sockets, and how to create, join, and communicate with rooms within each namespace.
 
-This game has also allowed me to improve my working knowledge of hooks and the context API from React. All state management was done with hooks and the context API.
+- Improve working knowledge of hooks and the context API from React. All state management was done with hooks and the context API.
 
-This project was implemented using Socket.io and Express, as well as ReactJS for the front-end.
+- Smart-contract creation, deployment, & interaction with Solidity and Ethers.js

@@ -1,4 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
+import { contractAddress } from "../constants";
 import socketIOClient from "socket.io-client";
 import { useContract } from "@web3-ui/hooks";
 import { abi } from "./DiceGame.json";
@@ -91,10 +92,7 @@ export function GameProvider(props) {
     gameOver: false,
     public: true,
   });
-  const contract = useContract(
-    "0x228d65C80a4D7072868034A2b503ec51eC75084b",
-    abi
-  );
+  const contract = useContract(contractAddress, abi);
 
   function handleScore(playerid, value, die) {
     swishSound.play();
