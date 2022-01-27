@@ -147,7 +147,7 @@ export default function SignIn() {
       {loading ? (
         signed ? (
           <PrimaryBtn className="etherscan">
-            <Button onClick={openEtherscan}>Approval pending...</Button>
+            <Button onClick={openEtherscan}>Pending...</Button>
           </PrimaryBtn>
         ) : (
           <PrimaryBtn className="etherscan">

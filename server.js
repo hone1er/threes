@@ -195,6 +195,10 @@ io.on("connection", (sock) => {
     return;
   });
 
+  sock.on("bet", (bet) => {
+    sock.broadcast.to(userRoom).emit("bet", bet);
+  });
+
   sock.on("disconnect", (user) => {
     if (rooms[userRoom]) {
       rooms[userRoom].chat.push([sockUser, { message: "disconnected" }]);

@@ -20,7 +20,6 @@ export default function Chat({
   const chatBottom = useCallback(
     (node) => {
       if (node !== null) {
-        console.log("HEIGHT: ", node.getBoundingClientRect().height);
         node.scrollTop = node.getBoundingClientRect().height + 100000000;
       }
     },

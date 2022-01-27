@@ -6,10 +6,9 @@ import { GameContext } from "./GameProvider";
 import { useContract } from "@web3-ui/hooks";
 import { abi } from "./DiceGame.json";
 import BetInput from "./BetInput";
-import { Interface } from "ethers/lib/utils";
 var audio = new Audio(diceAudio);
 
-export default function RollDice({ provider }) {
+export default function RollDice() {
   const [roomId, setRoomId] = useState();
   const {
     game,
@@ -40,28 +39,29 @@ export default function RollDice({ provider }) {
   let currentPlayer = game.names[game.currentPlayer];
 
   // Gets the total bet
-  useEffect(() => {
-    async function checkBet() {
-      if (contract.checkBet === undefined) return;
-      try {
-        if (!roomId) {
-          const roomIdx = await contract.getGameId(roomName);
+  async function checkBet() {
+    if (contract.checkBet === undefined) return;
+    try {
+      if (!roomId) {
+        const roomIdx = await contract.getGameId(roomName);
 
-          setRoomId(roomIdx);
-        }
-        const currentBet = await contract.checkBet(parseInt(roomId));
-        console.log(Number(currentBet));
-        setTotalBet(Number(currentBet));
-      } catch (error) {
-        console.log(error);
+        setRoomId(roomIdx);
       }
+      const currentBet = await contract.checkBet(parseInt(roomId));
+      setTotalBet(Number(currentBet));
+    } catch (error) {
+      console.log(error);
     }
+  }
+  useEffect(() => {
     if (isReady) checkBet();
-    // A filter that matches the correct game
-
     // eslint-disable-next-line
   }, [contract]);
 
+  sock.on("bet", (bet) => {
+    console.log(bet);
+    if (isReady) checkBet();
+  });
   // Sets the score on-chain
   useEffect(() => {
     async function sendScore() {
@@ -149,7 +149,7 @@ export default function RollDice({ provider }) {
     setEtherscan("https://ropsten.etherscan.io/tx/" + betTxn.hash);
 
     await betTxn.wait();
-
+    sock.emit("bet", bet);
     setLoading(false);
     setBetPlaced(true);
     setBet(0);
