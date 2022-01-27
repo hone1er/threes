@@ -11,7 +11,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@usedapp/core": "^0.5.4",
     "@web3-ui/components": "^0.6.0",
-    "@web3-ui/hooks": "^0.6.0",
+    "@web3-ui/hooks": "^0.9.0",
     "emoji-picker-react": "^3.4.2",
     "express": "^4.17.1",
     "mysql": "^2.18.1",

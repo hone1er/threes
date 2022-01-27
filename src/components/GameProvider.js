@@ -17,7 +17,7 @@ import {
 
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
-const sock = socketIOClient("webthrees.herokuapp.com");
+const sock = socketIOClient("localhost:8000");
 let index = 0;
 
 sock.on("joinFailed", (reason) => {
@@ -92,7 +92,7 @@ export function GameProvider(props) {
     gameOver: false,
     public: true,
   });
-  const contract = useContract(contractAddress, abi);
+  const [contract, isReady] = useContract(contractAddress, abi);
 
   function handleScore(playerid, value, die) {
     swishSound.play();
@@ -176,7 +176,10 @@ export function GameProvider(props) {
   });
 
   return (
-    <HookProvider network={NETWORKS.ropsten}>
+    <HookProvider
+      network={NETWORKS.ropsten}
+      rpcUrl="https://eth-ropsten.alchemyapi.io/v2/le8P0iQeDJCVYKdGVXqZXJwHmSCjIton"
+    >
       <GameContext.Provider
         value={{
           setEtherscan,

@@ -6,9 +6,10 @@ import { GameContext } from "./GameProvider";
 import { useContract } from "@web3-ui/hooks";
 import { abi } from "./DiceGame.json";
 import BetInput from "./BetInput";
+import { Interface } from "ethers/lib/utils";
 var audio = new Audio(diceAudio);
 
-export default function RollDice() {
+export default function RollDice({ provider }) {
   const [roomId, setRoomId] = useState();
   const {
     game,
@@ -30,8 +31,8 @@ export default function RollDice() {
     setClientGame,
   } = useContext(GameContext);
 
-  const contract = useContract(contractAddress, abi);
-
+  const [contract, isReady] = useContract(contractAddress, abi);
+  const [totalBet, setTotalBet] = useState();
   let overrides = {
     value: String(bet), // ether in this case MUST be a string
   };
@@ -49,12 +50,15 @@ export default function RollDice() {
           setRoomId(roomIdx);
         }
         const currentBet = await contract.checkBet(parseInt(roomId));
-        console.log(currentBet);
+        console.log(Number(currentBet));
+        setTotalBet(Number(currentBet));
       } catch (error) {
         console.log(error);
       }
     }
-    checkBet();
+    if (isReady) checkBet();
+    // A filter that matches the correct game
+
     // eslint-disable-next-line
   }, [contract]);
 
@@ -221,6 +225,7 @@ export default function RollDice() {
           ? "pay winner"
           : "reset game"}
       </Button>
+      <div>Bet: {totalBet}</div>
     </div>
   );
 }

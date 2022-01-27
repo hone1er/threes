@@ -22,7 +22,7 @@ function App() {
     handleScore,
   } = useContext(GameContext);
 
-  const { connection, disconnectWallet } = useWallet();
+  const { connection, disconnectWallet, provider } = useWallet();
 
   return (
     <div className="App">
@@ -30,7 +30,7 @@ function App() {
       <ScoreBoard game={game} player={player} />
       <Winner game={game} />
       <Dice game={game} handleScore={handleScore} player={player} />
-      <RollDice />
+      <RollDice provider={provider} />
       <Chat
         gifs
         sound

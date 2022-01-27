@@ -27,7 +27,7 @@ export default function SignIn() {
   } = useContext(GameContext);
   const { connection, connected, connectWallet, disconnectWallet } =
     useWallet();
-  const contract = useContract(contractAddress, abi);
+  const [contract, isReady] = useContract(contractAddress, abi);
   const [signed, setSigned] = useState(true);
 
   const room = game.currentRoom;
