@@ -19,6 +19,8 @@ export default function SignIn() {
     player,
     loading,
     setRoomName,
+    roomId,
+    setRoomId,
     etherscan,
     setPlayer,
     setLoading,
@@ -46,7 +48,7 @@ export default function SignIn() {
     }
     const roomId = await contract.getGameId(room);
     const joinGameTxn = await contract.joinGame(roomId);
-
+    setRoomId(parseInt(roomId));
     console.log("Mining...", joinGameTxn.hash);
     setEtherscan("https://ropsten.etherscan.io/tx/" + joinGameTxn.hash);
     setLoading(true);
@@ -91,6 +93,9 @@ export default function SignIn() {
     setSigned(true);
     setLoading(false);
     setRoomName(room);
+    const roomId = await contract.getGameId(room);
+    setRoomId(parseInt(roomId));
+    console.log(parseInt(roomId));
 
     sock.emit("newRoom", {
       room: room,

@@ -31,7 +31,7 @@ export default function RollDice() {
   } = useContext(GameContext);
 
   const [contract, isReady] = useContract(contractAddress, abi);
-  const [totalBet, setTotalBet] = useState();
+  const [totalBet, setTotalBet] = useState(0);
   let overrides = {
     value: String(bet), // ether in this case MUST be a string
   };
@@ -45,9 +45,10 @@ export default function RollDice() {
       if (!roomId) {
         const roomIdx = await contract.getGameId(roomName);
 
-        setRoomId(roomIdx);
+        setRoomId(parseInt(roomIdx));
+        console.log(parseInt(roomIdx));
       }
-      const currentBet = await contract.checkBet(parseInt(roomId));
+      const currentBet = await contract.checkBet(roomId);
       setTotalBet(Number(currentBet));
     } catch (error) {
       console.log(error);
@@ -67,7 +68,7 @@ export default function RollDice() {
     async function sendScore() {
       try {
         const scoreTxn = await contract.setScore(
-          parseInt(roomId),
+          roomId,
           game.scores[game.currentPlayer]
         );
 
@@ -157,7 +158,7 @@ export default function RollDice() {
 
   async function handleWinner() {
     try {
-      const winTxn = await contract.payWinner(parseInt(roomId));
+      const winTxn = await contract.payWinner(roomId);
       setLoading(true);
       setEtherscan("https://ropsten.etherscan.io/tx/" + winTxn.hash);
 
