@@ -17,7 +17,7 @@ import {
 
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
-const sock = socketIOClient("localhost:8000");
+const sock = socketIOClient("webthrees.herokuapp.com");
 let index = 0;
 
 sock.on("joinFailed", (reason) => {
