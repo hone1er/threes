@@ -58,8 +58,8 @@ export default function RollDice() {
     // eslint-disable-next-line
   }, [contract]);
 
-  sock.on("bet", (bet) => {
-    console.log(bet);
+  sock.on("bet", (betObj) => {
+    console.log(betObj["bet"], betObj["player"]);
     if (isReady) checkBet();
   });
   // Sets the score on-chain
@@ -149,7 +149,7 @@ export default function RollDice() {
     setEtherscan("https://ropsten.etherscan.io/tx/" + betTxn.hash);
 
     await betTxn.wait();
-    sock.emit("bet", bet);
+    sock.emit("bet", { bet: bet, player: player });
     setLoading(false);
     setBetPlaced(true);
     setBet(0);

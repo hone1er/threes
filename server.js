@@ -195,8 +195,8 @@ io.on("connection", (sock) => {
     return;
   });
 
-  sock.on("bet", (bet) => {
-    sock.broadcast.to(userRoom).emit("bet", bet);
+  sock.on("bet", (betObj) => {
+    sock.broadcast.to(userRoom).emit("bet", betObj);
   });
 
   sock.on("disconnect", (user) => {
