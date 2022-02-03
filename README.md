@@ -1,5 +1,4 @@
-# Threes
-
+![web threes](/webthrees.png)
 A smart-contract based web3 dice game
 
 Built with:
@@ -14,7 +13,7 @@ Built with:
 ### Deployed Contract Address
 
 Ropsten Testnet
-[0x228d65C80a4D7072868034A2b503ec51eC75084b](https://ropsten.etherscan.io/address/0x228d65C80a4D7072868034A2b503ec51eC75084b)
+[0xB15e828145d5a00a468bf6520bEE958a46c4217F](https://ropsten.etherscan.io/address/0x228d65C80a4D7072868034A2b503ec51eC75084b)
 
 ## Rules
 
