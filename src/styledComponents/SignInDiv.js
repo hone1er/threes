@@ -9,7 +9,6 @@ export const SignInDiv = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 100vh !important;
   min-height: 700px;
   background-size: contain;
   background-position-y: -40px;
@@ -17,8 +16,14 @@ export const SignInDiv = styled.div`
   background-position-x: center;
   padding-bottom: 25px;
 
+  .disclaimer {
+    height: 64px;
+    margin-top: 96px;
+  }
+
   .addy-wrap {
     width: 100%;
+    margin-top: 42.75%;
     place-content: center;
 
     p {
@@ -99,7 +104,7 @@ export const SignInDiv = styled.div`
     border-radius: 8px;
     color: #f8f8f8;
     @media (max-width: 800px) {
-      width: 100%;
+      width: 97%;
       background: #111;
     }
   }
@@ -140,5 +145,43 @@ export const SignInDiv = styled.div`
       height: 175px;
       min-height: 175px;
     }
+  }
+
+  .gameContainer {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .gameHeader {
+    font-weight: bold;
+    font-size: 2rem;
+    overflow-y: scroll;
+  }
+
+  .gameList {
+    width: 500px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 1px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin: auto;
+    background: #f8f8f8;
+    height: 300px;
+    box-shadow: 0px 0px 7px 5px rgb(0 0 0 / 8%);
+    border-radius: 8px;
+    list-style: none;
+    text-align: center;
+  }
+  .gameItem {
+    padding: 5px;
+    box-shadow: 0px 0px 2px 0px rgb(0 0 0 / 8%);
+  }
+  .gameItem:hover {
+    box-shadow: 0px 0px 2px 0px rgb(0 0 0 / 22%);
+  }
+
+  .connectWallet {
+    margin-top: 45% !important;
   }
 `;

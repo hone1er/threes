@@ -55,6 +55,8 @@ function sendHeartbeat() {
 }
 
 io.on("connection", (sock) => {
+  sock.emit("connected", rooms);
+
   // name of the socket user
   let sockUser;
   let userRoom;
@@ -70,7 +72,7 @@ io.on("connection", (sock) => {
     console.log("Pong received from client");
   });
 
-  sock.on("newRoom", ({ room, player, publicStatus, password }) => {
+  sock.on("newRoom", ({ room, player, publicStatus, password, roomId }) => {
     if (rooms[room]) {
       sock.emit("joinFailed", "roomTaken");
     } else {
@@ -98,16 +100,20 @@ io.on("connection", (sock) => {
       sock.join(room);
       sockUser = player;
       userRoom = room;
+      roomId = roomId;
       let tempGame = JSON.parse(JSON.stringify(newGame));
       tempGame.names.push(player);
       tempGame.scores.push(0);
       tempGame.public = publicStatus;
       tempGame.password = password;
+      tempGame.roomId = roomId;
+      tempGame.currentRoom = userRoom;
       rooms[room] = tempGame;
       userGame = rooms[room];
 
       sock.emit("joinSuccess", "create");
       io.to(room).emit("setGame", tempGame);
+      console.log(tempGame);
       console.log(`\n${player} has succefully CREATED room: ${room}\n`);
     }
   });

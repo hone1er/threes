@@ -50,6 +50,7 @@ sock.on("joinSuccess", (reason) => {
   switch (response) {
     case reason["join"]:
       document.getElementById("join").click();
+      // chat room index
       index = reason["join"];
       break;
     case "create":
@@ -85,6 +86,7 @@ export function GameProvider(props) {
     scores: [],
     chat: [],
     currentRoom: "",
+    currentRoomId: 0,
     password: "",
     rollDisabled: false,
     rolling: false,

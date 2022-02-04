@@ -43,7 +43,7 @@ export default function RollDice() {
     if (contract.checkBet === undefined) return;
     try {
       if (!roomId) {
-        const roomIdx = await contract.getGameId(roomName);
+        const roomIdx = await contract.getGameId(game.names[0]);
 
         setRoomId(parseInt(roomIdx));
         console.log(parseInt(roomIdx));

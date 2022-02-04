@@ -30,7 +30,7 @@ function SignInInputs({ game, setClientGame, roomName, setRoomName }) {
           <input
             type="password"
             value={password}
-            autocomplete="off"
+            autoComplete="off"
             id="room-password"
             onChange={handlePassword}
             className="sign-in-input"
