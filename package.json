@@ -16,7 +16,6 @@
     "emoji-picker-react": "^3.4.2",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
-    "nodejs": "16.13.0",
     "nodemon": "^2.0.3",
     "postcss-cli": "^7",
     "react": "^16.13.1",
