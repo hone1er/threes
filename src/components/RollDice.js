@@ -68,7 +68,6 @@ export default function RollDice() {
     async function sendScore() {
       try {
         const scoreTxn = await contract.setScore(
-          roomId,
           game.scores[game.currentPlayer]
         );
 
@@ -84,7 +83,7 @@ export default function RollDice() {
         console.log(error);
       }
     }
-    if (game.playerTurns <= 0 && game.currentPlayer < game.names.length) {
+    if (game.playerTurns <= 0 && game.currentPlayer <= game.names.length) {
       if (player !== currentPlayer) return;
       sendScore();
       setBet(0);
@@ -158,7 +157,7 @@ export default function RollDice() {
 
   async function handleWinner() {
     try {
-      const winTxn = await contract.payWinner(roomId);
+      const winTxn = await contract.payWinner();
       setLoading(true);
       setEtherscan("https://ropsten.etherscan.io/tx/" + winTxn.hash);
 

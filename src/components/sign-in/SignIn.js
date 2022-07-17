@@ -159,15 +159,22 @@ export default function SignIn() {
   return (
     <SignInDiv player={player} room={room}>
       {!connected ? (
-        <PrimaryBtn className="connectWallet">
-          <Button onClick={connectWallet}>Connect wallet</Button>
+        <PrimaryBtn style={{ "margin-bottom": "20px", "margin-top": "45%" }}>
+          <Button
+            onClick={connectWallet}
+            fontSize={"16px"}
+            justifyContent={"center"}
+            alignContent={"center"}
+          >
+            Connect wallet
+          </Button>
         </PrimaryBtn>
       ) : (
         <>
           <div className="addy-wrap">
             <Address value={player} shortened />
           </div>
-          <PrimaryBtn className="etherscan">
+          <PrimaryBtn className="etherscan" style={{ "margin-bottom": "20px" }}>
             <Button onClick={disconnectWallet}>Disconnect wallet</Button>
           </PrimaryBtn>
         </>
@@ -230,7 +237,6 @@ export default function SignIn() {
       </div>
       <div className="sign-in-buttons">
         <PrimaryBtn
-          className="sign-in-button"
           onClick={handleJoinRoom}
           onKeyUp={handleJoinEnter}
           tabIndex="0"
@@ -239,14 +245,15 @@ export default function SignIn() {
         </PrimaryBtn>
 
         <PrimaryBtn
-          className="sign-in-button"
           onClick={handleNewRoom}
           onKeyUp={handleNewEnter}
           tabIndex="0"
         >
           New Game
         </PrimaryBtn>
-        <Modal class="sign-in-rules modal-area" />
+        <PrimaryBtn>
+          <Modal class="" />
+        </PrimaryBtn>
       </div>
       <Link to="/game" id="join" className="sign-in-button"></Link>
       <Link to="/game" id="new" className="sign-in-button"></Link>

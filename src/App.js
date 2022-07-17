@@ -11,6 +11,7 @@ import RollDice from "./components/RollDice";
 import { ScoreBoard } from "./components/ScoreBoard";
 import { GameContext } from "./components/GameProvider";
 import "react-dice-complete/dist/react-dice-complete.css";
+import { PrimaryBtn } from "./styledComponents/PrimaryBtn";
 
 function App() {
   const {
@@ -39,7 +40,9 @@ function App() {
         index={index}
         connection={connection}
       />
-      <Modal class="game-room-rules modal-area" />
+      <PrimaryBtn>
+        <Modal class="game-room-rules modal-area" />
+      </PrimaryBtn>
     </div>
   );
 }

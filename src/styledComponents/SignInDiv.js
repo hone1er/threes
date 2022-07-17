@@ -83,30 +83,8 @@ export const SignInDiv = styled.div`
   }
 
   .sign-in-button {
-    border-radius: 8px;
-    background: ${(props) =>
-      props.player === "" || props.room === "" ? "#555" : "#222"};
-    pointer-events: ${(props) =>
-      props.player === "" || props.room === "" ? "none" : "unset"};
-
-    color: #f8f8f8;
-    :hover {
-      background: #111;
-    }
-    @media (max-width: 800px) {
-      width: 86%;
-      margin: 0 auto;
-    }
   }
   .rules {
-    pointer-events: all;
-    background: #222;
-    border-radius: 8px;
-    color: #f8f8f8;
-    @media (max-width: 800px) {
-      width: 97%;
-      background: #111;
-    }
   }
   #enter-room {
     margin: 0 0 10px;
