@@ -159,14 +159,14 @@ export default function SignIn() {
     <SignInDiv player={player} room={room}>
       {!connected ? (
         <PrimaryBtn style={{ "margin-bottom": "20px", "margin-top": "45%" }}>
-          <Button
+          <button
             onClick={connectWallet}
             fontSize={"16px"}
             justifyContent={"center"}
             alignContent={"center"}
           >
             Connect wallet
-          </Button>
+          </button>
         </PrimaryBtn>
       ) : (
         <>
@@ -174,7 +174,7 @@ export default function SignIn() {
             <Address value={player} shortened />
           </div>
           <PrimaryBtn className="etherscan" style={{ "margin-bottom": "20px" }}>
-            <Button onClick={disconnectWallet}>Disconnect wallet</Button>
+            <button onClick={disconnectWallet}>Disconnect wallet</button>
           </PrimaryBtn>
         </>
       )}
@@ -182,16 +182,16 @@ export default function SignIn() {
       {loading ? (
         signed ? (
           <PrimaryBtn className="etherscan">
-            <Button onClick={openEtherscan}>Pending...</Button>
+            <button onClick={openEtherscan}>Pending...</button>
           </PrimaryBtn>
         ) : (
           <PrimaryBtn className="etherscan">
-            <Button onClick={openEtherscan}>Creating game...</Button>
+            <button onClick={openEtherscan}>Creating game...</button>
           </PrimaryBtn>
         )
       ) : (
         <PrimaryBtn className="etherscan">
-          <Button onClick={openEtherscan}>Etherscan</Button>
+          <button onClick={openEtherscan}>Etherscan</button>
         </PrimaryBtn>
       )}
       <SignInInputs
