@@ -2,7 +2,6 @@ import Modal from "../Modal";
 import Radios from "./Radios";
 import { abi } from "../DiceGame.json";
 import { Link } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
 import SignInInputs from "./SignInInputs";
 import { GameContext } from "../GameProvider";
 import { Address } from "@web3-ui/components";
