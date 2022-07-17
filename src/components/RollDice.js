@@ -193,9 +193,16 @@ export default function RollDice() {
         ) : (
           <Button onClick={openEtherscan}>Placing Bet...</Button>
         )
+      ) : betPlaced && loading && !game.gameOver ? (
+        <Button onClick={openEtherscan}>Sending score</Button>
       ) : (
+        //  show "game over" or "roll the dice" as button text
         <Button
-          disabled={player !== currentPlayer ? true : game.rollDisabled}
+          disabled={
+            player !== currentPlayer || game.playerTurns === 0
+              ? true
+              : game.rollDisabled
+          }
           onClick={handleRoll}
         >
           {game.gameOver || !currentPlayer
@@ -215,14 +222,18 @@ export default function RollDice() {
           !paid && !game.gameOver
             ? null
             : !paid && game.gameOver
-            ? handleWinner
+            ? loading
+              ? openEtherscan
+              : handleWinner
             : handleReset
         }
       >
         {!paid && !game.gameOver
           ? "disabled"
           : !paid && game.gameOver
-          ? "pay winner"
+          ? loading
+            ? "paying..."
+            : "pay winner"
           : "reset game"}
       </Button>
       <div>Bet: {totalBet}</div>

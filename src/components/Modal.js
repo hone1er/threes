@@ -47,7 +47,7 @@ export default function Modal(props) {
             </span>
           </button>
           <img src={rules} alt="rules" />
-          <ul>
+          <ul style={{ color: "black" }}>
             <li>This is a turn based game</li>
             <li>Lowest score at the end of the game wins</li>
             <li>Each player will start their turn with 5 dice</li>
