@@ -158,40 +158,43 @@ export default function SignIn() {
   return (
     <SignInDiv player={player} room={room}>
       {!connected ? (
-        <PrimaryBtn style={{ "margin-bottom": "20px", "margin-top": "45%" }}>
-          <button
-            onClick={connectWallet}
-            fontSize={"16px"}
-            justifyContent={"center"}
-            alignContent={"center"}
-          >
-            Connect wallet
-          </button>
+        <PrimaryBtn
+          onClick={connectWallet}
+          fontSize={"16px"}
+          justifyContent={"center"}
+          alignContent={"center"}
+          style={{ marginBottom: "20px", marginTop: "45%" }}
+        >
+          Connect wallet
         </PrimaryBtn>
       ) : (
         <>
           <div className="addy-wrap">
             <Address value={player} shortened />
           </div>
-          <PrimaryBtn className="etherscan" style={{ "margin-bottom": "20px" }}>
-            <button onClick={disconnectWallet}>Disconnect wallet</button>
+          <PrimaryBtn
+            onClick={disconnectWallet}
+            className="etherscan"
+            style={{ "margin-bottom": "20px" }}
+          >
+            Disconnect wallet
           </PrimaryBtn>
         </>
       )}
 
       {loading ? (
         signed ? (
-          <PrimaryBtn className="etherscan">
-            <button onClick={openEtherscan}>Pending...</button>
+          <PrimaryBtn onClick={openEtherscan} className="etherscan">
+            Pending...
           </PrimaryBtn>
         ) : (
-          <PrimaryBtn className="etherscan">
-            <button onClick={openEtherscan}>Creating game...</button>
+          <PrimaryBtn onClick={openEtherscan} className="etherscan">
+            Creating game...
           </PrimaryBtn>
         )
       ) : (
-        <PrimaryBtn className="etherscan">
-          <button onClick={openEtherscan}>Etherscan</button>
+        <PrimaryBtn onClick={openEtherscan} className="etherscan">
+          Etherscan
         </PrimaryBtn>
       )}
       <SignInInputs
