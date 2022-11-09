@@ -27,7 +27,7 @@
     "react-giphy-searchbox": "^1.3.0",
     "react-icons": "^3.10.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "^5.0.1",
     "socket.io": "^2.4.1",
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.0",
