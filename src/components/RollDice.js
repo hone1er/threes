@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Button } from "../styledComponents/Button";
-import { contractAddress } from "../constants";
-import diceAudio from "../audio/diceSound.mp3";
-import { GameContext } from "./GameProvider";
-import { useContract } from "@web3-ui/hooks";
-import { abi } from "./DiceGame.json";
-import BetInput from "./BetInput";
+import React, { useContext, useEffect, useState } from 'react';
+import { Button } from '../styledComponents/Button';
+import { contractAddress } from '../constants';
+import diceAudio from '../audio/diceSound.mp3';
+import { GameContext } from './GameProvider';
+import { useContract } from '@web3-ui/hooks';
+import { abi } from './DiceGame.json';
+import BetInput from './BetInput';
 var audio = new Audio(diceAudio);
 
 export default function RollDice() {
@@ -16,7 +16,6 @@ export default function RollDice() {
     setLoading,
     etherscan,
     setEtherscan,
-    roomName,
     paid,
     setPaid,
     bet,
@@ -59,8 +58,8 @@ export default function RollDice() {
     // eslint-disable-next-line
   }, [contract]);
 
-  sock.on("bet", (betObj) => {
-    console.log(betObj["bet"], betObj["player"]);
+  sock.on('bet', (betObj) => {
+    console.log(betObj['bet'], betObj['player']);
     if (isReady) checkBet();
   });
   // Sets the score on-chain
@@ -73,7 +72,7 @@ export default function RollDice() {
 
         setLoading(true);
         setClientScore(game.scores[game.currentPlayer]);
-        setEtherscan("https://ropsten.etherscan.io/tx/" + scoreTxn.hash);
+        setEtherscan('https://sepolia.etherscan.io/tx/' + scoreTxn.hash);
 
         await scoreTxn.wait();
 
@@ -93,16 +92,16 @@ export default function RollDice() {
   // handle the rolling dice UI effect. Timeout controls length of dice roll animation
   useEffect(() => {
     setTimeout(() => {
-      let el = document.getElementsByClassName("dice");
+      let el = document.getElementsByClassName('dice');
       for (let i = 0; i < el.length; i++) {
-        el[i].classList.remove("rolling");
+        el[i].classList.remove('rolling');
       }
     }, 500);
     return () => {
       setTimeout(() => {
-        let el = document.getElementsByClassName("dice");
+        let el = document.getElementsByClassName('dice');
         for (let i = 0; i < el.length; i++) {
-          el[i].classList.add("rolling");
+          el[i].classList.add('rolling');
         }
       }, 0);
       return;
@@ -132,7 +131,7 @@ export default function RollDice() {
       diceDisabled: false,
       rolling: !game.rolling,
     });
-    sock.emit("rollDice", {
+    sock.emit('rollDice', {
       ...game,
       diceValues: value,
       rollDisabled: true,
@@ -146,10 +145,10 @@ export default function RollDice() {
     const betTxn = await contract.placeBet(overrides);
 
     setLoading(true);
-    setEtherscan("https://ropsten.etherscan.io/tx/" + betTxn.hash);
+    setEtherscan('https://sepolia.etherscan.io/tx/' + betTxn.hash);
 
     await betTxn.wait();
-    sock.emit("bet", { bet: bet, player: player });
+    sock.emit('bet', { bet: bet, player: player });
     setLoading(false);
     setBetPlaced(true);
     setBet(0);
@@ -159,7 +158,7 @@ export default function RollDice() {
     try {
       const winTxn = await contract.payWinner();
       setLoading(true);
-      setEtherscan("https://ropsten.etherscan.io/tx/" + winTxn.hash);
+      setEtherscan('https://sepolia.etherscan.io/tx/' + winTxn.hash);
 
       await winTxn.wait();
 
@@ -170,21 +169,21 @@ export default function RollDice() {
     }
   }
   function shortenName(name) {
-    return String(name).substring(0, 4) + "..." + String(name).substring(38);
+    return String(name).substring(0, 4) + '...' + String(name).substring(38);
   }
 
   function openEtherscan() {
-    window.open(etherscan, "_blank");
+    window.open(etherscan, '_blank');
   }
 
   return (
-    <div className="roll-area">
+    <div className='roll-area'>
       <BetInput bet={bet} setBet={setBet} />
       {!betPlaced ? (
         bet <= 0 ? (
           <Button onClick={handleSendBet} disabled={true}>
-            Enter bet{" "}
-            <span role="img" aria-label="up emoji">
+            Enter bet{' '}
+            <span role='img' aria-label='up emoji'>
               👆
             </span>
           </Button>
@@ -206,14 +205,14 @@ export default function RollDice() {
           onClick={handleRoll}
         >
           {game.gameOver || !currentPlayer
-            ? "game over "
+            ? 'game over '
             : currentPlayer !== player
             ? `${
                 currentPlayer.length > 12
                   ? shortenName(currentPlayer)
                   : currentPlayer
               }'s turn`
-            : "roll the dice"}
+            : 'roll the dice'}
         </Button>
       )}
       <Button
@@ -229,12 +228,12 @@ export default function RollDice() {
         }
       >
         {!paid && !game.gameOver
-          ? "disabled"
+          ? 'disabled'
           : !paid && game.gameOver
           ? loading
-            ? "paying..."
-            : "pay winner"
-          : "reset game"}
+            ? 'paying...'
+            : 'pay winner'
+          : 'reset game'}
       </Button>
       <div>Bet: {totalBet}</div>
     </div>

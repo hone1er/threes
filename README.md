@@ -4,7 +4,6 @@ A smart-contract based web3 dice game
 
 Built with:
 
-- [NextJS](https://nextjs.org/docs)
 - [NodeJS](https://nodejs.dev/)
 - [Web3-UI](https://github.com/Developer-DAO/web3-ui)
 - [Solidity](https://docs.soliditylang.org/en/v0.8.11/)
@@ -13,8 +12,8 @@ Built with:
 
 ### Deployed Contract Address
 
-Ropsten Testnet
-[0xB15e828145d5a00a468bf6520bEE958a46c4217F](https://ropsten.etherscan.io/address/0x228d65C80a4D7072868034A2b503ec51eC75084b)
+Sepolia Testnet
+[0x7838074626470180F23FA88221D1C4e8E0588bf5](https://sepolia.etherscan.io/address/0x7838074626470180F23FA88221D1C4e8E0588bf5)
 
 ## Rules
 

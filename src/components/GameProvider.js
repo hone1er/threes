@@ -1,11 +1,11 @@
-import React, { useState, createContext, useEffect } from "react";
-import { contractAddress } from "../constants";
-import socketIOClient from "socket.io-client";
-import { useContract } from "@web3-ui/hooks";
-import { abi } from "./DiceGame.json";
-import swish from "../audio/swish.mp3";
-import "../index.css";
-import { NETWORKS, Provider as HookProvider } from "@web3-ui/hooks";
+import React, { useState, createContext, useEffect } from 'react';
+import { contractAddress } from '../constants';
+import socketIOClient from 'socket.io-client';
+import { useContract } from '@web3-ui/hooks';
+import { abi } from './DiceGame.json';
+import swish from '../audio/swish.mp3';
+import '../index.css';
+import { Provider as HookProvider } from '@web3-ui/hooks';
 import {
   publicStatusError,
   privateStatusError,
@@ -13,31 +13,33 @@ import {
   userNameTaken,
   wrongPassword,
   roomDoesNotExist,
-} from "../helperMessages";
+} from '../helperMessages';
 
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
-const sock = socketIOClient("webthrees.herokuapp.com");
+const sock = socketIOClient('http://localhost:8000/');
+console.log('🚀 ~ file: GameProvider.js:21 ~ sock:', sock);
 let index = 0;
 
-sock.on("joinFailed", (reason) => {
+sock.on('joinFailed', (reason) => {
+  console.log('🚀 ~ file: GameProvider.js:25 ~ sock.on ~ reason:', reason);
   switch (reason) {
-    case "userNameTaken":
+    case 'userNameTaken':
       userNameTaken();
       break;
-    case "roomTaken":
+    case 'roomTaken':
       roomNameTaken();
       break;
-    case "roomDoesNotExist":
+    case 'roomDoesNotExist':
       roomDoesNotExist();
       break;
-    case "wrongPassword":
+    case 'wrongPassword':
       wrongPassword();
       break;
-    case "publicStatusError":
+    case 'publicStatusError':
       publicStatusError();
       break;
-    case "privateStatusError":
+    case 'privateStatusError':
       privateStatusError();
       break;
     default:
@@ -45,16 +47,17 @@ sock.on("joinFailed", (reason) => {
   }
 });
 
-sock.on("joinSuccess", (reason) => {
-  let response = reason["join"] || "create";
+sock.on('joinSuccess', (reason) => {
+  console.log('🚀 ~ file: GameProvider.js:49 ~ sock.on ~ reason:', reason);
+  let response = reason['join'] || 'create';
   switch (response) {
-    case reason["join"]:
-      document.getElementById("join").click();
+    case reason['join']:
+      document.getElementById('join').click();
       // chat room index
-      index = reason["join"];
+      index = reason['join'];
       break;
-    case "create":
-      document.getElementById("new").click();
+    case 'create':
+      document.getElementById('new').click();
       break;
     default:
       break;
@@ -62,21 +65,22 @@ sock.on("joinSuccess", (reason) => {
   return;
 });
 
-sock.on("ping", function (data) {
-  sock.emit("pong", { beat: 1 });
+sock.on('ping', function (data) {
+  console.log('🚀 ~ file: GameProvider.js:69 ~ data:', data);
+  sock.emit('pong', { beat: 1 });
 });
 
 export function GameProvider(props) {
   const [bet, setBet] = useState(0);
   const [roomId, setRoomId] = useState();
   const [paid, setPaid] = useState(false);
-  const [player, setPlayer] = useState("");
-  const [status, setStatus] = useState("");
-  const [roomName, setRoomName] = useState("");
+  const [player, setPlayer] = useState('');
+  const [status, setStatus] = useState('');
+  const [roomName, setRoomName] = useState('');
   const [loading, setLoading] = useState(false);
   const [betPlaced, setBetPlaced] = useState(false);
   const [clientScore, setClientScore] = useState(null);
-  const [etherscan, setEtherscan] = useState("https://ropsten.etherscan.io/");
+  const [etherscan, setEtherscan] = useState('https://sepolia.etherscan.io/');
   const [game, setClientGame] = useState({
     currentPlayer: 0,
     playerTurns: 5,
@@ -85,16 +89,16 @@ export function GameProvider(props) {
     names: [],
     scores: [],
     chat: [],
-    currentRoom: "",
+    currentRoom: '',
     currentRoomId: 0,
-    password: "",
+    password: '',
     rollDisabled: false,
     rolling: false,
     diceDisabled: true,
     gameOver: false,
     public: true,
   });
-  const [contract, isReady] = useContract(contractAddress, abi);
+  const [contract] = useContract(contractAddress, abi);
 
   function handleScore(playerid, value, die) {
     swishSound.play();
@@ -113,14 +117,14 @@ export function GameProvider(props) {
       rollDisabled: false,
     };
     setClientGame(gameStats);
-    sock.emit("setGame", gameStats);
+    sock.emit('setGame', gameStats);
   }
 
   function handleReset() {
     if (game.gameOver) {
-      const elements = document.getElementsByClassName("dice");
+      const elements = document.getElementsByClassName('dice');
       for (let i = 0; i < elements.length; i++) {
-        document.getElementsByClassName("dice")[i].style.display = "unset";
+        document.getElementsByClassName('dice')[i].style.display = 'unset';
       }
       const newGame = {
         ...game,
@@ -138,7 +142,7 @@ export function GameProvider(props) {
       setBetPlaced(false);
       setBet(0);
       setClientGame(newGame);
-      sock.emit("setGame", newGame);
+      sock.emit('setGame', newGame);
     }
   }
 
@@ -165,23 +169,20 @@ export function GameProvider(props) {
       if (game.names[game.currentPlayer] === player) {
         setBetPlaced(false);
       }
-      sock.emit("setGame", gameObj);
+      sock.emit('setGame', gameObj);
     } else {
       return;
     }
     // eslint-disable-next-line
   }, [clientScore]);
 
-  sock.on("setGame", (data) => {
+  sock.on('setGame', (data) => {
     setClientGame(data);
     setClientScore(null);
   });
 
   return (
-    <HookProvider
-      network={NETWORKS.ropsten}
-      rpcUrl="https://eth-ropsten.alchemyapi.io/v2/le8P0iQeDJCVYKdGVXqZXJwHmSCjIton"
-    >
+    <HookProvider network={11155111} rpcUrl='https://rpc.sepolia.org/'>
       <GameContext.Provider
         value={{
           setEtherscan,
