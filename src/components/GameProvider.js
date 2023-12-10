@@ -18,59 +18,73 @@ import {
 export const GameContext = createContext();
 const swishSound = new Audio(swish);
 const sock = socketIOClient('http://localhost:8000/');
-console.log('🚀 ~ file: GameProvider.js:21 ~ sock:', sock);
-let index = 0;
-
-sock.on('joinFailed', (reason) => {
-  console.log('🚀 ~ file: GameProvider.js:25 ~ sock.on ~ reason:', reason);
-  switch (reason) {
-    case 'userNameTaken':
-      userNameTaken();
-      break;
-    case 'roomTaken':
-      roomNameTaken();
-      break;
-    case 'roomDoesNotExist':
-      roomDoesNotExist();
-      break;
-    case 'wrongPassword':
-      wrongPassword();
-      break;
-    case 'publicStatusError':
-      publicStatusError();
-      break;
-    case 'privateStatusError':
-      privateStatusError();
-      break;
-    default:
-      break;
-  }
-});
-
-sock.on('joinSuccess', (reason) => {
-  console.log('🚀 ~ file: GameProvider.js:49 ~ sock.on ~ reason:', reason);
-  let response = reason['join'] || 'create';
-  switch (response) {
-    case reason['join']:
-      document.getElementById('join').click();
-      // chat room index
-      index = reason['join'];
-      break;
-    case 'create':
-      document.getElementById('new').click();
-      break;
-    default:
-      break;
-  }
-  return;
-});
-
-sock.on('ping', function (data) {
-  console.log('🚀 ~ file: GameProvider.js:69 ~ data:', data);
-  sock.emit('pong', { beat: 1 });
-});
 
 export function GameProvider(props) {
+  let index = 0;
+  useEffect(() => {
+    sock.on('joinFailed', (reason) => {
+      switch (reason) {
+        case 'userNameTaken':
+          userNameTaken();
+          break;
+        case 'roomTaken':
+          roomNameTaken();
+          break;
+        case 'roomDoesNotExist':
+          roomDoesNotExist();
+          break;
+        case 'wrongPassword':
+          wrongPassword();
+          break;
+        case 'publicStatusError':
+          publicStatusError();
+          break;
+        case 'privateStatusError':
+          privateStatusError();
+          break;
+        default:
+          break;
+      }
+    });
+
+    sock.on('joinSuccess', (reason) => {
+      let response = reason['join'] || 'create';
+      switch (response) {
+        case reason['join']:
+          document.getElementById('join').click();
+          // chat room index
+          index = reason['join'];
+          break;
+        case 'create':
+          document.getElementById('new').click();
+          break;
+        default:
+          break;
+      }
+      localStorage.setItem(
+        'currentRoom',
+        JSON.stringify({ roomName, playerName: player })
+      );
+      return;
+    });
+
+    // Attempt to reconnect to the saved room on component mount
+    const savedRoom = JSON.parse(localStorage.getItem('currentRoom'));
+    if (savedRoom) {
+      console.log(
+        '🚀 ~ file: GameProvider.js:78 ~ useEffect ~ savedRoom:',
+        savedRoom
+      );
+      sock.emit('rejoinRoom', savedRoom);
+    }
+
+    sock.on('ping', function (data) {
+      sock.emit('pong', { beat: 1 });
+    });
+    return () => {
+      sock.disconnect();
+    };
+  }, []);
   const [bet, setBet] = useState(0);
   const [roomId, setRoomId] = useState();
   const [paid, setPaid] = useState(false);
@@ -82,6 +96,7 @@ export function GameProvider(props) {
   const [clientScore, setClientScore] = useState(null);
   const [etherscan, setEtherscan] = useState('https://sepolia.etherscan.io/');
   const [game, setClientGame] = useState({
+    creator: '',
     currentPlayer: 0,
     playerTurns: 5,
     diceValues: Array(5).fill(5),

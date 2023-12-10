@@ -38,21 +38,23 @@ export default function RollDice() {
   let currentPlayer = game.names[game.currentPlayer];
 
   // Gets the total bet
-  async function checkBet() {
+  const checkBet = async () => {
     if (contract.checkBet === undefined) return;
     try {
+      let tempRoomId = roomId;
       if (!roomId) {
-        const roomIdx = await contract.getGameId(game.names[0]);
+        const roomIdx = await contract.getGameId(game.creator);
 
         setRoomId(parseInt(roomIdx));
+        tempRoomId = parseInt(roomIdx);
         console.log(parseInt(roomIdx));
       }
-      const currentBet = await contract.checkBet(roomId);
+      const currentBet = await contract.checkBet(tempRoomId);
       setTotalBet(Number(currentBet));
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   useEffect(() => {
     if (isReady) checkBet();
     // eslint-disable-next-line

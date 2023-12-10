@@ -31,7 +31,7 @@ export default function SignIn() {
       network: 11155111,
     },
   });
-  const [contract] = useContract(contractAddress, abi);
+  const [contract, isReady] = useContract(contractAddress, abi);
   const [signed, setSigned] = useState(true);
   const [roomCreator, setRoomCreator] = useState();
   const [allCurrentGames, setAllCurrentGames] = useState();
@@ -45,7 +45,7 @@ export default function SignIn() {
     }
   }, [connected, connection, setPlayer]);
 
-  async function handleJoinRoom() {
+  const handleJoinRoom = async () => {
     // password check
     if (game.password === room) {
       alert(`Password cannot be the same as the room name`);
@@ -73,7 +73,7 @@ export default function SignIn() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   async function handleNewRoom() {
     if (game.password === room) {
@@ -109,26 +109,20 @@ export default function SignIn() {
       parseInt(roomIdx)
     );
 
-    const res = sock.emit('newRoom', {
+    sock.emit('newRoom', {
       room: room,
       player: player,
       publicStatus: game.public,
       password: game.password,
       roomId: parseInt(roomIdx),
     });
-    console.log('🚀 ~ file: SignIn.js:119 ~ handleNewRoom ~ res:', res);
-    console.log('🚀 ~ file: SignIn.js:116 ~ handleNewRoom ~ : ', {
-      room: room,
-      player: player,
-      publicStatus: game.public,
-      password: game.password,
-      roomId: parseInt(roomIdx),
-    });
+
     let tempGame = game;
     tempGame.names.push(player);
     tempGame.scores.push(0);
     tempGame.currentRoom = room;
     tempGame.roomId = parseInt(roomIdx);
+    tempGame.creator = player;
     localStorage.setItem('player', JSON.stringify(player));
     setClientGame(tempGame);
   }
@@ -163,7 +157,7 @@ export default function SignIn() {
         frontEndRooms.push({
           roomName: room.currentRoom,
           roomId: room.roomId,
-          creator: room.names[0],
+          creator: room.creator,
         });
       }
     }

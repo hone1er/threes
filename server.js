@@ -11,6 +11,7 @@ let rooms = {};
 
 // server side new game state
 const newGame = {
+  creator: '',
   currentPlayer: 0,
   playerTurns: 5,
   diceValues: Array(5).fill(5),
@@ -73,15 +74,6 @@ io.on('connection', (sock) => {
   });
 
   sock.on('newRoom', ({ room, player, publicStatus, password, roomId }) => {
-    console.log(
-      '🚀 ~ file: server.js:122 ~ sock.on ~ room, player, publicStatus, password, roomId:',
-      room,
-      player,
-      publicStatus,
-      password,
-      roomId
-    );
-
     if (rooms[room]) {
       sock.emit('joinFailed', 'roomTaken');
     } else {
@@ -116,6 +108,7 @@ io.on('connection', (sock) => {
       tempGame.password = password;
       tempGame.roomId = roomId;
       tempGame.currentRoom = userRoom;
+      tempGame.creator = player;
       rooms[room] = tempGame;
       userGame = rooms[room];
 
@@ -189,6 +182,18 @@ io.on('connection', (sock) => {
     }
   });
 
+  sock.on('rejoinRoom', ({ roomName, playerName }) => {
+    if (rooms[roomName] && rooms[roomName].names.includes(playerName)) {
+      sock.join(roomName);
+      console.log(`\n${playerName} has rejoined room: ${roomName}\n`);
+      // Send the current state of the game to the rejoining player
+      sock.emit('setGame', rooms[roomName]);
+    } else {
+      // Handle case where room does not exist or player is not part of the room
+      sock.emit('joinFailed', 'rejoinFailed');
+    }
+  });
+
   sock.on('setGame', (data) => {
     let tempChat = rooms[userRoom]?.chat;
     rooms[userRoom] = data;
@@ -226,6 +231,7 @@ io.on('connection', (sock) => {
     );
 
     if (tempGame.names.indexOf(sockUser) !== -1) {
+      tempGame.creator = tempGame.names[0];
       tempGame.scores.splice(tempGame.names.indexOf(sockUser), 1);
       tempGame.names.splice(tempGame.names.indexOf(sockUser), 1);
       if (tempGame.names.length === 0) {
